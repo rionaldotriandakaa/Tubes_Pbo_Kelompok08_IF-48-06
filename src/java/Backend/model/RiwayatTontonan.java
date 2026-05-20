@@ -10,15 +10,20 @@ package Backend.model;
  */
 public class RiwayatTontonan {
 
-    private String judulKonten;
+    private Konten konten;
+
     private boolean selesai;
 
-    public RiwayatTontonan(String judulKonten, boolean selesai) {
-        this.judulKonten = judulKonten;
+    public RiwayatTontonan(Konten konten, boolean selesai) {
+
+        this.konten = konten;
         this.selesai = selesai;
+
     }
 
     public void tampilRiwayat() {
-        System.out.println(judulKonten);
+
+        System.out.println(konten.getJudul());
+
     }
 }

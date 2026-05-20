@@ -13,12 +13,26 @@ public class Episode {
     private int episodeNumber;
     private String judulEpisode;
 
-    public Episode(int episodeNumber, String judulEpisode) {
+    private Series series;
+
+    public Episode(int episodeNumber,
+                   String judulEpisode,
+                   Series series) {
+
         this.episodeNumber = episodeNumber;
         this.judulEpisode = judulEpisode;
+        this.series = series;
     }
 
     public void playEpisode() {
+
         System.out.println("Memutar episode " + judulEpisode);
+
+    }
+
+    public Series getSeries() {
+
+        return series;
+
     }
 }

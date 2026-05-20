@@ -11,18 +11,25 @@ package Backend.model;
 public class Favorite {
 
     private int idFavorite;
-    private String namaKonten;
 
-    public Favorite(int idFavorite, String namaKonten) {
+    private Konten konten;
+
+    public Favorite(int idFavorite, Konten konten) {
+
         this.idFavorite = idFavorite;
-        this.namaKonten = namaKonten;
+        this.konten = konten;
+
     }
 
     public void tambahFavorite() {
-        System.out.println(namaKonten + " ditambahkan");
+
+        System.out.println(konten.getJudul() + " ditambahkan");
+
     }
 
     public void hapusFavorite() {
-        System.out.println(namaKonten + " dihapus");
+
+        System.out.println(konten.getJudul() + " dihapus");
+
     }
 }
