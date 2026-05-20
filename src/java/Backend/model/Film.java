@@ -12,11 +12,27 @@ public class Film extends Konten {
 
     private String sutradara;
 
-    public Film(int id, String judul, String genre,
-                String deskripsi, int durasi,
+    public Film(int id,
+                String judul,
+                String genre,
+                String deskripsi,
+                int durasi,
+                double ratingAverage,
+                String poster,
+                int tahunRilis,
+                boolean trending,
                 String sutradara) {
 
-        super(id, judul, genre, deskripsi, durasi);
+        super(id,
+              judul,
+              genre,
+              deskripsi,
+              durasi,
+              ratingAverage,
+              poster,
+              tahunRilis,
+              trending);
+
         this.sutradara = sutradara;
     }
 
@@ -26,7 +42,10 @@ public class Film extends Konten {
 
     @Override
     public void tampilDetail() {
+
         System.out.println("Film : " + judul);
         System.out.println("Genre : " + genre);
+        System.out.println("Sutradara : " + sutradara);
+
     }
 }

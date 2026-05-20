@@ -4,15 +4,33 @@
  */
 package Backend.controller;
 
+import Backend.model.RiwayatTontonan;
+import java.util.ArrayList;
 /**
  *
  * @author ACER
  */
 public class RiwayatTontonanController {
+    private ArrayList<RiwayatTontonan> daftarRiwayat;
+    public RiwayatTontonanController() {
+        daftarRiwayat = new ArrayList<>();
+    }
 
+    // tambah riwayat tontonan
+    public void tambahRiwayat(RiwayatTontonan riwayat) {
+        daftarRiwayat.add(riwayat);
+        System.out.println("Riwayat berhasil ditambahkan");
+    }
+
+    // tampilkan semua riwayat
     public void tampilRiwayat() {
-
-        System.out.println("Menampilkan riwayat tontonan");
-
+        if (daftarRiwayat.isEmpty()) {
+            System.out.println("Belum ada riwayat tontonan");
+        } else {
+            System.out.println("Daftar Riwayat Tontonan:");
+            for (RiwayatTontonan r : daftarRiwayat) {
+                r.tampilRiwayat();
+            }
+        }
     }
 }

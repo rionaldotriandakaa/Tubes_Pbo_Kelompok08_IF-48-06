@@ -12,27 +12,59 @@ public class Episode {
 
     private int episodeNumber;
     private String judulEpisode;
+    private int durasiEpisode;
+    private boolean sudahDitonton;
 
     private Series series;
 
     public Episode(int episodeNumber,
                    String judulEpisode,
+                   int durasiEpisode,
+                   boolean sudahDitonton,
                    Series series) {
 
         this.episodeNumber = episodeNumber;
         this.judulEpisode = judulEpisode;
+        this.durasiEpisode = durasiEpisode;
+        this.sudahDitonton = sudahDitonton;
         this.series = series;
+
     }
 
-    public void playEpisode() {
+    // getter
+    public int getEpisodeNumber() {
+        return episodeNumber;
+    }
 
-        System.out.println("Memutar episode " + judulEpisode);
+    public String getJudulEpisode() {
+        return judulEpisode;
+    }
 
+    public int getDurasiEpisode() {
+        return durasiEpisode;
+    }
+
+    public boolean isSudahDitonton() {
+        return sudahDitonton;
     }
 
     public Series getSeries() {
-
         return series;
+    }
 
+    // play episode
+    public void playEpisode() {
+        System.out.println("Memutar episode "
+                + episodeNumber
+                + " : "
+                + judulEpisode);
+
+    }
+
+    // tampil detail episode
+    public void tampilDetailEpisode() {
+        System.out.println("Episode : " + episodeNumber);
+        System.out.println("Judul : " + judulEpisode);
+        System.out.println("Durasi : " + durasiEpisode + " menit");
     }
 }

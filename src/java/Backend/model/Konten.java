@@ -16,12 +16,31 @@ public abstract class Konten {
     protected String deskripsi;
     protected int durasi;
 
-    public Konten(int id, String judul, String genre, String deskripsi, int durasi) {
+    protected double ratingAverage;
+    protected String poster;
+    protected int tahunRilis;
+    protected boolean trending;
+
+    public Konten(int id,
+                  String judul,
+                  String genre,
+                  String deskripsi,
+                  int durasi,
+                  double ratingAverage,
+                  String poster,
+                  int tahunRilis,
+                  boolean trending) {
+
         this.id = id;
         this.judul = judul;
         this.genre = genre;
         this.deskripsi = deskripsi;
         this.durasi = durasi;
+        this.ratingAverage = ratingAverage;
+        this.poster = poster;
+        this.tahunRilis = tahunRilis;
+        this.trending = trending;
+
     }
 
     public int getId() {
@@ -40,9 +59,18 @@ public abstract class Konten {
         return deskripsi;
     }
 
+    public double getRatingAverage() {
+        return ratingAverage;
+    }
+        
     public int getDurasi() {
         return durasi;
     }
+    public void play() {
 
+        System.out.println("Memutar konten...");
+
+    }
+    
     public abstract void tampilDetail();
 }
