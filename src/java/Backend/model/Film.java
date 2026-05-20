@@ -8,6 +8,25 @@ package Backend.model;
  *
  * @author ACER
  */
-public class Film {
-    
+public class Film extends Konten {
+
+    private String sutradara;
+
+    public Film(int id, String judul, String genre,
+                String deskripsi, int durasi,
+                String sutradara) {
+
+        super(id, judul, genre, deskripsi, durasi);
+        this.sutradara = sutradara;
+    }
+
+    public String getSutradara() {
+        return sutradara;
+    }
+
+    @Override
+    public void tampilDetail() {
+        System.out.println("Film : " + judul);
+        System.out.println("Genre : " + genre);
+    }
 }

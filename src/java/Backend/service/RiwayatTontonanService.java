@@ -9,5 +9,12 @@ package Backend.service;
  * @author ACER
  */
 public class RiwayatTontonanService {
-    
+
+    public void tambahRiwayat() {
+        System.out.println("Riwayat tontonan ditambahkan");
+    }
+
+    public void lihatRiwayat() {
+        System.out.println("Menampilkan riwayat tontonan");
+    }
 }

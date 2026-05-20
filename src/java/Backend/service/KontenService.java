@@ -9,5 +9,12 @@ package Backend.service;
  * @author ACER
  */
 public class KontenService {
-    
+
+    public void tampilkanKonten() {
+        System.out.println("Menampilkan daftar konten");
+    }
+
+    public void detailKonten() {
+        System.out.println("Menampilkan detail konten");
+    }
 }

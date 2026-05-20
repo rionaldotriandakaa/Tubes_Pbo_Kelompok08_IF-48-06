@@ -9,5 +9,12 @@ package Backend.repository;
  * @author ACER
  */
 public class RiwayatTontonanRepository {
-    
+
+    public void simpanRiwayat() {
+        System.out.println("Riwayat berhasil disimpan");
+    }
+
+    public void ambilRiwayat() {
+        System.out.println("Mengambil riwayat tontonan");
+    }
 }

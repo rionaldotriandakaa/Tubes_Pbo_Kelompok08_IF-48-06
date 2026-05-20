@@ -9,5 +9,12 @@ package Backend.repository;
  * @author ACER
  */
 public class RatingRepository {
-    
+
+    public void simpanRating() {
+        System.out.println("Rating berhasil disimpan");
+    }
+
+    public void updateRating() {
+        System.out.println("Rating berhasil diperbarui");
+    }
 }

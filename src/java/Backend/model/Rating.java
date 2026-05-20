@@ -9,5 +9,18 @@ package Backend.model;
  * @author ACER
  */
 public class Rating {
-    
+
+    private int nilaiRating;
+
+    public Rating(int nilaiRating) {
+        this.nilaiRating = nilaiRating;
+    }
+
+    public int getNilaiRating() {
+        return nilaiRating;
+    }
+
+    public void beriRating() {
+        System.out.println("Rating diberikan");
+    }
 }

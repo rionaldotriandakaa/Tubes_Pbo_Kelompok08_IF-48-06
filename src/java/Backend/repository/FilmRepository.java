@@ -9,5 +9,12 @@ package Backend.repository;
  * @author ACER
  */
 public class FilmRepository {
-    
+
+    public void simpanFilm() {
+        System.out.println("Film berhasil disimpan");
+    }
+
+    public void ambilFilm() {
+        System.out.println("Mengambil data film");
+    }
 }

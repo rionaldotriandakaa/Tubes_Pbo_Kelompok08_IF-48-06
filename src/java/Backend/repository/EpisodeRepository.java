@@ -9,5 +9,12 @@ package Backend.repository;
  * @author ACER
  */
 public class EpisodeRepository {
-    
+
+    public void simpanEpisode() {
+        System.out.println("Episode berhasil disimpan");
+    }
+
+    public void ambilEpisode() {
+        System.out.println("Mengambil data episode");
+    }
 }

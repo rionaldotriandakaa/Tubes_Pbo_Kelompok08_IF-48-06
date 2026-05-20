@@ -9,5 +9,16 @@ package Backend.service;
  * @author ACER
  */
 public class FavoriteService {
-    
+
+    public void tambahFavorite() {
+        System.out.println("Konten ditambahkan ke favorite");
+    }
+
+    public void hapusFavorite() {
+        System.out.println("Konten dihapus dari favorite");
+    }
+
+    public void lihatFavorite() {
+        System.out.println("Menampilkan daftar favorite");
+    }
 }
