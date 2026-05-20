@@ -279,7 +279,7 @@
 
             <div class="register">
                 Tidak Punya Akun?
-                <a href="Register.jsp">Create an account</a>
+                <a href="Frontend/Register.jsp">Create an account</a>
             </div>
 
             <div class="footer">
