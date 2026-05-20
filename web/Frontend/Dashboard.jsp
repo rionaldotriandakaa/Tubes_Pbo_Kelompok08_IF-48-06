@@ -264,7 +264,7 @@
             </div>
 
             <h1>
-                AVANGERS<br>
+                AVENGERS<br>
                 DOOMSDAY
             </h1>
 
