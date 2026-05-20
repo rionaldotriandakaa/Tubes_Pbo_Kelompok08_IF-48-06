@@ -8,6 +8,7 @@ package Backend.model;
  *
  * @author ACER
  */
+
 public abstract class Konten {
 
     protected int id;
@@ -15,8 +16,11 @@ public abstract class Konten {
     protected String genre;
     protected String deskripsi;
     protected int durasi;
+    protected String posterPath;
 
-    public Konten(int id, String judul, String genre, String deskripsi, int durasi) {
+    public Konten(int id, String judul, String genre,
+                  String deskripsi, int durasi) {
+
         this.id = id;
         this.judul = judul;
         this.genre = genre;
@@ -42,6 +46,14 @@ public abstract class Konten {
 
     public int getDurasi() {
         return durasi;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
     public abstract void tampilDetail();
