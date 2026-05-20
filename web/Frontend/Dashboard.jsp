@@ -373,6 +373,8 @@
         </div>
 
     </div>
+    
+    <jsp:include page="recommendation.jsp" />
 
 </body>
 </html>
