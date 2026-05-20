@@ -1,16 +1,9 @@
-<%-- 
-    Document   : recommendation
-    Created on : 20 May 2026, 17.51.10
-    Author     : White
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CineStream Recommendations</title>
+    <title>CineStream Dashboard</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -78,10 +71,10 @@
         /* HERO */
 
         .hero{
-            height:70vh;
+            height:100vh;
             background:
-                linear-gradient(to right, rgba(5,8,22,0.95) 30%, rgba(5,8,22,0.3)),
-                url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=2070&auto=format&fit=crop');
+                linear-gradient(to right, rgba(5,8,22,0.96) 30%, rgba(5,8,22,0.2)),
+                url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop');
 
             background-size:cover;
             background-position:center;
@@ -106,15 +99,22 @@
         }
 
         .hero h1{
-            font-size:70px;
-            line-height:75px;
+            font-size:90px;
+            line-height:95px;
             margin-bottom:25px;
+            font-weight:700;
         }
 
         .hero p{
             color:#d2d2d2;
-            line-height:30px;
+            line-height:32px;
+            max-width:600px;
             margin-bottom:35px;
+        }
+
+        .hero-buttons{
+            display:flex;
+            gap:20px;
         }
 
         .watch-btn{
@@ -124,6 +124,16 @@
             background:linear-gradient(90deg,#ff9b9b,#ff6b81);
             color:black;
             font-weight:700;
+            cursor:pointer;
+            box-shadow:0 0 20px rgba(255,107,129,0.5);
+        }
+
+        .fav-btn{
+            padding:18px 35px;
+            border:none;
+            border-radius:40px;
+            background:rgba(255,255,255,0.08);
+            color:white;
             cursor:pointer;
         }
 
@@ -186,6 +196,39 @@
             font-size:13px;
         }
 
+        /* CONTINUE WATCHING */
+
+        .continue-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:25px;
+        }
+
+        .continue-card{
+            background:#0b1024;
+            border-radius:20px;
+            padding:20px;
+            display:flex;
+            align-items:center;
+            gap:18px;
+        }
+
+        .continue-card img{
+            width:90px;
+            height:60px;
+            border-radius:12px;
+            object-fit:cover;
+        }
+
+        .continue-info h4{
+            margin-bottom:5px;
+        }
+
+        .continue-info p{
+            color:#888;
+            font-size:13px;
+        }
+
     </style>
 </head>
 
@@ -217,69 +260,113 @@
         <div class="hero-content">
 
             <div class="tag">
-                PERSONALIZED PICKS
+                FEATURED PREMIERE
             </div>
 
             <h1>
-                RECOMMENDED<br>
-                FOR YOU
+                AVANGERS<br>
+                DOOMSDAY
             </h1>
 
             <p>
-                Discover movies and series specially selected based on
-                your watch history, favorite genres, and personal ratings.
+                When the greatest threat rises from the shadows,
+                the Avengers must reunite to face the ultimate destruction.
+                In a battle filled with sacrifice, courage, and destiny,
+                the fate of humanity hangs in the balance.
             </p>
 
-            <button class="watch-btn">
-                EXPLORE NOW
-            </button>
+            <div class="hero-buttons">
+                <button class="watch-btn">WATCH NOW</button>
+                <button class="fav-btn">ADD TO FAVORITES</button>
+            </div>
 
         </div>
 
     </div>
 
-    <!-- RECOMMENDED MOVIES -->
+    <!-- TRENDING -->
 
     <div class="section">
 
-        <h2 class="section-title">Based On Your Favorites</h2>
-        <p class="section-subtitle">MOVIES SELECTED JUST FOR YOU</p>
+        <h2 class="section-title">Trending Now</h2>
+        <p class="section-subtitle">GLOBAL FAVORITES THIS WEEK</p>
 
         <div class="movie-row">
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
-
+                <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
                 <div class="movie-info">
-                    <h3>Interstellar</h3>
-                    <p>Sci-Fi • 2h 49m</p>
+                    <h3>Pengabdi Setan</h3>
+                    <p>Horror • 2h 14m</p>
                 </div>
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
-
+                <img src="https://upload.wikimedia.org/wikipedia/en/8/87/The_Lord_of_the_Rings_-_The_Two_Towers.jpg">
                 <div class="movie-info">
-                    <h3>Dune Part Two</h3>
-                    <p>Sci-Fi • 2h 46m</p>
+                    <h3>Lord Of The Rings</h3>
+                    <p>Fantasy • 3h 45m</p>
                 </div>
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Everything_Everywhere_All_at_Once.jpg">
-
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/WandaVision_poster.jpg">
                 <div class="movie-info">
-                    <h3>Everything Everywhere</h3>
-                    <p>Adventure • 2h 19m</p>
+                    <h3>Wanda Vision</h3>
+                    <p>Adventure • 2h 30m</p>
                 </div>
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
-
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg">
                 <div class="movie-info">
-                    <h3>Guardians Vol. 3</h3>
-                    <p>Action • 2h 30m</p>
+                    <h3>Frozen</h3>
+                    <p>Fantasy • 1h 52m</p>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Doctor_Strange_in_the_Multiverse_of_Madness_poster.jpg">
+                <div class="movie-info">
+                    <h3>Doctor Strange</h3>
+                    <p>Action • 2h 05m</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTINUE WATCHING -->
+
+    <div class="section">
+
+        <h2 class="section-title">Continue Watching</h2>
+        <p class="section-subtitle">PICK UP WHERE YOU LEFT OFF</p>
+
+        <div class="continue-grid">
+
+            <div class="continue-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg">
+                <div class="continue-info">
+                    <h4>Stranger Things</h4>
+                    <p>S1:E4 • 42m remaining</p>
+                </div>
+            </div>
+
+            <div class="continue-card">
+                <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+                <div class="continue-info">
+                    <h4>Pengabdi Setan</h4>
+                    <p>15m remaining</p>
+                </div>
+            </div>
+
+            <div class="continue-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/9d/Loki_season_2_poster.jpg">
+                <div class="continue-info">
+                    <h4>Loki</h4>
+                    <p>S2:E2 • 5m remaining</p>
                 </div>
             </div>
 
