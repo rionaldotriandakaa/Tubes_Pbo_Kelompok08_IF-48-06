@@ -238,7 +238,7 @@
             <p>Step back into the world of stories.</p>
         </div>
 
-        <form action="Dashboard.jsp" method="get">
+        <form action="Frontend/Dasboard.jsp" method="get">
 
             <div class="input-group">
                 <label>USERNAME OR EMAIL</label>
