@@ -246,7 +246,6 @@
             <a href="#">Series</a>
             <a href="#">Favorites</a>
             <a href="#">My List</a>
-            <a href="recommendation.jsp">Recommendations</a>
         </div>
 
         <div class="profile"></div>
@@ -373,6 +372,8 @@
         </div>
 
     </div>
+    
+    <jsp:include page="recommendation.jsp" />
 
 </body>
 </html>
