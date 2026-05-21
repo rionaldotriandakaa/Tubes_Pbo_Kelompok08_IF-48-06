@@ -67,8 +67,7 @@ public class SearchRepository {
     // Ambil semua genre untuk dropdown filter
     public List<String> getAllGenre() {
         List<String> genres = new ArrayList<>();
-        String sql = "SELECT DISTINCT genre FROM konten 
-                      ORDER BY genre ASC";
+        String sql = "SELECT DISTINCT genre FROM konten ORDER BY genre ASC";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = 

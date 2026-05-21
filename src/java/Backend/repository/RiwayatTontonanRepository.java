@@ -17,4 +17,12 @@ public class RiwayatTontonanRepository {
     public void ambilRiwayat() {
         System.out.println("Mengambil riwayat tontonan");
     }
+
+    public int getProgress(int profilId, int kontenId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void upsertProgress(int profilId, int kontenId, int detik, boolean selesai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
