@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <title>CineStream Dashboard</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
 
@@ -18,25 +17,32 @@
         }
 
         body{
-            background:#050816;
+            background:#040816;
             color:white;
             overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
         }
 
         /* NAVBAR */
 
         .navbar{
             width:100%;
-            height:80px;
+            height:85px;
             padding:0 60px;
+
             display:flex;
             justify-content:space-between;
             align-items:center;
+
             position:fixed;
             top:0;
-            z-index:100;
-            background:rgba(0,0,0,0.25);
-            backdrop-filter:blur(12px);
+            z-index:1000;
+
+            background:rgba(0,0,0,0.35);
+            backdrop-filter:blur(14px);
         }
 
         .logo{
@@ -51,7 +57,6 @@
         }
 
         .nav-links a{
-            text-decoration:none;
             color:#ddd;
             font-size:14px;
             transition:0.3s;
@@ -61,25 +66,48 @@
             color:#ff9b9b;
         }
 
+        .right-nav{
+            display:flex;
+            align-items:center;
+            gap:20px;
+        }
+
+        .icon{
+            font-size:20px;
+            cursor:pointer;
+        }
+
         .profile{
             width:42px;
             height:42px;
+
             border-radius:50%;
-            background:#ff9b9b;
+
+            background-image:url('https://i.pravatar.cc/150?img=12');
+
+            background-size:cover;
+            background-position:center;
+
+            border:2px solid #ff9b9b;
         }
 
         /* HERO */
 
         .hero{
             height:100vh;
+
             background:
-                linear-gradient(to right, rgba(5,8,22,0.96) 30%, rgba(5,8,22,0.2)),
-                url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop');
+                linear-gradient(to right,
+                rgba(4,8,22,0.96) 25%,
+                rgba(4,8,22,0.4)),
+                url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1974');
 
             background-size:cover;
             background-position:center;
+
             display:flex;
             align-items:center;
+
             padding:0 80px;
         }
 
@@ -88,28 +116,33 @@
         }
 
         .tag{
-            background:#ff9b9b;
             display:inline-block;
+
             padding:8px 18px;
-            border-radius:20px;
-            font-size:12px;
+
+            background:#ff9b9b;
+
             color:black;
-            font-weight:600;
+            font-size:12px;
+            font-weight:700;
+
+            border-radius:20px;
+
             margin-bottom:25px;
         }
 
         .hero h1{
             font-size:90px;
-            line-height:95px;
+            line-height:92px;
             margin-bottom:25px;
-            font-weight:700;
+            font-weight:800;
         }
 
         .hero p{
             color:#d2d2d2;
             line-height:32px;
-            max-width:600px;
             margin-bottom:35px;
+            max-width:550px;
         }
 
         .hero-buttons{
@@ -118,22 +151,31 @@
         }
 
         .watch-btn{
-            padding:18px 35px;
+            padding:18px 38px;
+
             border:none;
             border-radius:40px;
+
             background:linear-gradient(90deg,#ff9b9b,#ff6b81);
+
             color:black;
             font-weight:700;
+
             cursor:pointer;
+
             box-shadow:0 0 20px rgba(255,107,129,0.5);
         }
 
         .fav-btn{
-            padding:18px 35px;
+            padding:18px 38px;
+
             border:none;
             border-radius:40px;
+
             background:rgba(255,255,255,0.08);
+
             color:white;
+
             cursor:pointer;
         }
 
@@ -144,14 +186,18 @@
         }
 
         .section-title{
-            font-size:38px;
+            font-size:40px;
             margin-bottom:10px;
         }
 
         .section-subtitle{
-            color:#777;
+            color:#7b8190;
             margin-bottom:35px;
+            letter-spacing:2px;
+            font-size:13px;
         }
+
+        /* MOVIES */
 
         .movie-row{
             display:flex;
@@ -165,11 +211,16 @@
         }
 
         .movie-card{
-            min-width:220px;
+            min-width:230px;
+
             background:#0b1024;
-            border-radius:22px;
+
+            border-radius:24px;
+
             overflow:hidden;
+
             transition:0.3s;
+
             cursor:pointer;
         }
 
@@ -192,7 +243,7 @@
         }
 
         .movie-info p{
-            color:#999;
+            color:#8c8c8c;
             font-size:13px;
         }
 
@@ -206,26 +257,28 @@
 
         .continue-card{
             background:#0b1024;
-            border-radius:20px;
+            border-radius:22px;
             padding:20px;
+
             display:flex;
             align-items:center;
             gap:18px;
         }
 
         .continue-card img{
-            width:90px;
-            height:60px;
+            width:100px;
+            height:70px;
+
             border-radius:12px;
             object-fit:cover;
         }
 
         .continue-info h4{
-            margin-bottom:5px;
+            margin-bottom:8px;
         }
 
         .continue-info p{
-            color:#888;
+            color:#8d8d8d;
             font-size:13px;
         }
 
@@ -241,14 +294,32 @@
         <div class="logo">CineStream</div>
 
         <div class="nav-links">
-            <a href="Dashboard.jsp">Home</a>
-            <a href="#">Movies</a>
-            <a href="#">Series</a>
-            <a href="#">Favorites</a>
-            <a href="#">My List</a>
+
+            <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
+
+            <a href="/CineStream/Frontend/Search.jsp">MOVIES</a>
+
+            <a href="/CineStream/Frontend/Player.jsp">SERIES</a>
+
+            <a href="/CineStream/Frontend/recommendation.jsp">FAVORITES</a>
+
+            <a href="/CineStream/Frontend/Profile.jsp">MY LIST</a>
+
         </div>
 
-        <div class="profile"></div>
+        <div class="right-nav">
+
+            <div class="icon">🔍</div>
+
+            <div class="icon">🔔</div>
+
+            <a href="/CineStream/Frontend/Profile.jsp">
+
+                <div class="profile"></div>
+
+            </a>
+
+        </div>
 
     </div>
 
@@ -275,8 +346,15 @@
             </p>
 
             <div class="hero-buttons">
-                <button class="watch-btn">WATCH NOW</button>
-                <button class="fav-btn">ADD TO FAVORITES</button>
+
+                <button class="watch-btn">
+                    ▶ WATCH NOW
+                </button>
+
+                <button class="fav-btn">
+                    + ADD TO FAVORITES
+                </button>
+
             </div>
 
         </div>
@@ -287,49 +365,109 @@
 
     <div class="section">
 
-        <h2 class="section-title">Trending Now</h2>
-        <p class="section-subtitle">GLOBAL FAVORITES THIS WEEK</p>
+        <h2 class="section-title">
+            Trending Now
+        </h2>
+
+        <p class="section-subtitle">
+            GLOBAL FAVORITES THIS WEEK
+        </p>
 
         <div class="movie-row">
 
             <div class="movie-card">
+
                 <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+
                 <div class="movie-info">
                     <h3>Pengabdi Setan</h3>
                     <p>Horror • 2h 14m</p>
                 </div>
+
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/8/87/The_Lord_of_the_Rings_-_The_Two_Towers.jpg">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Lord_of_the_Rings%2C_TFOTR_%282001%29.jpg">
+
                 <div class="movie-info">
                     <h3>Lord Of The Rings</h3>
-                    <p>Fantasy • 3h 45m</p>
+                    <p>Fantasy • 3h 10m</p>
                 </div>
+
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/WandaVision_poster.jpg">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
+
                 <div class="movie-info">
-                    <h3>Wanda Vision</h3>
+                    <h3>WandaVision</h3>
                     <p>Adventure • 2h 30m</p>
                 </div>
+
             </div>
 
             <div class="movie-card">
+
                 <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg">
+
                 <div class="movie-info">
                     <h3>Frozen</h3>
                     <p>Fantasy • 1h 52m</p>
                 </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RECOMMENDED -->
+
+    <div class="section">
+
+        <h2 class="section-title">
+            Recommended For You
+        </h2>
+
+        <p class="section-subtitle">
+            BASED ON YOUR VIEWING HISTORY
+        </p>
+
+        <div class="movie-row">
+
+            <div class="movie-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Final_Destination_Bloodlines.jpg">
+
+                <div class="movie-info">
+                    <h3>Final Destination</h3>
+                    <p>Horror • 98% Match</p>
+                </div>
+
             </div>
 
             <div class="movie-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Doctor_Strange_in_the_Multiverse_of_Madness_poster.jpg">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg">
+
                 <div class="movie-info">
-                    <h3>Doctor Strange</h3>
-                    <p>Action • 2h 05m</p>
+                    <h3>Barbie</h3>
+                    <p>Comedy • 96% Match</p>
                 </div>
+
+            </div>
+
+            <div class="movie-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Insidious_the_red_door.png">
+
+                <div class="movie-info">
+                    <h3>Insidious</h3>
+                    <p>Horror • 92% Match</p>
+                </div>
+
             </div>
 
         </div>
@@ -340,40 +478,52 @@
 
     <div class="section">
 
-        <h2 class="section-title">Continue Watching</h2>
-        <p class="section-subtitle">PICK UP WHERE YOU LEFT OFF</p>
+        <h2 class="section-title">
+            Continue Watching
+        </h2>
+
+        <p class="section-subtitle">
+            PICK UP WHERE YOU LEFT OFF
+        </p>
 
         <div class="continue-grid">
 
             <div class="continue-card">
+
                 <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg">
+
                 <div class="continue-info">
                     <h4>Stranger Things</h4>
                     <p>S1:E4 • 42m remaining</p>
                 </div>
+
             </div>
 
             <div class="continue-card">
+
                 <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+
                 <div class="continue-info">
                     <h4>Pengabdi Setan</h4>
                     <p>15m remaining</p>
                 </div>
+
             </div>
 
             <div class="continue-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/9/9d/Loki_season_2_poster.jpg">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Loki_season_2_poster.jpeg">
+
                 <div class="continue-info">
                     <h4>Loki</h4>
-                    <p>S2:E2 • 5m remaining</p>
+                    <p>S2:E2 • 15m remaining</p>
                 </div>
+
             </div>
 
         </div>
 
     </div>
-    
-    <jsp:include page="recommendation.jsp" />
 
 </body>
 </html>
