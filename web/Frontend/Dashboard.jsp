@@ -463,6 +463,57 @@
 
     </div>
 
+        <!-- CONTINUE WATCHING -->
+
+    <div class="section">
+
+        <h2 class="section-title">
+            Continue Watching
+        </h2>
+
+        <p class="section-subtitle">
+            PICK UP WHERE YOU LEFT OFF
+        </p>
+
+        <div class="continue-grid">
+
+            <div class="continue-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg">
+
+                <div class="continue-info">
+                    <h4>Stranger Things</h4>
+                    <p>S1:E4 • 42m remaining</p>
+                </div>
+
+            </div>
+
+            <div class="continue-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+
+                <div class="continue-info">
+                    <h4>Pengabdi Setan</h4>
+                    <p>15m remaining</p>
+                </div>
+
+            </div>
+
+            <div class="continue-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Loki_season_2_poster.jpeg">
+
+                <div class="continue-info">
+                    <h4>Loki</h4>
+                    <p>S2:E2 • 15m remaining</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+        
     <!-- RECOMMENDED -->
 
     <div class="section">
@@ -547,57 +598,6 @@
                 </div>
 
             </a>
-
-        </div>
-
-    </div>
-
-    <!-- CONTINUE WATCHING -->
-
-    <div class="section">
-
-        <h2 class="section-title">
-            Continue Watching
-        </h2>
-
-        <p class="section-subtitle">
-            PICK UP WHERE YOU LEFT OFF
-        </p>
-
-        <div class="continue-grid">
-
-            <div class="continue-card">
-
-                <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg">
-
-                <div class="continue-info">
-                    <h4>Stranger Things</h4>
-                    <p>S1:E4 • 42m remaining</p>
-                </div>
-
-            </div>
-
-            <div class="continue-card">
-
-                <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
-
-                <div class="continue-info">
-                    <h4>Pengabdi Setan</h4>
-                    <p>15m remaining</p>
-                </div>
-
-            </div>
-
-            <div class="continue-card">
-
-                <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Loki_season_2_poster.jpeg">
-
-                <div class="continue-info">
-                    <h4>Loki</h4>
-                    <p>S2:E2 • 15m remaining</p>
-                </div>
-
-            </div>
 
         </div>
 

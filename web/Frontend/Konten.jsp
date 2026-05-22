@@ -34,7 +34,7 @@
             color:white;
         }
 
-        /* NAVBAR */
+        /* navigasi */
 
         .navbar{
             width:100%;
@@ -84,7 +84,7 @@
             background-size:cover;
         }
 
-        /* HERO */
+        /* poster */
 
         .hero{
             min-height:100vh;
@@ -409,338 +409,163 @@
         }
 
     </style>
-
 </head>
-
 <body>
 
     <!-- NAVBAR -->
-
     <div class="navbar">
-
-        <div class="logo">
-            CineStream
-        </div>
-
+        <div class="logo">CineStream</div>
         <div class="nav-links">
-
             <a href="Dashboard.jsp">HOME</a>
             <a href="Search.jsp">MOVIES</a>
             <a href="Player.jsp">SERIES</a>
             <a href="MyList.jsp">MY LIST</a>
             <a href="Profile.jsp">PROFILE</a>
-
         </div>
-
         <div class="profile"></div>
-
     </div>
 
     <!-- HERO -->
 
     <section class="hero">
-
         <div class="poster">
-
             <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg">
-
         </div>
-
         <div class="hero-content">
-
-            <div class="tag">
-                FEATURED SERIES
-            </div>
-
-            <h1>
-                Avengers <br>
-                Doomsday
-            </h1>
-
+            <div class="tag">FEATURED SERIES</div>
+            <h1>Avengers <br>Doomsday</h1>
             <div class="meta">
-
                 <span>⭐ 9.2/10</span>
                 <span>Action • Sci-Fi</span>
                 <span>8 Episodes</span>
-
             </div>
-
             <p class="description">
-
                 Earth's mightiest heroes reunite once again to face
                 a multiversal catastrophe that threatens all realities.
                 A battle beyond time begins.
-
             </p>
-
             <div class="buttons">
-
-                <button class="watch-btn">
-                    ▶ WATCH NOW
-                </button>
-
-                <button class="list-btn">
-                    + WATCHLIST
-                </button>
-
-                <button class="list-btn">
-                    ♡ FAVORITE
-                </button>
-
+                <button class="watch-btn">▶ WATCH NOW</button>
+                <button class="list-btn">+ WATCHLIST</button>
+                <button class="list-btn">♡ FAVORITE</button>
             </div>
-
         </div>
-
     </section>
 
     <!-- CONTINUE WATCHING -->
 
     <section class="section">
-
-        <h2 class="section-title">
-            Continue Watching
-        </h2>
-
-        <p class="section-subtitle">
-            RESUME YOUR LAST SESSION
-        </p>
-
+        <h2 class="section-title">Continue Watching</h2>
+        <p class="section-subtitle">RESUME YOUR LAST SESSION</p>
         <div class="continue-card">
-
             <div class="continue-top">
-
-                <h3>
-                    Episode 4 • The Last Portal
-                </h3>
-
-                <span>
-                    45% Completed
-                </span>
-
+                <h3>Episode 4 • The Last Portal</h3>
+                <span>45% Completed</span>
             </div>
-
             <div class="progress-bar">
-
                 <div class="progress-fill"></div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- EPISODES -->
 
     <section class="section">
-
         <div class="episode-header">
-
             <div>
-
-                <h2 class="section-title">
-                    Episodes
-                </h2>
-
-                <p class="section-subtitle">
-                    SEASON COLLECTION
-                </p>
-
+                <h2 class="section-title">Episodes</h2>
+                <p class="section-subtitle">SEASON COLLECTION</p>
             </div>
-
             <select class="season-select">
-
                 <option>Season 1</option>
                 <option>Season 2</option>
-
             </select>
-
         </div>
-
         <div class="episode-grid">
-
             <div class="episode-card">
-
                 <h3>Episode 1</h3>
-
-                <p>
-                    The Avengers discover the beginning of the multiverse collapse.
-                </p>
-
+                <p>The Avengers discover the beginning of the multiverse collapse.</p>
             </div>
-
             <div class="episode-card">
-
                 <h3>Episode 2</h3>
-
-                <p>
-                    Strange realities collide as heroes search for answers.
-                </p>
-
+                <p>Strange realities collide as heroes search for answers.</p>
             </div>
-
             <div class="episode-card">
-
                 <h3>Episode 3</h3>
-
-                <p>
-                    An unexpected villain rises from another universe.
-                </p>
-
+                <p>An unexpected villain rises from another universe.</p>
             </div>
-
             <div class="episode-card">
-
                 <h3>Episode 4</h3>
-
-                <p>
-                    The final portal opens and chaos begins.
-                </p>
-
+                <p>The final portal opens and chaos begins.</p>
             </div>
-
         </div>
-
     </section>
 
     <!-- RECOMMENDATIONS -->
-
     <section class="section">
-
-        <h2 class="section-title">
-            Recommended For You
-        </h2>
-
-        <p class="section-subtitle">
-            BASED ON YOUR WATCH HISTORY
-        </p>
-
+        <h2 class="section-title">Recommended For You</h2>
+        <p class="section-subtitle">BASED ON YOUR WATCH HISTORY</p>
         <div class="movie-row">
-
             <a href="Konten.jsp">
-
                 <div class="movie-card">
-
                     <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
-
                     <div class="movie-info">
-
                         <h3>Interstellar</h3>
-
-                        <p>
-                            Sci-Fi • 2h 49m
-                        </p>
-
+                        <p>Sci-Fi • 2h 49m</p>
                     </div>
-
                 </div>
-
             </a>
-
             <div class="movie-card">
-
                 <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
-
                 <div class="movie-info">
-
                     <h3>Dune Part Two</h3>
                     <p>Adventure • 2h 46m</p>
-
                 </div>
-
             </div>
-
             <div class="movie-card">
-
                 <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
-
                 <div class="movie-info">
-
                     <h3>Guardians Vol.3</h3>
                     <p>Action • 2h 30m</p>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- COMMENTS -->
 
     <section class="section">
-
         <div class="rating-header">
-
-            <div class="rating-number">
-                4.8
-            </div>
-
+            <div class="rating-number">4.8</div>
             <div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p>
-                    Based on 2.4k reviews
-                </p>
-
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Based on 2.4k reviews</p>
             </div>
-
         </div>
-
         <div class="comment-grid">
-
             <div class="comment-card">
-
-                <div class="comment-user">
-                    Viozkyyy
-                </div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
+                <div class="comment-user">Viozkyyy</div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
                 <div class="comment-text">
-
                     One of the best Marvel stories ever created.
                     The visuals and action sequences are incredible.
-
                 </div>
-
             </div>
-
             <div class="comment-card">
-
-                <div class="comment-user">
-                    CineLover
-                </div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐☆
-                </div>
-
+                <div class="comment-user">CineLover</div>
+                <div class="stars">⭐⭐⭐⭐☆</div>
                 <div class="comment-text">
-
                     Amazing multiverse concept and emotional ending.
                     Definitely worth watching.
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- FOOTER -->
 
     <footer class="footer">
-
         © 2026 CineStream • Kelompok 8
-
     </footer>
-
 </body>
 </html>
