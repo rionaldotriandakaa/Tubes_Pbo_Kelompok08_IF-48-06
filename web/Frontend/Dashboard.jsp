@@ -303,7 +303,7 @@
 
             <a href="/CineStream/Frontend/recommendation.jsp">FAVORITES</a>
 
-            <a href="/CineStream/Frontend/Profile.jsp">MY LIST</a>
+            <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
 
         </div>
 
