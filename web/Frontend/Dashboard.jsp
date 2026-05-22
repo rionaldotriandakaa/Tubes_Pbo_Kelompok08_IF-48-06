@@ -198,6 +198,10 @@
         }
 
         /* MOVIES */
+        .movie-row a{
+            text-decoration:none;
+            color:white;
+        }
 
         .movie-row{
             display:flex;
@@ -375,49 +379,85 @@
 
         <div class="movie-row">
 
-            <div class="movie-card">
+            <a href="Konten.jsp">
 
-                <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+                <div class="movie-card">
 
-                <div class="movie-info">
-                    <h3>Pengabdi Setan</h3>
-                    <p>Horror • 2h 14m</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+
+                    <div class="movie-info">
+
+                        <h3>Pengabdi Setan</h3>
+
+                        <p>
+                            Horror • 2h 14m
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
+            
+            <a href="Konten.jsp">
 
-            <div class="movie-card">
+                <div class="movie-card">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Lord_of_the_Rings%2C_TFOTR_%282001%29.jpg">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Lord_of_the_Rings%2C_TFOTR_%282001%29.jpg">
 
-                <div class="movie-info">
-                    <h3>Lord Of The Rings</h3>
-                    <p>Fantasy • 3h 10m</p>
+                    <div class="movie-info">
+
+                        <h3>Lord Of The Rings</h3>
+
+                        <p>
+                            Fantasy • 3h 10m
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
+            
+            <a href="Konten.jsp">
 
-            <div class="movie-card">
+                <div class="movie-card">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
 
-                <div class="movie-info">
-                    <h3>WandaVision</h3>
-                    <p>Adventure • 2h 30m</p>
+                    <div class="movie-info">
+
+                        <h3>WandaVision</h3>
+
+                        <p>
+                            Adventure • 2h 30m
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
 
-            <div class="movie-card">
+            <a href="Konten.jsp">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg">
+                <div class="movie-card">
 
-                <div class="movie-info">
-                    <h3>Frozen</h3>
-                    <p>Fantasy • 1h 52m</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
+
+                    <div class="movie-info">
+
+                        <h3>Frozen</h3>
+
+                        <p>
+                            Fantasy • 1h 52m
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
 
         </div>
 
@@ -437,38 +477,76 @@
 
         <div class="movie-row">
 
+            <a href="Konten.jsp">
+
+                <div class="movie-card">
+
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Final_Destination_Bloodlines.jpg">
+
+                    <div class="movie-info">
+
+                        <h3>Final Destination</h3>
+
+                        <p>
+                            Horror • 98% Match
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+            
             <div class="movie-card">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Final_Destination_Bloodlines.jpg">
+                
 
                 <div class="movie-info">
-                    <h3>Final Destination</h3>
-                    <p>Horror • 98% Match</p>
+                    <h3></h3>
+                    <p></p>
                 </div>
 
             </div>
+            
+            <a href="Konten.jsp">
 
-            <div class="movie-card">
+                <div class="movie-card">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg">
 
-                <div class="movie-info">
-                    <h3>Barbie</h3>
-                    <p>Comedy • 96% Match</p>
+                    <div class="movie-info">
+
+                        <h3>Barbie</h3>
+
+                        <p>
+                            Comedy • 96% Match
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
 
-            <div class="movie-card">
+            <a href="Konten.jsp">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Insidious_the_red_door.png">
+                <div class="movie-card">
 
-                <div class="movie-info">
-                    <h3>Insidious</h3>
-                    <p>Horror • 92% Match</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Insidious_the_red_door.png">
+
+                    <div class="movie-info">
+
+                        <h3>Frozen</h3>
+
+                        <p>
+                            Horror • 92% Match
+                        </p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </a>
 
         </div>
 

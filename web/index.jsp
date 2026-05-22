@@ -1,3 +1,3 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:forward page="Frontend/Login.jsp"/>
+<%response.sendRedirect("Frontend/Login.jsp");%>

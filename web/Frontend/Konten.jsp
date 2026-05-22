@@ -5,50 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<%@page import="Backend.model.Konten"%>
-<%@page import="Backend.model.Film"%>
-<%@page import="Backend.model.Series"%>
-<%@page import="Backend.model.Episode"%>
-
-<%@page import="java.util.ArrayList"%>
-
-<%
-    Konten konten =
-        (Konten) request.getAttribute("konten");
-%>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
     <title>CineStream - Konten</title>
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <!-- Google Font -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Bootstrap Icon -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
 
@@ -60,251 +24,388 @@
         }
 
         body{
-            background:#0b0f1a;
+            background:#050816;
             color:white;
             overflow-x:hidden;
         }
 
         a{
             text-decoration:none;
+            color:white;
         }
 
         /* NAVBAR */
 
-        .navbar-custom{
-            background:rgba(0,0,0,0.45);
-            backdrop-filter:blur(12px);
-            border-bottom:1px solid rgba(255,255,255,0.08);
-            padding:15px 0;
+        .navbar{
+            width:100%;
+            height:85px;
+
+            padding:0 60px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            position:fixed;
+            top:0;
+            z-index:1000;
+
+            background:rgba(0,0,0,0.35);
+            backdrop-filter:blur(14px);
         }
 
         .logo{
-            font-size:28px;
+            font-size:32px;
             font-weight:700;
-            color:#ff0055;
+            color:#ff9b9b;
         }
 
-        .nav-link{
-            color:white !important;
-            margin-left:20px;
+        .nav-links{
+            display:flex;
+            gap:35px;
+        }
+
+        .nav-links a{
+            color:#ddd;
             transition:0.3s;
         }
 
-        .nav-link:hover{
-            color:#ff0055 !important;
+        .nav-links a:hover{
+            color:#ff9b9b;
+        }
+
+        .profile{
+            width:42px;
+            height:42px;
+
+            border-radius:50%;
+
+            background-image:url('https://i.pravatar.cc/150?img=12');
+            background-size:cover;
         }
 
         /* HERO */
 
-        .hero-section{
+        .hero{
             min-height:100vh;
-            padding-top:120px;
-            padding-bottom:80px;
+
+            padding:140px 80px 80px;
+
+            display:flex;
+            gap:60px;
+            align-items:center;
 
             background:
-                linear-gradient(
-                rgba(0,0,0,0.75),
-                rgba(0,0,0,0.95)
-                ),
-                url("../images/bg.jpg");
+            linear-gradient(to right,
+            rgba(5,8,22,0.95),
+            rgba(5,8,22,0.65)),
+
+            url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070');
 
             background-size:cover;
             background-position:center;
         }
 
-        .poster-img{
-            width:100%;
-            border-radius:25px;
-            box-shadow:0 0 35px rgba(255,0,90,0.25);
+        .poster img{
+            width:340px;
+            border-radius:28px;
+
+            box-shadow:0 0 35px rgba(255,107,129,0.35);
         }
 
-        .content-title{
-            font-size:64px;
-            font-weight:700;
-            margin-bottom:20px;
+        .hero-content{
+            max-width:700px;
         }
 
-        .content-info{
-            display:flex;
-            flex-wrap:wrap;
-            gap:12px;
-            margin-bottom:20px;
-        }
+        .tag{
+            display:inline-block;
 
-        .badge-custom{
-            background:rgba(255,255,255,0.08);
-            border:1px solid rgba(255,255,255,0.08);
-            padding:10px 18px;
+            padding:8px 18px;
+
             border-radius:30px;
-            font-size:14px;
+
+            background:#ff9b9b;
+            color:black;
+
+            font-size:12px;
+            font-weight:700;
+
+            margin-bottom:20px;
         }
 
-        .content-desc{
-            color:#c7c7c7;
-            line-height:1.9;
+        .hero-content h1{
+            font-size:72px;
+            line-height:80px;
+            margin-bottom:20px;
+        }
+
+        .meta{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+
+            margin-bottom:25px;
+
+            color:#d1d1d1;
+        }
+
+        .description{
+            line-height:32px;
+            color:#bcbcbc;
+
             margin-bottom:35px;
         }
 
-        /* BUTTON */
+        .buttons{
+            display:flex;
+            gap:18px;
+            flex-wrap:wrap;
+        }
 
-        .btn-play{
+        .watch-btn,
+        .list-btn{
 
-            background:#ff0055;
-            color:white;
+            padding:18px 34px;
+
             border:none;
+            border-radius:40px;
 
-            padding:14px 35px;
-            border-radius:50px;
+            cursor:pointer;
 
-            font-weight:600;
-            margin-right:15px;
+            font-weight:700;
+            font-size:15px;
 
             transition:0.3s;
         }
 
-        .btn-play:hover{
-            background:#ff336f;
-            transform:scale(1.05);
+        .watch-btn{
+            background:linear-gradient(90deg,#ff9b9b,#ff6b81);
+            color:black;
+
+            box-shadow:0 0 25px rgba(255,107,129,0.5);
         }
 
-        .btn-list{
+        .watch-btn:hover{
+            transform:translateY(-3px);
+        }
 
+        .list-btn{
             background:rgba(255,255,255,0.08);
             color:white;
-
-            border:none;
-            padding:14px 30px;
-
-            border-radius:50px;
-
-            font-weight:500;
-            transition:0.3s;
         }
 
-        .btn-list:hover{
+        .list-btn:hover{
             background:rgba(255,255,255,0.15);
         }
 
-        /* EPISODE */
+        /* SECTION */
 
-        .episode-section{
-            padding:70px 0;
+        .section{
+            padding:70px 80px;
         }
 
         .section-title{
-            font-size:32px;
-            font-weight:700;
+            font-size:38px;
+            margin-bottom:12px;
+        }
+
+        .section-subtitle{
+            color:#777;
+            letter-spacing:2px;
             margin-bottom:35px;
+            font-size:13px;
+        }
+
+        /* CONTINUE WATCHING */
+
+        .continue-card{
+
+            background:#0b1024;
+
+            border-radius:24px;
+
+            padding:30px;
+        }
+
+        .continue-top{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:18px;
+        }
+
+        .progress-bar{
+            width:100%;
+            height:10px;
+
+            border-radius:10px;
+
+            background:#1f2937;
+
+            overflow:hidden;
+        }
+
+        .progress-fill{
+            width:45%;
+            height:100%;
+
+            background:linear-gradient(90deg,#ff9b9b,#ff6b81);
+        }
+
+        /* EPISODES */
+
+        .episode-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:30px;
+        }
+
+        .season-select{
+
+            padding:14px 20px;
+
+            border:none;
+            border-radius:14px;
+
+            background:#0b1024;
+            color:white;
+        }
+
+        .episode-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+            gap:25px;
         }
 
         .episode-card{
 
-            background:rgba(255,255,255,0.04);
+            background:#0b1024;
 
-            border-radius:20px;
-            padding:20px;
+            padding:25px;
 
-            margin-bottom:20px;
+            border-radius:22px;
 
             transition:0.3s;
-            border:1px solid rgba(255,255,255,0.05);
         }
 
         .episode-card:hover{
-
-            transform:translateY(-5px);
-
-            background:rgba(255,255,255,0.07);
+            transform:translateY(-8px);
         }
 
-        .episode-title{
-            font-size:20px;
-            font-weight:600;
+        .episode-card h3{
+            margin-bottom:12px;
         }
 
-        .episode-duration{
-            color:#aaaaaa;
-            margin-top:5px;
+        .episode-card p{
+            color:#8d8d8d;
+            line-height:24px;
         }
 
-        /* RELATED */
+        /* RECOMMENDATION */
 
-        .related-section{
-            padding-bottom:80px;
+        .movie-row{
+            display:flex;
+            gap:25px;
+            overflow-x:auto;
         }
 
-        .related-card{
+        .movie-row::-webkit-scrollbar{
+            display:none;
+        }
 
-            background:#141b2d;
+        .movie-card{
+            min-width:220px;
 
-            border-radius:20px;
+            background:#0b1024;
+
+            border-radius:24px;
+
             overflow:hidden;
 
             transition:0.3s;
         }
 
-        .related-card:hover{
-            transform:scale(1.04);
+        .movie-card:hover{
+            transform:translateY(-10px);
         }
 
-        .related-img{
+        .movie-card img{
             width:100%;
-            height:300px;
+            height:320px;
             object-fit:cover;
         }
 
-        .related-content{
+        .movie-info{
             padding:18px;
         }
 
-        .related-title{
-            font-size:18px;
-            font-weight:600;
+        .movie-info h3{
+            margin-bottom:8px;
         }
 
-        .related-genre{
-            color:#aaaaaa;
-            font-size:14px;
+        .movie-info p{
+            color:#8d8d8d;
+            font-size:13px;
         }
 
-        /* COMMENT */
+        /* COMMENTS */
 
-        .comment-section{
-            padding-bottom:80px;
+        .rating-header{
+
+            display:flex;
+            align-items:center;
+            gap:20px;
+
+            margin-bottom:35px;
         }
 
-        .comment-box{
+        .rating-number{
+            font-size:55px;
+            font-weight:700;
+            color:#ff9b9b;
+        }
 
-            background:rgba(255,255,255,0.04);
+        .comment-grid{
+            display:grid;
+            gap:25px;
+        }
 
-            border-radius:20px;
-            padding:25px;
+        .comment-card{
 
-            margin-bottom:20px;
+            background:#0b1024;
+
+            padding:28px;
+
+            border-radius:24px;
         }
 
         .comment-user{
-            font-weight:600;
-            margin-bottom:10px;
+            font-weight:700;
+            margin-bottom:12px;
         }
 
-        .comment-rating{
-            color:#ffd700;
-            margin-bottom:10px;
+        .stars{
+            color:#ffd43b;
+            margin-bottom:15px;
         }
 
         .comment-text{
-            color:#c7c7c7;
-            line-height:1.8;
+            color:#bcbcbc;
+            line-height:28px;
         }
 
         /* FOOTER */
 
         .footer{
+
+            padding:40px;
+
             text-align:center;
-            padding:30px;
-            color:#888;
-            border-top:1px solid rgba(255,255,255,0.08);
+
+            color:#777;
+
+            border-top:1px solid rgba(255,255,255,0.06);
         }
 
     </style>
@@ -315,75 +416,331 @@
 
     <!-- NAVBAR -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="navbar">
 
-        <div class="container">
+        <div class="logo">
+            CineStream
+        </div>
 
-            <a class="navbar-brand logo"
-               href="Dashboard.jsp">
+        <div class="nav-links">
 
-                CineStream
+            <a href="Dashboard.jsp">HOME</a>
+            <a href="Search.jsp">MOVIES</a>
+            <a href="Player.jsp">SERIES</a>
+            <a href="MyList.jsp">MY LIST</a>
+            <a href="Profile.jsp">PROFILE</a>
 
-            </a>
+        </div>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
+        <div class="profile"></div>
 
-                <span class="navbar-toggler-icon"></span>
+    </div>
 
-            </button>
+    <!-- HERO -->
 
-            <div class="collapse navbar-collapse"
-                 id="navbarNav">
+    <section class="hero">
 
-                <ul class="navbar-nav ms-auto">
+        <div class="poster">
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="Dashboard.jsp">
+            <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg">
 
-                            Beranda
+        </div>
 
-                        </a>
-                    </li>
+        <div class="hero-content">
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="Search.jsp">
+            <div class="tag">
+                FEATURED SERIES
+            </div>
 
-                            Search
+            <h1>
+                Avengers <br>
+                Doomsday
+            </h1>
 
-                        </a>
-                    </li>
+            <div class="meta">
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="MyList.jsp">
+                <span>⭐ 9.2/10</span>
+                <span>Action • Sci-Fi</span>
+                <span>8 Episodes</span>
 
-                            My List
+            </div>
 
-                        </a>
-                    </li>
+            <p class="description">
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="Profile.jsp">
+                Earth's mightiest heroes reunite once again to face
+                a multiversal catastrophe that threatens all realities.
+                A battle beyond time begins.
 
-                            Profile
+            </p>
 
-                        </a>
-                    </li>
+            <div class="buttons">
 
-                </ul>
+                <button class="watch-btn">
+                    ▶ WATCH NOW
+                </button>
+
+                <button class="list-btn">
+                    + WATCHLIST
+                </button>
+
+                <button class="list-btn">
+                    ♡ FAVORITE
+                </button>
 
             </div>
 
         </div>
 
-    </nav>
+    </section>
+
+    <!-- CONTINUE WATCHING -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Continue Watching
+        </h2>
+
+        <p class="section-subtitle">
+            RESUME YOUR LAST SESSION
+        </p>
+
+        <div class="continue-card">
+
+            <div class="continue-top">
+
+                <h3>
+                    Episode 4 • The Last Portal
+                </h3>
+
+                <span>
+                    45% Completed
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- EPISODES -->
+
+    <section class="section">
+
+        <div class="episode-header">
+
+            <div>
+
+                <h2 class="section-title">
+                    Episodes
+                </h2>
+
+                <p class="section-subtitle">
+                    SEASON COLLECTION
+                </p>
+
+            </div>
+
+            <select class="season-select">
+
+                <option>Season 1</option>
+                <option>Season 2</option>
+
+            </select>
+
+        </div>
+
+        <div class="episode-grid">
+
+            <div class="episode-card">
+
+                <h3>Episode 1</h3>
+
+                <p>
+                    The Avengers discover the beginning of the multiverse collapse.
+                </p>
+
+            </div>
+
+            <div class="episode-card">
+
+                <h3>Episode 2</h3>
+
+                <p>
+                    Strange realities collide as heroes search for answers.
+                </p>
+
+            </div>
+
+            <div class="episode-card">
+
+                <h3>Episode 3</h3>
+
+                <p>
+                    An unexpected villain rises from another universe.
+                </p>
+
+            </div>
+
+            <div class="episode-card">
+
+                <h3>Episode 4</h3>
+
+                <p>
+                    The final portal opens and chaos begins.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Recommended For You
+        </h2>
+
+        <p class="section-subtitle">
+            BASED ON YOUR WATCH HISTORY
+        </p>
+
+        <div class="movie-row">
+
+            <a href="Konten.jsp">
+
+                <div class="movie-card">
+
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
+
+                    <div class="movie-info">
+
+                        <h3>Interstellar</h3>
+
+                        <p>
+                            Sci-Fi • 2h 49m
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+            <div class="movie-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
+
+                <div class="movie-info">
+
+                    <h3>Dune Part Two</h3>
+                    <p>Adventure • 2h 46m</p>
+
+                </div>
+
+            </div>
+
+            <div class="movie-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
+
+                <div class="movie-info">
+
+                    <h3>Guardians Vol.3</h3>
+                    <p>Action • 2h 30m</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- COMMENTS -->
+
+    <section class="section">
+
+        <div class="rating-header">
+
+            <div class="rating-number">
+                4.8
+            </div>
+
+            <div>
+
+                <div class="stars">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+                <p>
+                    Based on 2.4k reviews
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="comment-grid">
+
+            <div class="comment-card">
+
+                <div class="comment-user">
+                    Viozkyyy
+                </div>
+
+                <div class="stars">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+                <div class="comment-text">
+
+                    One of the best Marvel stories ever created.
+                    The visuals and action sequences are incredible.
+
+                </div>
+
+            </div>
+
+            <div class="comment-card">
+
+                <div class="comment-user">
+                    CineLover
+                </div>
+
+                <div class="stars">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+                <div class="comment-text">
+
+                    Amazing multiverse concept and emotional ending.
+                    Definitely worth watching.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 CineStream • Kelompok 8
+
+    </footer>
 
 </body>
-
 </html>
