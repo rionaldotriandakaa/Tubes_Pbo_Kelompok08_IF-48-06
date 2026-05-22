@@ -285,46 +285,87 @@
             color:#8d8d8d;
             font-size:13px;
         }
+        
+        /* NAVBAR SEARCH */
+        .navbar-search {
+            display: flex;
+            align-items: center;
+        }
 
+        .navbar-search-input {
+            height: 40px;
+            width: 200px;
+            border-radius: 20px 0 0 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-right: none;
+            padding: 0 18px;
+            color: white;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .navbar-search-input:focus {
+            background: rgba(255,255,255,0.12);
+            border-color: #ff9b9b;
+            width: 260px;
+        }
+
+        .navbar-search-input::placeholder {
+            color: #777;
+        }
+
+        .navbar-search-btn {
+            height: 40px;
+            padding: 0 18px;
+            border-radius: 0 20px 20px 0;
+            background: linear-gradient(90deg, #ff9b9b, #ff6b81);
+            border: none;
+            color: #111;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .navbar-search-btn:hover {
+            box-shadow: 0 0 15px rgba(255,107,129,0.6);
+        }
     </style>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
-
     <div class="navbar">
-
         <div class="logo">CineStream</div>
-
         <div class="nav-links">
-
             <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
-
-            <a href="/CineStream/Frontend/Search.jsp">MOVIES</a>
-
-            <a href="/CineStream/Frontend/Player.jsp">SERIES</a>
-
+            <a href="#">MOVIES</a>
+            <a href="#">SERIES</a>
             <a href="/CineStream/Frontend/recommendation.jsp">FAVORITES</a>
-
             <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
-
         </div>
+
+    <!-- SEARCH BAR -->
+        <form action="/CineStream/search" method="get" class="navbar-search">
+            <input
+                type="text"
+                name="keyword"
+                class="navbar-search-input"
+                placeholder="🔍  Search movies...">
+            <button type="submit" class="navbar-search-btn">Search</button>
+        </form>
 
         <div class="right-nav">
-
-            <div class="icon">🔍</div>
-
             <div class="icon">🔔</div>
-
             <a href="/CineStream/Frontend/Profile.jsp">
-
                 <div class="profile"></div>
-
             </a>
-
         </div>
-
     </div>
 
     <!-- HERO -->
