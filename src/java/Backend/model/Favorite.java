@@ -11,7 +11,6 @@ package Backend.model;
 public class Favorite {
 
     private int idFavorite;
-
     private Konten konten;
 
     public Favorite(int idFavorite, Konten konten) {
@@ -19,6 +18,14 @@ public class Favorite {
         this.idFavorite = idFavorite;
         this.konten = konten;
 
+    }
+
+    public int getIdFavorite() {
+        return idFavorite;
+    }
+
+    public Konten getKonten() {
+        return konten;
     }
 
     public void tambahFavorite() {

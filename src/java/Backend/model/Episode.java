@@ -28,10 +28,8 @@ public class Episode {
         this.durasiEpisode = durasiEpisode;
         this.sudahDitonton = sudahDitonton;
         this.series = series;
-
     }
 
-    // getter
     public int getEpisodeNumber() {
         return episodeNumber;
     }
@@ -52,19 +50,21 @@ public class Episode {
         return series;
     }
 
-    // play episode
     public void playEpisode() {
-        System.out.println("Memutar episode "
-                + episodeNumber
-                + " : "
-                + judulEpisode);
 
+        System.out.println(
+            "Memutar episode "
+            + episodeNumber
+            + " : "
+            + judulEpisode
+        );
     }
 
-    // tampil detail episode
     public void tampilDetailEpisode() {
+
         System.out.println("Episode : " + episodeNumber);
         System.out.println("Judul : " + judulEpisode);
         System.out.println("Durasi : " + durasiEpisode + " menit");
+
     }
 }

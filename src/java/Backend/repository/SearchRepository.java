@@ -12,7 +12,6 @@ package Backend.repository;
 import Backend.model.Konten;
 import Backend.model.Film;
 import Backend.model.Series;
-//import Util.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -84,26 +83,38 @@ public class SearchRepository {
     }
 
     // Konversi hasil query jadi object Konten
-    private Konten mapToKonten(ResultSet rs) 
+    private Konten mapToKonten(ResultSet rs)
             throws SQLException {
+
         String tipe = rs.getString("tipe");
 
         if ("FILM".equals(tipe)) {
+
             return new Film(
                 rs.getInt("id"),
                 rs.getString("judul"),
                 rs.getString("genre"),
                 rs.getString("deskripsi"),
                 rs.getInt("durasi"),
+                rs.getDouble("ratingAverage"),
+                rs.getString("poster"),
+                rs.getInt("tahun_rilis"),
+                rs.getBoolean("trending"),
                 rs.getString("sutradara")
             );
+
         } else {
+
             return new Series(
                 rs.getInt("id"),
                 rs.getString("judul"),
                 rs.getString("genre"),
                 rs.getString("deskripsi"),
                 rs.getInt("durasi"),
+                rs.getDouble("ratingAverage"),
+                rs.getString("poster"),
+                rs.getInt("tahun_rilis"),
+                rs.getBoolean("trending"),
                 rs.getInt("total_episode")
             );
         }

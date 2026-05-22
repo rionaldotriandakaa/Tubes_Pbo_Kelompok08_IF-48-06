@@ -4,17 +4,53 @@
  */
 package Backend.repository;
 
+import Backend.model.Series;
+import java.util.ArrayList;
 /**
  *
  * @author ACER
  */
 public class SeriesRepository {
 
-    public void simpanSeries() {
-        System.out.println("Series berhasil disimpan");
+    private ArrayList<Series> daftarSeries;
+
+    public SeriesRepository() {
+
+        daftarSeries = new ArrayList<>();
+
+    }
+
+    public void simpanSeries(Series series) {
+
+        daftarSeries.add(series);
+
+        System.out.println(
+            "Series berhasil disimpan"
+        );
+
     }
 
     public void ambilSeries() {
-        System.out.println("Mengambil data series");
+
+        if (daftarSeries.isEmpty()) {
+
+            System.out.println(
+                "Belum ada data series"
+            );
+
+        } else {
+
+            System.out.println(
+                "Daftar Series:"
+            );
+
+            for (Series s : daftarSeries) {
+
+                System.out.println(
+                    s.getJudul()
+                );
+
+            }
+        }
     }
 }
