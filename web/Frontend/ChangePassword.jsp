@@ -1,7 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
+
     <title>CineStream - Change Password</title>
 
     <style>
@@ -40,6 +42,8 @@
             backdrop-filter:blur(10px);
 
             color:white;
+
+            box-shadow:0 0 20px rgba(0,0,0,0.4);
         }
 
         h1{
@@ -69,10 +73,18 @@
             padding:15px;
 
             border:none;
+            outline:none;
+
             border-radius:15px;
 
             background:#111827;
             color:white;
+
+            font-size:14px;
+        }
+
+        .input-box input::placeholder{
+            color:#9ca3af;
         }
 
         .btn{
@@ -89,6 +101,13 @@
             font-weight:bold;
 
             cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.03);
+            opacity:0.9;
         }
 
         .back{
@@ -99,6 +118,11 @@
         .back a{
             color:#ff9a9e;
             text-decoration:none;
+            font-size:14px;
+        }
+
+        .back a:hover{
+            text-decoration:underline;
         }
 
     </style>
@@ -113,24 +137,39 @@
 
         <p>Secure your CineStream account</p>
 
-        <form action="Login.jsp">
+        <form action="Profile.jsp">
 
             <div class="input-box">
                 <label>Current Password</label>
-                <input type="password">
+
+                <input 
+                    type="password"
+                    name="currentPassword"
+                    placeholder="Enter current password"
+                    required>
             </div>
 
             <div class="input-box">
                 <label>New Password</label>
-                <input type="password">
+
+                <input 
+                    type="password"
+                    name="newPassword"
+                    placeholder="Enter new password"
+                    required>
             </div>
 
             <div class="input-box">
                 <label>Confirm Password</label>
-                <input type="password">
+
+                <input 
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm new password"
+                    required>
             </div>
 
-            <button class="btn">
+            <button type="submit" class="btn">
                 Update Password
             </button>
 
