@@ -2,3 +2,8 @@
 /build/
 /dist/
 /nbproject/private/
+*.log
+tmp/
+generated/
+*.class
+coverage/

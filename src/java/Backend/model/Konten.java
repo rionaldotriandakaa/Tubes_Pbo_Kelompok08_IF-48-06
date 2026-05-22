@@ -8,6 +8,7 @@ package Backend.model;
  *
  * @author ACER
  */
+
 public abstract class Konten {
 
     protected int id;
@@ -15,7 +16,12 @@ public abstract class Konten {
     protected String genre;
     protected String deskripsi;
     protected int durasi;
+    protected String posterPath;
 
+    public Konten(int id, String judul, String genre,
+                  String deskripsi, int durasi) {
+
+<<<<<<< HEAD
     protected double ratingAverage;
     protected String poster;
     protected int tahunRilis;
@@ -31,6 +37,8 @@ public abstract class Konten {
                   int tahunRilis,
                   boolean trending) {
 
+=======
+>>>>>>> main
         this.id = id;
         this.judul = judul;
         this.genre = genre;
@@ -68,9 +76,20 @@ public abstract class Konten {
     }
     public void play() {
 
+<<<<<<< HEAD
         System.out.println("Memutar konten...");
 
     }
     
+=======
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+>>>>>>> main
     public abstract void tampilDetail();
 }
