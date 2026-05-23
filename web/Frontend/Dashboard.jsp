@@ -364,7 +364,7 @@
                 <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
                 <a href="#">MOVIES</a>
                 <a href="#">SERIES</a>
-                <a href="/CineStream/Frontend/recommendation.jsp">FAVORITES</a>
+                <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
                 <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
             </div>
 
