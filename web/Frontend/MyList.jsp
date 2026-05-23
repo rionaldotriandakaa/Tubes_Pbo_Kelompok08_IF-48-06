@@ -55,7 +55,7 @@
 
         .nav-links{
             display:flex;
-            gap:25px;
+            gap:35px;
         }
 
         .nav-links a{
@@ -218,8 +218,8 @@
                 SERIES
             </a>
 
-            <a href="/CineStream/Frontend/recommendation.jsp">
-                FAVORITES
+            <a href="/CineStream/Frontend/Favorites.jsp">
+                FAVORITES</a>
             </a>
 
             <a href="/CineStream/Frontend/MyList.jsp">

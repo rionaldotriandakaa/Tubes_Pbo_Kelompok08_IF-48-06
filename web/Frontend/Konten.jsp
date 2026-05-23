@@ -5,6 +5,41 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+String movie=request.getParameter("movie");
+
+String title="Avengers Doomsday";
+String poster="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg";
+String description="Earth's mightiest heroes reunite once again.";
+
+if(movie!=null){
+
+if(movie.equals("Mulan")){
+title="Mulan";
+poster="https://image.tmdb.org/t/p/w500/5TYgKxYhnhRNNwqnRAKHkgfqi2G.jpg";
+description="A young warrior disguises herself and joins the army.";
+}
+
+else if(movie.equals("Coco")){
+title="Coco";
+poster="https://image.tmdb.org/t/p/w500/8QVDXDiOGHRcAD4oM6MXjE0osSj.jpg";
+description="Miguel enters the land of the dead.";
+}
+
+else if(movie.equals("Zootopia")){
+title="Zootopia";
+poster="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg";
+description="Animals build a modern civilization.";
+}
+
+else if(movie.equals("Interstellar")){
+title="Interstellar";
+poster="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg";
+description="Explorers travel through a wormhole in space.";
+}
+
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +97,7 @@
 
         .nav-links{
             display:flex;
-            gap:25px;
+            gap:35px;
         }
 
         .nav-links a{
@@ -413,7 +448,6 @@
 <body>
 
     <!-- NAVBAR -->
-    
     <div class="navbar">
         <div class="logo">CineStream</div>
         <div class="nav-links">
@@ -423,9 +457,7 @@
             <a href="MyList.jsp">MY LIST</a>
             <a href="Profile.jsp">PROFILE</a>
         </div>
-        <a href="Profile.jsp">
-            <div class="profile"></div>
-        </a>
+        <div class="profile"></div>
     </div>
 
     <!-- HERO -->
@@ -505,7 +537,6 @@
     </section>
 
     <!-- RECOMMENDATIONS -->
-    
     <section class="section">
         <h2 class="section-title">Recommended For You</h2>
         <p class="section-subtitle">BASED ON YOUR WATCH HISTORY</p>
