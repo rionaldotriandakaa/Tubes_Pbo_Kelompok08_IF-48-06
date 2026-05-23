@@ -54,7 +54,7 @@
 
         .nav-links{
             display:flex;
-            gap:35px;
+            gap:25px;
             align-items:center;
         }
 

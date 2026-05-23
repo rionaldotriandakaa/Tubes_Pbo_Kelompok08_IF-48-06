@@ -62,7 +62,7 @@
 
         .nav-links{
             display:flex;
-            gap:35px;
+            gap:25px;
         }
 
         .nav-links a{
@@ -413,6 +413,7 @@
 <body>
 
     <!-- NAVBAR -->
+    
     <div class="navbar">
         <div class="logo">CineStream</div>
         <div class="nav-links">
@@ -422,7 +423,9 @@
             <a href="MyList.jsp">MY LIST</a>
             <a href="Profile.jsp">PROFILE</a>
         </div>
-        <div class="profile"></div>
+        <a href="Profile.jsp">
+            <div class="profile"></div>
+        </a>
     </div>
 
     <!-- HERO -->
@@ -502,6 +505,7 @@
     </section>
 
     <!-- RECOMMENDATIONS -->
+    
     <section class="section">
         <h2 class="section-title">Recommended For You</h2>
         <p class="section-subtitle">BASED ON YOUR WATCH HISTORY</p>

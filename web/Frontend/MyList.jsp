@@ -55,7 +55,7 @@
 
         .nav-links{
             display:flex;
-            gap:35px;
+            gap:25px;
         }
 
         .nav-links a{

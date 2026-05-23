@@ -53,7 +53,7 @@
 
             .nav-links{
                 display:flex;
-                gap:35px;
+                gap:25px;
             }
 
             .nav-links a{
@@ -290,6 +290,11 @@
             .continue-info p{
                 color:#8d8d8d;
                 font-size:13px;
+            }
+            
+            .continue-card:hover{
+                transform:translateY(-5px);
+                transition:0.3s;
             }
 
             /* NAVBAR SEARCH */
