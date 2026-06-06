@@ -5,6 +5,41 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+String movie=request.getParameter("movie");
+
+String title="Avengers Doomsday";
+String poster="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg";
+String description="Earth's mightiest heroes reunite once again.";
+
+if(movie!=null){
+
+if(movie.equals("Mulan")){
+title="Mulan";
+poster="https://image.tmdb.org/t/p/w500/5TYgKxYhnhRNNwqnRAKHkgfqi2G.jpg";
+description="A young warrior disguises herself and joins the army.";
+}
+
+else if(movie.equals("Coco")){
+title="Coco";
+poster="https://image.tmdb.org/t/p/w500/8QVDXDiOGHRcAD4oM6MXjE0osSj.jpg";
+description="Miguel enters the land of the dead.";
+}
+
+else if(movie.equals("Zootopia")){
+title="Zootopia";
+poster="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg";
+description="Animals build a modern civilization.";
+}
+
+else if(movie.equals("Interstellar")){
+title="Interstellar";
+poster="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg";
+description="Explorers travel through a wormhole in space.";
+}
+
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +69,7 @@
             color:white;
         }
 
-        /* NAVBAR */
+        /* navigasi */
 
         .navbar{
             width:100%;
@@ -84,7 +119,7 @@
             background-size:cover;
         }
 
-        /* HERO */
+        /* poster */
 
         .hero{
             min-height:100vh;
@@ -413,11 +448,16 @@
 <body>
 
     <!-- NAVBAR -->
+<<<<<<< HEAD
     
     <div class="navbar">
         <div class="logo">
             CineStream
         </div>
+=======
+    <div class="navbar">
+        <div class="logo">CineStream</div>
+>>>>>>> origin/main
         <div class="nav-links">
             <a href="Dashboard.jsp">HOME</a>
             <a href="Search.jsp">MOVIES</a>
@@ -435,6 +475,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg">
         </div>
         <div class="hero-content">
+<<<<<<< HEAD
             <div class="tag">
                 FEATURED SERIES
             </div>
@@ -442,6 +483,10 @@
                 Avengers <br>
                 Doomsday
             </h1>
+=======
+            <div class="tag">FEATURED SERIES</div>
+            <h1>Avengers <br>Doomsday</h1>
+>>>>>>> origin/main
             <div class="meta">
                 <span>⭐ 9.2/10</span>
                 <span>Action • Sci-Fi</span>
@@ -453,6 +498,7 @@
                 A battle beyond time begins.
             </p>
             <div class="buttons">
+<<<<<<< HEAD
                 <button class="watch-btn">
                     ▶ WATCH NOW
                 </button>
@@ -462,12 +508,18 @@
                 <button class="list-btn">
                     ♡ FAVORITE
                 </button>
+=======
+                <button class="watch-btn">▶ WATCH NOW</button>
+                <button class="list-btn">+ WATCHLIST</button>
+                <button class="list-btn">♡ FAVORITE</button>
+>>>>>>> origin/main
             </div>
         </div>
     </section>
 
     <!-- CONTINUE WATCHING -->
     <section class="section">
+<<<<<<< HEAD
         <h2 class="section-title">
             Continue Watching
         </h2>
@@ -483,6 +535,14 @@
                 <span>
                     45% Completed
                 </span>
+=======
+        <h2 class="section-title">Continue Watching</h2>
+        <p class="section-subtitle">RESUME YOUR LAST SESSION</p>
+        <div class="continue-card">
+            <div class="continue-top">
+                <h3>Episode 4 • The Last Portal</h3>
+                <span>45% Completed</span>
+>>>>>>> origin/main
             </div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
@@ -494,12 +554,17 @@
     <section class="section">
         <div class="episode-header">
             <div>
+<<<<<<< HEAD
                 <h2 class="section-title">
                     Episodes
                 </h2>
                 <p class="section-subtitle">
                     SEASON COLLECTION
                 </p>
+=======
+                <h2 class="section-title">Episodes</h2>
+                <p class="section-subtitle">SEASON COLLECTION</p>
+>>>>>>> origin/main
             </div>
             <select class="season-select">
                 <option>Season 1</option>
@@ -509,6 +574,7 @@
         <div class="episode-grid">
             <div class="episode-card">
                 <h3>Episode 1</h3>
+<<<<<<< HEAD
                 <p>
                     The Avengers discover the beginning of the multiverse collapse.
                 </p>
@@ -530,11 +596,27 @@
                 <p>
                     The final portal opens and chaos begins.
                 </p>
+=======
+                <p>The Avengers discover the beginning of the multiverse collapse.</p>
+            </div>
+            <div class="episode-card">
+                <h3>Episode 2</h3>
+                <p>Strange realities collide as heroes search for answers.</p>
+            </div>
+            <div class="episode-card">
+                <h3>Episode 3</h3>
+                <p>An unexpected villain rises from another universe.</p>
+            </div>
+            <div class="episode-card">
+                <h3>Episode 4</h3>
+                <p>The final portal opens and chaos begins.</p>
+>>>>>>> origin/main
             </div>
         </div>
     </section>
 
     <!-- RECOMMENDATIONS -->
+<<<<<<< HEAD
     
     <section class="section">
         <h2 class="section-title">
@@ -543,15 +625,24 @@
         <p class="section-subtitle">
             BASED ON YOUR WATCH HISTORY
         </p>
+=======
+    <section class="section">
+        <h2 class="section-title">Recommended For You</h2>
+        <p class="section-subtitle">BASED ON YOUR WATCH HISTORY</p>
+>>>>>>> origin/main
         <div class="movie-row">
             <a href="Konten.jsp">
                 <div class="movie-card">
                     <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
                     <div class="movie-info">
                         <h3>Interstellar</h3>
+<<<<<<< HEAD
                         <p>
                             Sci-Fi • 2h 49m
                         </p>
+=======
+                        <p>Sci-Fi • 2h 49m</p>
+>>>>>>> origin/main
                     </div>
                 </div>
             </a>
@@ -576,6 +667,7 @@
 
     <section class="section">
         <div class="rating-header">
+<<<<<<< HEAD
             <div class="rating-number">
                 4.8
             </div>
@@ -586,28 +678,44 @@
                 <p>
                     Based on 2.4k reviews
                 </p>
+=======
+            <div class="rating-number">4.8</div>
+            <div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Based on 2.4k reviews</p>
+>>>>>>> origin/main
             </div>
         </div>
         <div class="comment-grid">
             <div class="comment-card">
+<<<<<<< HEAD
                 <div class="comment-user">
                     Viozkyyy
                 </div>
                 <div class="stars">
                     ⭐⭐⭐⭐⭐
                 </div>
+=======
+                <div class="comment-user">Viozkyyy</div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+>>>>>>> origin/main
                 <div class="comment-text">
                     One of the best Marvel stories ever created.
                     The visuals and action sequences are incredible.
                 </div>
             </div>
             <div class="comment-card">
+<<<<<<< HEAD
                 <div class="comment-user">
                     CineLover
                 </div>
                 <div class="stars">
                     ⭐⭐⭐⭐☆
                 </div>
+=======
+                <div class="comment-user">CineLover</div>
+                <div class="stars">⭐⭐⭐⭐☆</div>
+>>>>>>> origin/main
                 <div class="comment-text">
                     Amazing multiverse concept and emotional ending.
                     Definitely worth watching.

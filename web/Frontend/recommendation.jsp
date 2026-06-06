@@ -14,21 +14,17 @@
 
         <!-- CARD 1 -->
 
-        <a href="Konten.jsp">
+        <a href="Konten.jsp" class="movie-card">
 
-            <div class="movie-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
+            <div class="movie-info">
 
-                <div class="movie-info">
+                <h3>Interstellar</h3>
 
-                    <h3>Interstellar</h3>
-
-                    <p>
-                        Sci-Fi • 2h 49m
-                    </p>
-
-                </div>
+                <p>
+                    Sci-Fi • 2h 49m
+                </p>
 
             </div>
 
@@ -36,21 +32,17 @@
 
         <!-- CARD 2 -->
 
-        <a href="Konten.jsp">
+        <a href="Konten.jsp" class="movie-card">
 
-            <div class="movie-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
+            <div class="movie-info">
 
-                <div class="movie-info">
+                <h3>Dune Part Two</h3>
 
-                    <h3>Dune Part Two</h3>
-
-                    <p>
-                        Sci-Fi • 2h 46m
-                    </p>
-
-                </div>
+                <p>
+                    Sci-Fi • 2h 46m
+                </p>
 
             </div>
 
@@ -58,21 +50,17 @@
 
         <!-- CARD 3 -->
 
-        <a href="Konten.jsp">
+        <a href="Konten.jsp" class="movie-card">
 
-            <div class="movie-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Everything_Everywhere_All_at_Once.jpg">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Everything_Everywhere_All_at_Once.jpg">
+            <div class="movie-info">
 
-                <div class="movie-info">
+                <h3>Everything Everywhere</h3>
 
-                    <h3>Everything Everywhere</h3>
-
-                    <p>
-                        Adventure • 2h 19m
-                    </p>
-
-                </div>
+                <p>
+                    Adventure • 2h 19m
+                </p>
 
             </div>
 
@@ -80,21 +68,17 @@
 
         <!-- CARD 4 -->
 
-        <a href="Konten.jsp">
+        <a href="Konten.jsp" class="movie-card">
 
-            <div class="movie-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
+            <div class="movie-info">
 
-                <div class="movie-info">
+                <h3>Guardians Vol. 3</h3>
 
-                    <h3>Guardians Vol. 3</h3>
-
-                    <p>
-                        Action • 2h 30m
-                    </p>
-
-                </div>
+                <p>
+                    Action • 2h 30m
+                </p>
 
             </div>
 
