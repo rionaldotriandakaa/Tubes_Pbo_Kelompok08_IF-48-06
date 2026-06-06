@@ -501,13 +501,11 @@
         </a>
 
         <div class="nav-links">
-
-            <a href="Dashboard.jsp">HOME</a>
-            <a href="Search.jsp">MOVIES</a>
-            <a href="Player.jsp">SERIES</a>
-            <a href="recommendation.jsp">FAVORITES</a>
-            <a href="MyList.jsp">MY LIST</a>
-
+            <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
+            <a href="/CineStream/movies">MOVIES</a>
+            <a href="/CineStream/series">SERIES</a>
+            <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
+            <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
         </div>
 
         <a href="Profile.jsp">

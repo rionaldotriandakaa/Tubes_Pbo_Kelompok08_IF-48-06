@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 /**
  *
@@ -15,6 +15,7 @@ public class Series {
     private String genre;
     private String deskripsi;
     private int totalEpisode;
+    private String poster;
 
     public Series() {
     }
@@ -57,5 +58,13 @@ public class Series {
 
     public void setTotalEpisode(int totalEpisode) {
         this.totalEpisode = totalEpisode;
+    }
+    
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }

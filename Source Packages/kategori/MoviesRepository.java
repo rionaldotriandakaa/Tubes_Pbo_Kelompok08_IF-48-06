@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 import config.DatabaseConnection;
 import java.sql.*;
@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author ACER
  */
-public class FilmRepository {
+public class MoviesRepository {
 
-    public List<Film> getAllFilm() {
+    public List<Movies> getAllFilm() {
 
-        List<Film> films = new ArrayList<>();
+        List<Movies> films = new ArrayList<>();
 
         try {
 
@@ -32,7 +32,7 @@ public class FilmRepository {
 
             while(rs.next()){
 
-                Film film = new Film();
+                Movies film = new Movies();
 
                 film.setIdFilm(
                         rs.getInt("id"));
@@ -62,15 +62,15 @@ public class FilmRepository {
         return films;
     }
 
-    public Film getFilmById(int id){
+    public Movies getFilmById(int id){
         return null;
     }
 
-    public boolean insertFilm(Film film){
+    public boolean insertFilm(Movies film){
         return true;
     }
 
-    public boolean updateFilm(Film film){
+    public boolean updateFilm(Movies film){
         return true;
     }
 

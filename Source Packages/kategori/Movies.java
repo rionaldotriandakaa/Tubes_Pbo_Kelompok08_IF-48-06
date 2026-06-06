@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 /**
  *
  * @author ACER
  */
-public class Film {
+public class Movies {
 
     private int idFilm;
     private String judul;
@@ -18,10 +18,10 @@ public class Film {
     private String thumbnail;
     private String videoUrl;
 
-    public Film() {
+    public Movies() {
     }
 
-    public Film(int idFilm, String judul, String genre,
+    public Movies(int idFilm, String judul, String genre,
                 String deskripsi, int durasi,
                 String thumbnail, String videoUrl) {
         this.idFilm = idFilm;

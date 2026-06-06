@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 import java.io.IOException;
 
@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author ACER
  */
 @WebServlet("/movies")
-public class FilmServlet extends HttpServlet {
+public class MoviesServlet extends HttpServlet {
 
-    private FilmService service;
+    private MoviesService service;
 
     @Override
     public void init() {
-        service = new FilmService();
+        service = new MoviesService();
     }
 
     @Override

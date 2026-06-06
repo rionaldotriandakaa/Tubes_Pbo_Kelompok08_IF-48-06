@@ -2,26 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 import java.util.List;
 /**
  *
  * @author ACER
  */
-public class FilmService {
+public class MoviesService {
 
-    private FilmRepository repository;
+    private MoviesRepository repository;
 
-    public FilmService() {
-        repository = new FilmRepository();
+    public MoviesService() {
+        repository = new MoviesRepository();
     }
 
-    public List<Film> getAllFilm() {
+    public List<Movies> getAllFilm() {
         return repository.getAllFilm();
     }
 
-    public Film getFilmById(int id) {
+    public Movies getFilmById(int id) {
         return repository.getFilmById(id);
     }
 }

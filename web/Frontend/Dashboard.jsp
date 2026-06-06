@@ -1,4 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="kategori.Movies"%>
+
+<%
+List<Movies> films =
+(List<Movies>)request.getAttribute("films");
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -362,8 +370,8 @@
 
             <div class="nav-links">
                 <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
-                <a href="#">MOVIES</a>
-                <a href="#">SERIES</a>
+                <a href="/CineStream/movies">MOVIES</a>
+                <a href="/CineStream/series">SERIES</a>
                 <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
                 <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
             </div>
@@ -422,13 +430,17 @@
 
                 <div class="hero-buttons">
 
-                    <button class="watch-btn">
-                        ▶ WATCH NOW
-                    </button>
+                    <a href="Konten.jsp">
+                        <button class="watch-btn">
+                            ▶ WATCH NOW
+                        </button>
+                    </a>
 
-                    <button class="fav-btn">
-                        + ADD TO FAVORITES
-                    </button>
+                    <a href="Favorites.jsp">
+                        <button class="fav-btn">
+                            + ADD TO FAVORITES
+                        </button>
+                    </a>
 
                 </div>
 
@@ -449,78 +461,33 @@
             </p>
 
             <div class="movie-row">
+            <<%
+            if(films != null){
+                for(Movies film : films){
+            %>
 
-                <a href="Konten.jsp">
+                <div class="movie-card">
 
-                    <div class="movie-card">
+                    <img src="images/<%= film.getThumbnail() %>">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
+                    <div class="movie-info">
 
-                        <div class="movie-info">
+                        <h3><%= film.getJudul() %></h3>
 
-                            <h3>Pengabdi Setan</h3>
-
-                            <p>Horror • 2h 14m</p>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-                <a href="Konten.jsp">
-
-                    <div class="movie-card">
-
-                        <img src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Lord_of_the_Rings%2C_TFOTR_%282001%29.jpg">
-
-                        <div class="movie-info">
-
-                            <h3>Lord Of The Rings</h3>
-
-                            <p>Fantasy • 3h 10m</p>
-
-                        </div>
+                        <p>
+                            <%= film.getGenre() %>
+                            •
+                            <%= film.getDurasi() %> menit
+                        </p>
 
                     </div>
 
-                </a>
+                </div>
 
-                <a href="Konten.jsp">
-
-                    <div class="movie-card">
-
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
-
-                        <div class="movie-info">
-
-                            <h3>WandaVision</h3>
-
-                            <p>Adventure • 2h 30m</p>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-                <a href="Konten.jsp">
-
-                    <div class="movie-card">
-
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/90/WandaVision_poster.jpg">
-
-                        <div class="movie-info">
-
-                            <h3>Frozen</h3>
-
-                            <p>Fantasy • 1h 52m</p>
-
-                        </div>
-
-                    </div>
-
-                </a>
+            <%
+                }
+            }
+            %>
 
             </div>
 

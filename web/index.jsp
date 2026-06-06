@@ -1,9 +1,5 @@
-<%@ page import="config.DatabaseConnection" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if(DatabaseConnection.getConnection() != null){
-        out.println("Database Connected");
-    }else{
-        out.println("Database Failed");
-    }
+    response.sendRedirect("Frontend/Login.jsp");
 %>

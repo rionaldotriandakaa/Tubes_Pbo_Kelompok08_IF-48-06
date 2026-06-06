@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package movie;
+package kategori;
 
 import java.io.IOException;
 
@@ -30,7 +30,8 @@ public class SeriesServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setAttribute("seriesList",
+        request.setAttribute(
+                "series",
                 service.getAllSeries());
 
         request.getRequestDispatcher(

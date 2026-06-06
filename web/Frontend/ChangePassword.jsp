@@ -137,7 +137,7 @@
 
         <p>Secure your CineStream account</p>
 
-        <form action="Profile.jsp">
+        <form action="change-password" method="post">
 
             <div class="input-box">
                 <label>Current Password</label>

@@ -9,5 +9,14 @@ package favorite;
  * @author ACER
  */
 public class FavoriteService {
-    
+
+    private FavoriteRepository repository;
+
+    public FavoriteService() {
+        repository = new FavoriteRepository();
+    }
+
+    public boolean addFavorite(int userId, int filmId) {
+        return repository.addFavorite(userId, filmId);
+    }
 }
