@@ -108,7 +108,7 @@ List<Movies> films =
                     linear-gradient(to right,
                     rgba(4,8,22,0.96) 25%,
                     rgba(4,8,22,0.4)),
-                    url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1974');
+                    url('../Assets/Dasboard.jpg');
 
                 background-size:cover;
                 background-position:center;

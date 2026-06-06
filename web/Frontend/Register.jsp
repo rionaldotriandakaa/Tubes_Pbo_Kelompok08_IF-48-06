@@ -21,7 +21,7 @@
 
             background:
             linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-            url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1974&auto=format&fit=crop');
+            url('../Assets/BagroundLogin.jpg');
 
             background-size:cover;
             background-position:center;
@@ -182,7 +182,6 @@
 
         <div class="logo">
             <h1>CineStream</h1>
-            <p>THE DIGITAL CURATOR</p>
         </div>
 
         <div class="title">
@@ -202,7 +201,7 @@
                 <input 
                     type="text"
                     class="input-box"
-                    placeholder="cinephile_01"
+                    placeholder="Enter your username"
                     required
                 >
             </div>
@@ -213,7 +212,7 @@
                 <input 
                     type="email"
                     class="input-box"
-                    placeholder="curator@cinestream.com"
+                    placeholder="Enter your email"
                     required
                 >
             </div>
@@ -224,7 +223,7 @@
                 <input 
                     type="password"
                     class="input-box"
-                    placeholder="••••••••"
+                    placeholder="Enter your password"
                     required
                 >
             </div>
