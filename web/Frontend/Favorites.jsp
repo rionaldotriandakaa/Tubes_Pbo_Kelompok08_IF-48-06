@@ -156,21 +156,24 @@
     }
 
     .watch-btn{
-        margin-top:15px;
-        padding:12px 25px;
+    display:inline-block;
 
-        border:none;
-        border-radius:30px;
+    margin-top:15px;
+    padding:12px 25px;
 
-        background:#ff8fa3;
-        color:black;
+    border-radius:30px;
 
-        font-weight:700;
-        cursor:pointer;
+    background:#ff8fa3;
+    color:black;
+
+    font-weight:700;
     }
 
     .side-movies{
         flex:1;
+        position:relative;
+        overflow:hidden;
+        border-radius:20px;
     }
 
     .side-movies img{
@@ -178,6 +181,7 @@
         height:320px;
         border-radius:20px;
         object-fit:cover;
+        display:block;
     }
 
     /* MOVIES */
@@ -261,6 +265,19 @@
         height:150px;
         border-radius:20px;
         object-fit:cover;
+    }    
+    .mini-info{
+    margin-top:8px;
+    }
+
+    .mini-title{
+        font-size:14px;
+        font-weight:600;
+    }
+
+    .mini-detail{
+        font-size:12px;
+        color:#999;
     }
     
     .recommend{
@@ -328,32 +345,49 @@ Kelola film favorit dan serial pilihanmu disini.
 
 <div class="hero">
 
-<div class="big-card">
+    <a href="Konten.jsp?movie=Interstellar" class="movie-link" style="flex:2;">
 
-<img src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
+        <div class="big-card">
 
-<div class="overlay">
+            <img src="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
 
-<h2>INTERSTELLAR</h2>
+            <div class="overlay">
 
-<p>Through wormholes and distant galaxies</p>
+                <h2>INTERSTELLAR</h2>
 
-<button class="watch-btn">
-WATCH NOW
-</button>
+                <p>Through wormholes and distant galaxies</p>
+
+                <div class="watch-btn">
+                    WATCH NOW
+                </div>
+
+            </div>
+
+        </div>
+
+    </a>
+
+    <a href="Konten.jsp?movie=Aladdin" class="movie-link" style="flex:1;">
+
+    <div class="side-movies">
+
+        <img src="https://image.tmdb.org/t/p/w500/ykUEbfpkf8d0w49pHh0AD2KrT52.jpg">
+
+        <div class="overlay">
+
+            <h2>Aladdin</h2>
+
+            <button class="watch-btn">
+                WATCH NOW
+            </button>
+
+        </div>
+
+    </div>
+
+</a>
 
 </div>
-
-</div>
-
-<div class="side-movies">
-
-<img src="https://image.tmdb.org/t/p/w500/ykUEbfpkf8d0w49pHh0AD2KrT52.jpg">
-
-</div>
-
-</div>
-
 
 <h2>Movies</h2>
 
@@ -429,61 +463,74 @@ WATCH NOW
 
 <div class="recommend">
 
-<h3>Because you liked "Interstellar"</h3>
+    <h3>Because you liked "Interstellar"</h3>
 
-<div class="mini-grid">
+    <div class="mini-grid">
 
-<div class="mini-card">
+        <a href="Konten.jsp?movie=TheMartian" class="movie-link">
 
-<img src="https://image.tmdb.org/t/p/w300/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg">
+            <div class="mini-card">
 
-<div class="mini-info">
-<div class="mini-title">The Martian</div>
-<div class="mini-detail">2015 • Movie</div>
-</div>
+                <img src="https://image.tmdb.org/t/p/w300/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg">
 
-</div>
+                <div class="mini-info">
+                    <div class="mini-title">The Martian</div>
+                    <div class="mini-detail">2015 • Movie</div>
+                </div>
 
+            </div>
 
-
-<div class="mini-card">
-
-<img src="https://image.tmdb.org/t/p/w300/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg">
-
-<div class="mini-info">
-<div class="mini-title">Jungle Cruise</div>
-<div class="mini-detail">2021 • Movie</div>
-</div>
-
-</div>
+        </a>
 
 
+        <a href="Konten.jsp?movie=JungleCruise" class="movie-link">
 
-<div class="mini-card">
+            <div class="mini-card">
 
-<img src="https://image.tmdb.org/t/p/w300/vH8YOW1Mh7ADyimwh4JPBf3FVrh.jpg">
+                <img src="https://image.tmdb.org/t/p/w300/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg">
 
-<div class="mini-info">
-<div class="mini-title">Wonder Woman</div>
-<div class="mini-detail">2020 • Movie</div>
-</div>
+                <div class="mini-info">
+                    <div class="mini-title">Jungle Cruise</div>
+                    <div class="mini-detail">2021 • Movie</div>
+                </div>
 
-</div>
+            </div>
+
+        </a>
 
 
+        <a href="Konten.jsp?movie=WonderWoman" class="movie-link">
 
-<div class="mini-card">
+            <div class="mini-card">
 
-<img src="https://image.tmdb.org/t/p/w300/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg">
+                <img src="https://image.tmdb.org/t/p/w300/vH8YOW1Mh7ADyimwh4JPBf3FVrh.jpg">
 
-<div class="mini-info">
-<div class="mini-title">Avatar</div>
-<div class="mini-detail">2022 • Movie</div>
-</div>
+                <div class="mini-info">
+                    <div class="mini-title">Wonder Woman</div>
+                    <div class="mini-detail">2020 • Movie</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+        </a>
+
+
+        <a href="Konten.jsp?movie=Avatar" class="movie-link">
+
+            <div class="mini-card">
+
+                <img src="https://image.tmdb.org/t/p/w300/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg">
+
+                <div class="mini-info">
+                    <div class="mini-title">Avatar</div>
+                    <div class="mini-detail">2022 • Movie</div>
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
 
 </div>
 
