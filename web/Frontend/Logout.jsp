@@ -1,17 +1,63 @@
-<%-- 
-    Document   : Logout
-    Created on : 20 Mei 2026, 17.23.55
-    Author     : viozkyyy
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Logging Out...</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background:#0d1117;
+            color:white;
+        }
+
+        .logout-box{
+            text-align:center;
+        }
+
+        h1{
+            color:#ff8c8c;
+            margin-bottom:15px;
+        }
+
+        p{
+            color:#bdbdbd;
+        }
+
+    </style>
+
+    <meta http-equiv="refresh" content="2;url=Login.jsp">
+
+</head>
+
+<body>
+
+    <%
+        session.invalidate();
+    %>
+
+    <div class="logout-box">
+
+        <h1>Logged Out</h1>
+
+        <p>
+            Redirecting to login page...
+        </p>
+
+    </div>
+
+</body>
 </html>

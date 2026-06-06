@@ -26,25 +26,22 @@
             background:
             linear-gradient(rgba(3,8,20,0.80),
             rgba(3,8,20,0.90)),
-            url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2070&auto=format&fit=crop');
+            url('../Assets/BagroundLogin.jpg');
 
             background-size:cover;
             background-position:center;
-
+            background-repeat: no-repeat;
             overflow:hidden;
             color:white;
         }
 
         .overlay{
-            position:absolute;
-            width:100%;
-            height:100%;
-            backdrop-filter:blur(4px);
+            display: none;
         }
 
         .container{
             position:relative;
-            width:420px;
+            width:450px;
             padding:45px;
 
             border-radius:30px;
@@ -62,7 +59,7 @@
 
         .logo{
             position:absolute;
-            top:-95px;
+            top:-70px;
             left:50%;
             transform:translateX(-50%);
             text-align:center;
@@ -70,13 +67,13 @@
 
         .logo h1{
             font-size:40px;
-            color:#ff9c9c;
+            color:#ff6f6f;
             font-weight:700;
         }
 
         .logo p{
             font-size:11px;
-            letter-spacing:5px;
+            letter-spacing:3px;
             color:#cccccc;
             margin-top:5px;
         }
@@ -176,57 +173,6 @@
             box-shadow:0 0 35px rgba(255,111,111,0.8);
         }
 
-        .divider{
-            text-align:center;
-            margin:28px 0;
-            color:#aaa;
-            font-size:12px;
-            position:relative;
-        }
-
-        .divider::before,
-        .divider::after{
-            content:'';
-            position:absolute;
-            width:35%;
-            height:1px;
-            background:rgba(255,255,255,0.1);
-            top:50%;
-        }
-
-        .divider::before{
-            left:0;
-        }
-
-        .divider::after{
-            right:0;
-        }
-
-        .socials{
-            display:flex;
-            gap:15px;
-        }
-
-        .social-btn{
-            flex:1;
-            height:52px;
-
-            border-radius:16px;
-
-            border:1px solid rgba(255,255,255,0.08);
-
-            background:rgba(255,255,255,0.04);
-
-            color:white;
-
-            cursor:pointer;
-
-            transition:0.3s;
-        }
-
-        .social-btn:hover{
-            background:rgba(255,255,255,0.08);
-        }
 
         .register{
             margin-top:30px;
@@ -260,7 +206,6 @@
 
         <div class="logo">
             <h1>CineStream</h1>
-            <p>THE DIGITAL CURATOR</p>
         </div>
 
         <div class="title">
@@ -280,7 +225,7 @@
                     type="text"
                     name="username"
                     class="input-box"
-                    placeholder="curator@cinestream.com"
+                    placeholder="Enter your email"
                     required>
 
             </div>
@@ -293,7 +238,7 @@
                     type="password"
                     name="password"
                     class="input-box"
-                    placeholder="••••••••"
+                    placeholder="Enter your password"
                     required>
 
             </div>
@@ -308,25 +253,9 @@
                 Login
             </button>
 
-            <div class="divider">
-                OR CONTINUE WITH
-            </div>
-
-            <div class="socials">
-
-                <button type="button" class="social-btn">
-                    Google
-                </button>
-
-                <button type="button" class="social-btn">
-                    Apple
-                </button>
-
-            </div>
-
             <div class="register">
 
-                Tidak Punya Akun?
+                Don't have an account?
 
                 <a href="Register.jsp">
                     Create an account
