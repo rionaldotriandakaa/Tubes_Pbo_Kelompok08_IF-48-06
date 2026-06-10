@@ -30,16 +30,17 @@ public class ProfileDAO {
 
                 ProfileModel p = new ProfileModel();
 
-                p.setProfileId(rs.getInt("id"));
+                p.setProfileId(rs.getInt("profile_id"));
                 p.setUserId(rs.getInt("user_id"));
                 p.setProfileName(rs.getString("profile_name"));
-                p.setProfileAvatar(rs.getString("avatar"));
+                p.setProfileAvatar(rs.getString("profile_avatar"));
                 p.setKids(rs.getBoolean("is_kids"));
 
                 list.add(p);
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("ProfileDAO Get Error: " + e.getMessage());
         }
 
@@ -66,7 +67,7 @@ public class ProfileDAO {
             PreparedStatement ps =
                 conn.prepareStatement(
                     "INSERT INTO profiles "
-                    + "(user_id, profile_name, avatar, is_kids) "
+                    + "(user_id, profile_name, profile_avatar, is_kids) "
                     + "VALUES (?, ?, ?, ?)"
                 )
         ) {
@@ -80,9 +81,11 @@ public class ProfileDAO {
 
             if (rowsAffected > 0) {
                 status = "SUCCESS";
+                System.out.println("Profile berhasil ditambahkan!");
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("ProfileDAO Insert Error: " + e.getMessage());
         }
 
