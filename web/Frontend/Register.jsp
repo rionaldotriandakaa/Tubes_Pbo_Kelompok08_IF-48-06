@@ -193,7 +193,7 @@
             </p>
         </div>
 
-        <form action="Verification.jsp" method="get">
+        <form action="Verifikasi.jsp" method="get">
 
             <div class="input-group">
                 <label>USERNAME</label>

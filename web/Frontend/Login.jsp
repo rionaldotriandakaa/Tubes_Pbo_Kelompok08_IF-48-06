@@ -1,3 +1,4 @@
+```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-
+        .error-message{
+        width:100%;
+        padding:12px;
+        margin-bottom:20px;
+        background:rgba(255,0,0,0.15);
+        border:1px solid rgba(255,100,100,0.4);
+        color:#ffb3b3;
+        border-radius:12px;
+        text-align:center;
+        font-size:14px;
+        
+        }   
+        
         *{
             margin:0;
             padding:0;
@@ -24,19 +37,17 @@
             align-items:center;
 
             background:
-            linear-gradient(rgba(3,8,20,0.80),
-            rgba(3,8,20,0.90)),
+            linear-gradient(
+            rgba(3,8,20,0.35),
+            rgba(3,8,20,0.55)),
             url('../Assets/BagroundLogin.jpg');
 
             background-size:cover;
             background-position:center;
-            background-repeat: no-repeat;
+            background-repeat:no-repeat;
+
             overflow:hidden;
             color:white;
-        }
-
-        .overlay{
-            display: none;
         }
 
         .container{
@@ -69,13 +80,6 @@
             font-size:40px;
             color:#ff6f6f;
             font-weight:700;
-        }
-
-        .logo p{
-            font-size:11px;
-            letter-spacing:3px;
-            color:#cccccc;
-            margin-top:5px;
         }
 
         .title{
@@ -131,10 +135,6 @@
             box-shadow:0 0 15px rgba(255,143,143,0.4);
         }
 
-        .input-box::placeholder{
-            color:#888;
-        }
-
         .forgot{
             text-align:right;
             margin-top:-10px;
@@ -173,7 +173,6 @@
             box-shadow:0 0 35px rgba(255,111,111,0.8);
         }
 
-
         .register{
             margin-top:30px;
             text-align:center;
@@ -200,8 +199,6 @@
 
 <body>
 
-    <div class="overlay"></div>
-
     <div class="container">
 
         <div class="logo">
@@ -212,11 +209,31 @@
             <h2>Welcome Back</h2>
             <p>Step back into the world of stories.</p>
         </div>
+        <%
+            String error = request.getParameter("error");
+
+            if("wrong_password".equals(error)){
+        %>
+
+        <div class="error-message">
+            Username atau password Anda salah.
+        </div>
+
+        <%
+            } else if("user_not_found".equals(error)){
+        %>
+
+        <div class="error-message">
+            Akun Anda belum terdaftar. Silakan lakukan registrasi terlebih dahulu.
+        </div>
+
+        <%
+            }
+        %>
 
         <!-- LOGIN FORM -->
 
-        <form action="/CineStream/Frontend/Dashboard.jsp" method="get">
-
+        <form action="<%=request.getContextPath()%>/login" method="post">
             <div class="input-group">
 
                 <label>USERNAME OR EMAIL</label>
@@ -273,3 +290,4 @@
 
 </body>
 </html>
+```

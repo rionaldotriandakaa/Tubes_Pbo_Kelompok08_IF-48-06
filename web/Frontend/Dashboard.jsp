@@ -3,8 +3,30 @@
 <%@page import="kategori.Movies"%>
 
 <%
-List<Movies> films =
-(List<Movies>)request.getAttribute("films");
+    // 1. Ambil data film untuk row trending
+    List<Movies> films = (List<Movies>)request.getAttribute("films");
+
+    // 2. SINKRONISASI SESSION DATA AKUN
+    String dashboardUser = (String) session.getAttribute("username");
+    String dashboardAvatar = (String) session.getAttribute("avatar");
+
+    // Proteksi nilai standar jika belum login lewat servlet (Menghindari NullPointerException)
+    if (dashboardUser == null) {
+        dashboardUser = "Guest User";
+    }
+
+    String dashboardImgSrc;
+    if (dashboardAvatar != null && !dashboardAvatar.trim().isEmpty() && !dashboardAvatar.equalsIgnoreCase("null")) {
+        // Cek jika path diawali dengan http (link luar) atau path lokal (uploads/)
+        if (dashboardAvatar.startsWith("http")) {
+            dashboardImgSrc = dashboardAvatar;
+        } else {
+            dashboardImgSrc = request.getContextPath() + "/" + dashboardAvatar;
+        }
+    } else {
+        // Avatar default bawaan jika kolom avatar di database masih kosong/null
+        dashboardImgSrc = "https://randomuser.me/api/portraits/men/32.jpg";
+    }
 %>
 
 <!DOCTYPE html>
@@ -16,7 +38,6 @@ List<Movies> films =
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
         <style>
-
             *{
                 margin:0;
                 padding:0;
@@ -35,20 +56,16 @@ List<Movies> films =
             }
 
             /* NAVBAR */
-
             .navbar{
                 width:100%;
                 height:85px;
                 padding:0 60px;
-
                 display:flex;
                 justify-content:space-between;
                 align-items:center;
-
                 position:fixed;
                 top:0;
                 z-index:1000;
-
                 background:rgba(0,0,0,0.35);
                 backdrop-filter:blur(14px);
             }
@@ -85,37 +102,46 @@ List<Movies> films =
                 cursor:pointer;
             }
 
+            /* Ditambahkan support text name di sebelah bulatan foto */
+            .profile-wrapper-nav {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+            }
+
+            .profile-name-nav {
+                font-size: 14px;
+                font-weight: 500;
+                color: white;
+            }
+
             .profile{
                 width:42px;
                 height:42px;
-
                 border-radius:50%;
-
-                background-image:url('https://i.pravatar.cc/150?img=12');
-
                 background-size:cover;
                 background-position:center;
-
                 border:2px solid #ff9b9b;
+                transition: 0.3s;
+            }
+            
+            .profile:hover {
+                transform: scale(1.05);
             }
 
             /* HERO */
-
             .hero{
                 height:100vh;
-
                 background:
                     linear-gradient(to right,
                     rgba(4,8,22,0.96) 25%,
                     rgba(4,8,22,0.4)),
                     url('../Assets/Dasboard.jpg');
-
                 background-size:cover;
                 background-position:center;
-
                 display:flex;
                 align-items:center;
-
                 padding:0 80px;
             }
 
@@ -125,17 +151,12 @@ List<Movies> films =
 
             .tag{
                 display:inline-block;
-
                 padding:8px 18px;
-
                 background:#ff9b9b;
-
                 color:black;
                 font-size:12px;
                 font-weight:700;
-
                 border-radius:20px;
-
                 margin-bottom:25px;
             }
 
@@ -160,35 +181,25 @@ List<Movies> films =
 
             .watch-btn{
                 padding:18px 38px;
-
                 border:none;
                 border-radius:40px;
-
                 background:linear-gradient(90deg,#ff9b9b,#ff6b81);
-
                 color:black;
                 font-weight:700;
-
                 cursor:pointer;
-
                 box-shadow:0 0 20px rgba(255,107,129,0.5);
             }
 
             .fav-btn{
                 padding:18px 38px;
-
                 border:none;
                 border-radius:40px;
-
                 background:rgba(255,255,255,0.08);
-
                 color:white;
-
                 cursor:pointer;
             }
 
             /* SECTION */
-
             .section{
                 padding:60px 80px;
             }
@@ -206,7 +217,6 @@ List<Movies> films =
             }
 
             /* MOVIES */
-
             .movie-row a{
                 text-decoration:none;
                 color:white;
@@ -225,15 +235,10 @@ List<Movies> films =
 
             .movie-card{
                 min-width:230px;
-
                 background:#0b1024;
-
                 border-radius:24px;
-
                 overflow:hidden;
-
                 transition:0.3s;
-
                 cursor:pointer;
             }
 
@@ -261,7 +266,6 @@ List<Movies> films =
             }
 
             /* CONTINUE WATCHING */
-
             .continue-grid a{
                 text-decoration:none;
                 color:white;
@@ -277,7 +281,6 @@ List<Movies> films =
                 background:#0b1024;
                 border-radius:22px;
                 padding:20px;
-
                 display:flex;
                 align-items:center;
                 gap:18px;
@@ -286,7 +289,6 @@ List<Movies> films =
             .continue-card img{
                 width:100px;
                 height:70px;
-
                 border-radius:12px;
                 object-fit:cover;
             }
@@ -306,7 +308,6 @@ List<Movies> films =
             }
 
             /* NAVBAR SEARCH */
-
             .navbar-search {
                 display: flex;
                 align-items: center;
@@ -354,13 +355,10 @@ List<Movies> films =
             .navbar-search-btn:hover {
                 box-shadow: 0 0 15px rgba(255,107,129,0.6);
             }
-
         </style>
     </head>
 
     <body>
-
-        <!-- NAVBAR -->
 
         <div class="navbar">
 
@@ -376,267 +374,172 @@ List<Movies> films =
                 <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
             </div>
 
-            <!-- SEARCH BAR -->
-
             <form action="/CineStream/search" method="get" class="navbar-search">
-
                 <input
                     type="text"
                     name="keyword"
                     class="navbar-search-input"
                     placeholder="🔍 Search movies...">
-
                 <button type="submit" class="navbar-search-btn">
                     Search
                 </button>
-
             </form>
 
             <div class="right-nav">
-
                 <div class="icon">
                     🔔
                 </div>
 
-                <a href="/CineStream/Frontend/Profile.jsp">
-                    <div class="profile"></div>
+                <a href="/CineStream/Frontend/Profile.jsp" class="profile-wrapper-nav">
+                    <span class="profile-name-nav"><%= dashboardUser %></span>
+                    <div class="profile" style="background-image: url('<%= dashboardImgSrc %>');"></div>
                 </a>
-
             </div>
 
         </div>
 
-        <!-- HERO -->
-
         <div class="hero">
-
             <div class="hero-content">
-
                 <div class="tag">
                     FEATURED PREMIERE
                 </div>
-
                 <h1>
                     AVENGERS<br>
                     DOOMSDAY
                 </h1>
-
                 <p>
                     When the greatest threat rises from the shadows,
                     the Avengers must reunite to face the ultimate destruction.
                     In a battle filled with sacrifice, courage, and destiny,
                     the fate of humanity hangs in the balance.
                 </p>
-
                 <div class="hero-buttons">
-
                     <a href="Konten.jsp">
                         <button class="watch-btn">
                             ▶ WATCH NOW
                         </button>
                     </a>
-
                     <a href="Favorites.jsp">
                         <button class="fav-btn">
                             + ADD TO FAVORITES
                         </button>
                     </a>
-
                 </div>
-
             </div>
-
         </div>
 
-        <!-- TRENDING -->
-
         <div class="section">
-
             <h2 class="section-title">
                 Trending Now
             </h2>
-
             <p class="section-subtitle">
                 GLOBAL FAVORITES THIS WEEK
             </p>
 
             <div class="movie-row">
-            <<%
+            <%
             if(films != null){
                 for(Movies film : films){
             %>
-
                 <div class="movie-card">
-
                     <img src="images/<%= film.getThumbnail() %>">
-
                     <div class="movie-info">
-
                         <h3><%= film.getJudul() %></h3>
-
                         <p>
                             <%= film.getGenre() %>
                             •
                             <%= film.getDurasi() %> menit
                         </p>
-
                     </div>
-
                 </div>
-
             <%
                 }
             }
             %>
-
             </div>
-
         </div>
 
-        <!-- CONTINUE WATCHING -->
-
         <div class="section">
-
             <h2 class="section-title">
                 Continue Watching
             </h2>
-
             <p class="section-subtitle">
                 PICK UP WHERE YOU LEFT OFF
             </p>
 
             <div class="continue-grid">
-
                 <a href="Konten.jsp">
-
                     <div class="continue-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Stranger_Things_season_4.jpg">
-
                         <div class="continue-info">
-
                             <h4>Stranger Things</h4>
-
                             <p>S1:E4 • 42m remaining</p>
-
                         </div>
-
                     </div>
-
                 </a>
 
                 <a href="Konten.jsp">
-
                     <div class="continue-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/id/3/3e/Pengabdi_Setan_2_Poster.jpg">
-
                         <div class="continue-info">
-
                             <h4>Pengabdi Setan</h4>
-
                             <p>15m remaining</p>
-
                         </div>
-
                     </div>
-
                 </a>
 
                 <a href="Konten.jsp">
-
                     <div class="continue-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Loki_season_2_poster.jpeg">
-
                         <div class="continue-info">
-
                             <h4>Loki</h4>
-
                             <p>S2:E2 • 15m remaining</p>
-
                         </div>
-
                     </div>
-
                 </a>
-
             </div>
-
         </div>
 
-        <!-- RECOMMENDED -->
-
         <div class="section">
-
             <h2 class="section-title">
                 Recommended For You
             </h2>
-
             <p class="section-subtitle">
                 BASED ON YOUR VIEWING HISTORY
             </p>
 
             <div class="movie-row">
-
                 <a href="Konten.jsp">
-
                     <div class="movie-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Final_Destination_Bloodlines.jpg">
-
                         <div class="movie-info">
-
                             <h3>Final Destination</h3>
-
                             <p>Horror • 98% Match</p>
-
                         </div>
-
                     </div>
-
                 </a>
 
                 <a href="Konten.jsp">
-
                     <div class="movie-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg">
-
                         <div class="movie-info">
-
                             <h3>Barbie</h3>
-
                             <p>Comedy • 96% Match</p>
-
                         </div>
-
                     </div>
-
                 </a>
 
                 <a href="Konten.jsp">
-
                     <div class="movie-card">
-
                         <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Insidious_the_red_door.png">
-
                         <div class="movie-info">
-
                             <h3>Insidious</h3>
-
                             <p>Horror • 92% Match</p>
-
                         </div>
-
                     </div>
-
                 </a>
-
             </div>
-
         </div>
 
     </body>
-
 </html>
