@@ -6,26 +6,34 @@
     // 1. Ambil data film untuk row trending
     List<Movies> films = (List<Movies>)request.getAttribute("films");
 
-    // 2. SINKRONISASI SESSION DATA AKUN
-    String dashboardUser = (String) session.getAttribute("username");
-    String dashboardAvatar = (String) session.getAttribute("avatar");
+    // ================= PROFILE YANG DIPILIH =================
+    String dashboardUser =
+        (String) session.getAttribute("activeProfileName");
 
-    // Proteksi nilai standar jika belum login lewat servlet (Menghindari NullPointerException)
+    String dashboardAvatar =
+        (String) session.getAttribute("activeProfileAvatar");
+
+    // Jika belum memilih profil
     if (dashboardUser == null) {
-        dashboardUser = "Guest User";
+        dashboardUser = "No Profile";
     }
 
+    // Avatar profil
     String dashboardImgSrc;
-    if (dashboardAvatar != null && !dashboardAvatar.trim().isEmpty() && !dashboardAvatar.equalsIgnoreCase("null")) {
-        // Cek jika path diawali dengan http (link luar) atau path lokal (uploads/)
-        if (dashboardAvatar.startsWith("http")) {
-            dashboardImgSrc = dashboardAvatar;
-        } else {
-            dashboardImgSrc = request.getContextPath() + "/" + dashboardAvatar;
-        }
+
+    if (dashboardAvatar != null &&
+        !dashboardAvatar.trim().isEmpty()) {
+
+    dashboardImgSrc =
+        request.getContextPath()
+        + "/Assets/avatars/"
+        + dashboardAvatar;
+
     } else {
-        // Avatar default bawaan jika kolom avatar di database masih kosong/null
-        dashboardImgSrc = "https://randomuser.me/api/portraits/men/32.jpg";
+
+    dashboardImgSrc =
+        request.getContextPath()
+        + "/Assets/avatars/avatar1.png";
     }
 %>
 
