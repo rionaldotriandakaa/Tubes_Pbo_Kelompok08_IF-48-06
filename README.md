@@ -120,9 +120,9 @@ CineStream
 Kelompok 08 IF-48-06
 
 - Rionaldo Triandaka
-- Viozky
-- Anggota Kelompok Lainnya
-
+- Raisa
+- Hilwa
+- Mukrima
 ---
 
 ## 🎯 Tujuan Proyek
