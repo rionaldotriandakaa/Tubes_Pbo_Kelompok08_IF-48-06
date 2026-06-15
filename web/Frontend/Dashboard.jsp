@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="kategori.Movies"%>
-
 <%
     // 1. Ambil data film untuk row trending
     List<Movies> films = (List<Movies>)request.getAttribute("films");

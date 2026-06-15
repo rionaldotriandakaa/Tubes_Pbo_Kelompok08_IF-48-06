@@ -49,6 +49,11 @@ public class SelectProfileServlet extends HttpServlet {
                 );
 
                 session.setAttribute(
+                     "activeProfileId",
+                     rs.getInt("profile_id")
+                );
+
+                session.setAttribute(
                     "activeProfileName",
                     rs.getString("profile_name")
                 );

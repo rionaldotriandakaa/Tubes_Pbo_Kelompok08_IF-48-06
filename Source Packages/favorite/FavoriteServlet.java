@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package favorite;
 
 import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 /**
- *
  * @author ACER
  */
-@WebServlet("/favorite")
+@WebServlet("/FavoriteServlet")
 public class FavoriteServlet extends HttpServlet {
 
     private FavoriteService service;
@@ -26,17 +22,45 @@ public class FavoriteServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request,
             HttpServletResponse response)
-            throws IOException {
+            throws ServletException, IOException {
 
-        int userId = 1; // sementara untuk demo
+        HttpSession session = request.getSession();
+        Integer profileId = (Integer) session.getAttribute("activeProfileId");
 
-        int filmId =
-                Integer.parseInt(
-                        request.getParameter("filmId"));
+        if (profileId == null) {
+            response.sendRedirect(request.getContextPath() + "/Frontend/Profile.jsp");
+            return;
+        }
 
-        service.addFavorite(userId, filmId);
+        // Membaca parameter film (Mendukung CamelCase dan Underscore)
+        String filmIdParam = request.getParameter("filmId");
+        if (filmIdParam == null) filmIdParam = request.getParameter("film_id");
 
-        response.sendRedirect(
-                "Frontend/Favorites.jsp");
+        // Membaca parameter series (Mendukung CamelCase dan Underscore)
+        String seriesIdParam = request.getParameter("seriesId");
+        if (seriesIdParam == null) seriesIdParam = request.getParameter("series_id");
+        
+        if (filmIdParam != null && !filmIdParam.trim().isEmpty()) {
+            try {
+                int filmId = Integer.parseInt(filmIdParam);
+                service.addFavorite(profileId, filmId, "film");
+            } catch (NumberFormatException e) { e.printStackTrace(); }
+        } 
+        else if (seriesIdParam != null && !seriesIdParam.trim().isEmpty()) {
+            try {
+                int seriesId = Integer.parseInt(seriesIdParam);
+                service.addFavorite(profileId, seriesId, "series");
+            } catch (NumberFormatException e) { e.printStackTrace(); }
+        }
+
+        response.sendRedirect(request.getContextPath() + "/Frontend/Favorites.jsp");
+    }
+
+    @Override
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 }

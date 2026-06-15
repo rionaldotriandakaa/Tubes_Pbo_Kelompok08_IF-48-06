@@ -4,744 +4,424 @@
     Author     : ACER
 --%>
 
+<%@page import="java.sql.*"%>
+<%@page import="config.DatabaseConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%
-String movie=request.getParameter("movie");
+String title = "Film Tidak Ditemukan";
+String poster = "";
+String description = "Detail film tidak tersedia atau ID salah.";
+String genre = "-";
+String duration = "-";
 
-String title="Avengers Doomsday";
-String poster="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg";
-String description="Earth's mightiest heroes reunite once again.";
+String idParam = request.getParameter("id");
 
-if(movie!=null){
+Connection conn = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
 
-if(movie.equals("Mulan")){
-title="Mulan";
-poster="https://image.tmdb.org/t/p/w500/5TYgKxYhnhRNNwqnRAKHkgfqi2G.jpg";
-description="A young warrior disguises herself and joins the army.";
-}
+if (idParam != null) {
+    try {
+        int idFilm = Integer.parseInt(idParam);
+        conn = DatabaseConnection.getConnection();
 
-else if(movie.equals("Coco")){
-title="Coco";
-poster="https://image.tmdb.org/t/p/w500/8QVDXDiOGHRcAD4oM6MXjE0osSj.jpg";
-description="Miguel enters the land of the dead.";
-}
+        ps = conn.prepareStatement("SELECT * FROM film WHERE id = ?");
+        ps.setInt(1, idFilm);
+        rs = ps.executeQuery();
 
-else if(movie.equals("Zootopia")){
-title="Zootopia";
-poster="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg";
-description="Animals build a modern civilization.";
-}
-
-else if(movie.equals("Interstellar")){
-title="Interstellar";
-poster="https://image.tmdb.org/t/p/w780/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg";
-description="Explorers travel through a wormhole in space.";
-}
-
+        if (rs.next()) {
+            title = rs.getString("judul");
+            poster = rs.getString("poster");
+            description = rs.getString("deskripsi");
+            genre = rs.getString("genre");
+            duration = rs.getString("durasi") + " menit";
+        }
+    } catch (Exception e) {
+        description = "Terjadi kesalahan sistem: " + e.getMessage();
+    } finally {
+        if (rs != null) try { rs.close(); } catch (Exception e) {}
+        if (ps != null) try { ps.close(); } catch (Exception e) {}
+        if (conn != null) try { conn.close(); } catch (Exception e) {}
+    }
 }
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
-    <title>CineStream - Konten</title>
-
+    <title><%= title %> - CineStream</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins',sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        body{
-            background:#050816;
-            color:white;
-            overflow-x:hidden;
+        body {
+            background: #050816;
+            color: white;
+            overflow-x: hidden;
         }
 
-        a{
-            text-decoration:none;
-            color:white;
+        /* Hero Layout Area */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 120px 80px;
+            background: linear-gradient(rgba(5,8,22,0.92), rgba(5,8,22,0.92)),
+                        url('/CineStream/Assets/Dasboard.jpg');
+            background-size: cover;
+            background-position: center;
         }
-
-        /* navigasi */
-
-        .navbar{
-            width:100%;
-            height:85px;
-
-            padding:0 60px;
-
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-
-            position:fixed;
-            top:0;
-            z-index:1000;
-
-            background:rgba(0,0,0,0.35);
-            backdrop-filter:blur(14px);
-        }
-
-        .logo{
-            font-size:32px;
-            font-weight:700;
-            color:#ff9b9b;
-        }
-
-        .nav-links{
-            display:flex;
-            gap:35px;
-        }
-
-        .nav-links a{
-            color:#ddd;
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-            color:#ff9b9b;
-        }
-
-        .profile{
-            width:42px;
-            height:42px;
-
-            border-radius:50%;
-
-            background-image:url('https://i.pravatar.cc/150?img=12');
-            background-size:cover;
-        }
-
-        /* poster */
-
-        .hero{
-            min-height:100vh;
-
-            padding:140px 80px 80px;
-
-            display:flex;
-            gap:60px;
-            align-items:center;
-
-            background:
-            linear-gradient(to right,
-            rgba(5,8,22,0.95),
-            rgba(5,8,22,0.65)),
-
-            url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070');
-
-            background-size:cover;
-            background-position:center;
-        }
-
-        .poster img{
-            width:340px;
-            border-radius:28px;
-
-            box-shadow:0 0 35px rgba(255,107,129,0.35);
-        }
-
-        .hero-content{
-            max-width:700px;
-        }
-
-        .tag{
+        
+        .back-btn{
             display:inline-block;
-
-            padding:8px 18px;
-
-            border-radius:30px;
-
-            background:#ff9b9b;
-            color:black;
-
-            font-size:12px;
-            font-weight:700;
-
-            margin-bottom:20px;
-        }
-
-        .hero-content h1{
-            font-size:72px;
-            line-height:80px;
-            margin-bottom:20px;
-        }
-
-        .meta{
-            display:flex;
-            gap:20px;
-            flex-wrap:wrap;
-
-            margin-bottom:25px;
-
-            color:#d1d1d1;
-        }
-
-        .description{
-            line-height:32px;
-            color:#bcbcbc;
-
-            margin-bottom:35px;
-        }
-
-        .buttons{
-            display:flex;
-            gap:18px;
-            flex-wrap:wrap;
-        }
-
-        .watch-btn,
-        .list-btn{
-
-            padding:18px 34px;
-
-            border:none;
-            border-radius:40px;
-
-            cursor:pointer;
-
-            font-weight:700;
+            color:#bdbdbd;
+            text-decoration:none;
             font-size:15px;
-
-            transition:0.3s;
+            font-weight:500;
+            margin-bottom:20px;
+            transition:.3s;
         }
 
-        .watch-btn{
-            background:linear-gradient(90deg,#ff9b9b,#ff6b81);
-            color:black;
-
-            box-shadow:0 0 25px rgba(255,107,129,0.5);
-        }
-
-        .watch-btn:hover{
-            transform:translateY(-3px);
-        }
-
-        .list-btn{
-            background:rgba(255,255,255,0.08);
-            color:white;
-        }
-
-        .list-btn:hover{
-            background:rgba(255,255,255,0.15);
-        }
-
-        /* SECTION */
-
-        .section{
-            padding:70px 80px;
-        }
-
-        .section-title{
-            font-size:38px;
-            margin-bottom:12px;
-        }
-
-        .section-subtitle{
-            color:#777;
-            letter-spacing:2px;
-            margin-bottom:35px;
-            font-size:13px;
-        }
-
-        /* CONTINUE WATCHING */
-
-        .continue-card{
-
-            background:#0b1024;
-
-            border-radius:24px;
-
-            padding:30px;
-        }
-
-        .continue-top{
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:18px;
-        }
-
-        .progress-bar{
-            width:100%;
-            height:10px;
-
-            border-radius:10px;
-
-            background:#1f2937;
-
-            overflow:hidden;
-        }
-
-        .progress-fill{
-            width:45%;
-            height:100%;
-
-            background:linear-gradient(90deg,#ff9b9b,#ff6b81);
-        }
-
-        /* EPISODES */
-
-        .episode-header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-
-            margin-bottom:30px;
-        }
-
-        .season-select{
-
-            padding:14px 20px;
-
-            border:none;
-            border-radius:14px;
-
-            background:#0b1024;
-            color:white;
-        }
-
-        .episode-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-            gap:25px;
-        }
-
-        .episode-card{
-
-            background:#0b1024;
-
-            padding:25px;
-
-            border-radius:22px;
-
-            transition:0.3s;
-        }
-
-        .episode-card:hover{
-            transform:translateY(-8px);
-        }
-
-        .episode-card h3{
-            margin-bottom:12px;
-        }
-
-        .episode-card p{
-            color:#8d8d8d;
-            line-height:24px;
-        }
-
-        /* RECOMMENDATION */
-
-        .movie-row{
-            display:flex;
-            gap:25px;
-            overflow-x:auto;
-        }
-
-        .movie-row::-webkit-scrollbar{
-            display:none;
-        }
-
-        .movie-card{
-            min-width:220px;
-
-            background:#0b1024;
-
-            border-radius:24px;
-
-            overflow:hidden;
-
-            transition:0.3s;
-        }
-
-        .movie-card:hover{
-            transform:translateY(-10px);
-        }
-
-        .movie-card img{
-            width:100%;
-            height:320px;
-            object-fit:cover;
-        }
-
-        .movie-info{
-            padding:18px;
-        }
-
-        .movie-info h3{
-            margin-bottom:8px;
-        }
-
-        .movie-info p{
-            color:#8d8d8d;
-            font-size:13px;
-        }
-
-        /* COMMENTS */
-
-        .rating-header{
-
-            display:flex;
-            align-items:center;
-            gap:20px;
-
-            margin-bottom:35px;
-        }
-
-        .rating-number{
-            font-size:55px;
-            font-weight:700;
+        .back-btn:hover{
             color:#ff9b9b;
         }
 
-        .comment-grid{
-            display:grid;
-            gap:25px;
+        .poster img {
+            width: 340px;
+            border-radius: 24px;
+            box-shadow: 0 0 30px rgba(255, 155, 155, 0.2);
+            object-fit: cover;
         }
 
-        .comment-card{
-
-            background:#0b1024;
-
-            padding:28px;
-
-            border-radius:24px;
+        .poster-placeholder {
+            width: 340px;
+            height: 500px;
+            background: #111424;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-weight: 500;
         }
 
-        .comment-user{
-            font-weight:700;
-            margin-bottom:12px;
+        .hero-content {
+            max-width: 700px;
         }
 
-        .stars{
-            color:#ffd43b;
-            margin-bottom:15px;
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            background: #ff9b9b;
+            color: black;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
 
-        .comment-text{
-            color:#bcbcbc;
-            line-height:28px;
+        h1 {
+            font-size: 64px;
+            line-height: 74px;
+            margin-bottom: 20px;
         }
 
-        /* FOOTER */
-
-        .footer{
-
-            padding:40px;
-
-            text-align:center;
-
-            color:#777;
-
-            border-top:1px solid rgba(255,255,255,0.06);
+        .meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: #ddd;
+            font-size: 15px;
         }
 
+        .description {
+            line-height: 32px;
+            color: #cfcfcf;
+            margin-bottom: 35px;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            border-radius: 35px;
+            background: linear-gradient(90deg, #ff9b9b, #ff6b81);
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(255,107,129,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,129,0.5);
+        }
+
+        /* Interactive Rating Input Component */
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-bottom: 25px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: .2s;
+        }
+
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd43b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>');
+        }
+
+        .comment-box {
+            width: 100%;
+            height: 110px;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            resize: none;
+            margin-bottom: 15px;
+            background: #111827;
+            color: white;
+            font-size: 14px;
+        }
+
+        .review-btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 30px;
+            background: #ff9b9b;
+            color: black;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .favorite-btn{
+            margin-top: 15px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 30px;
+            background: transparent;
+            color: #ff9b9b;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 2px solid #ff9b9b;
+            cursor: pointer;
+            transition: .3s;
+            display: inline-block;
+        }
+
+        .favorite-btn:hover{
+            background: #ff9b9b;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .review-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Review List Section Layout */
+        .review-section {
+            padding: 60px 80px;
+        }
+
+        .review-title {
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        .review-card {
+            background: #111827;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .review-user {
+            color: #ff9b9b;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-stars {
+            color: #ffd43b;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: #ddd;
+            line-height: 28px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <div class="navbar">
-
-        <div class="logo">
-            CineStream
-        </div>
-
-        <div class="nav-links">
-            <a href="Dashboard.jsp">HOME</a>
-            <a href="/CineStream/movies">MOVIES</a>
-            <a href="/CineStream/series">SERIES</a>
-            <a href="MyList.jsp">MY LIST</a>
-            <a href="Profile.jsp">PROFILE</a>
-        </div>
-
-        <div class="profile"></div>
-
-    </div>
-    
-    <!-- HERO -->
-    
     <section class="hero">
-
         <div class="poster">
-            <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg">
+            <% 
+            if (poster != null && !poster.isEmpty()) { 
+                String posterImg = poster;
+                if (!posterImg.toLowerCase().startsWith("http://") && !posterImg.toLowerCase().startsWith("https://")) {
+                    posterImg = request.getContextPath() + "/Assets/posters/" + posterImg;
+                }
+            %>
+                <img src="<%= posterImg %>" alt="<%= title %>" loading="lazy">
+            <% } else { %>
+                <div class="poster-placeholder">No Poster</div>
+            <% } %>
         </div>
 
         <div class="hero-content">
+            <a href="<%= request.getContextPath() %>/movies" class="back-btn">
+                ← Kembali
+            </a>
+            <div class="tag">FILM</div>
 
-            <div class="tag">
-                FEATURED SERIES
-            </div>
-
-            <h1>
-                Avengers <br>
-                Doomsday
-            </h1>
+            <h1><%= title %></h1>
 
             <div class="meta">
-                <span>⭐ 9.2/10</span>
-                <span>Action • Sci-Fi</span>
-                <span>8 Episodes</span>
+                <span><%= genre %></span>
+                <span>•</span>
+                <span><%= duration %></span>
             </div>
 
-            <p class="description">
-                Earth's mightiest heroes reunite once again to face
-                a multiversal catastrophe that threatens all realities.
-                A battle beyond time begins.
+            <form action="/CineStream/rating" method="post">
+                <input type="hidden" name="film_id" value="<%= idParam %>">
+                
+                <div class="rating">
+                    <input type="radio" id="star5" name="nilai" value="5"><label for="star5"></label>
+                    <input type="radio" id="star4" name="nilai" value="4"><label for="star4"></label>
+                    <input type="radio" id="star3" name="nilai" value="3"><label for="star3"></label>
+                    <input type="radio" id="star2" name="nilai" value="2"><label for="star2"></label>
+                    <input type="radio" id="star1" name="nilai" value="1"><label for="star1"></label>
+                </div>
+
+                <textarea name="komentar"
+                    placeholder="Tulis komentarmu..."
+                    class="comment-box"
+                    required></textarea>
+
+                <button type="submit" class="review-btn">
+                    Kirim Review
+                </button>
+            </form>
+
+            <form action="/CineStream/FavoriteServlet" method="post" style="display: inline-block; margin-right: 10px;">
+                <input type="hidden" name="filmId" value="<%= idParam %>">
+                <button type="submit" class="favorite-btn">
+                    ADD TO FAVORITES
+                </button>
+            </form>
+
+            <form action="/CineStream/WatchlistServlet" method="post" style="display: inline-block;">
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="itemId" value="<%= idParam %>">
+                <input type="hidden" name="tipe" value="film">
+                <button type="submit" class="favorite-btn">
+                    ADD TO WATCHLIST
+                </button>
+            </form>
+
+            <p class="description" style="margin-top: 25px;">
+                <%= description %>
             </p>
 
-            <div class="buttons">
-
-                <button class="watch-btn">
-                    ▶ WATCH NOW
-                </button>
-
-                <button class="list-btn">
-                    + WATCHLIST
-                </button>
-
-                <button class="list-btn">
-                    ♡ FAVORITE
-                </button>
-
-            </div>
-
+            <a href="<%= request.getContextPath() %>/Frontend/Streaming.jsp?id=<%= idParam %>&tipe=film" class="btn">▶ WATCH NOW</a>
         </div>
-
     </section>
 
-    <!-- CONTINUE WATCHING -->
-
-    <section class="section">
-
-        <h2 class="section-title">
-            Continue Watching
+    <section class="review-section">
+        <h2 class="review-title">
+            Review Pengguna
         </h2>
 
-        <p class="section-subtitle">
-            RESUME YOUR LAST SESSION
-        </p>
+        <%
+        Connection connReview = null;
+        PreparedStatement psReview = null;
+        ResultSet rsReview = null;
 
-        <div class="continue-card">
-            <div class="continue-top">
-                <h3>
-                    Episode 4 • The Last Portal
-                </h3>
-                <span>
-                    45% Completed
-                </span>
+        try {
+            connReview = DatabaseConnection.getConnection();
+
+            psReview = connReview.prepareStatement(
+                "SELECT r.*, p.profile_name " +
+                "FROM rating r " +
+                "JOIN profiles p ON r.profile_id = p.profile_id " +
+                "WHERE r.film_id = ? " +
+                "ORDER BY r.id DESC"
+            );
+
+            psReview.setInt(1, Integer.parseInt(idParam));
+            rsReview = psReview.executeQuery();
+
+            boolean adaReview = false;
+
+            while (rsReview.next()) {
+                adaReview = true;
+                int nilaiReview = rsReview.getInt("nilai");
+                String komentarReview = rsReview.getString("komentar");
+        %>
+            <div class="review-card">
+                <div class="review-user">
+                    <%= rsReview.getString("profile_name") %>
+                </div>
+
+                <div class="review-stars">
+                    <% for (int i = 1; i <= 5; i++) { %>
+                        <%= (i <= nilaiReview) ? "★" : "☆" %>
+                    <% } %>
+                </div>
+
+                <div class="review-text">
+                    <%= komentarReview %>
+                </div>
             </div>
+        <%
+            }
 
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
+            if (!adaReview) {
+        %>
+            <div class="review-card">
+                <div class="review-text">
+                    Belum ada review.
+                </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- EPISODES -->
-
-    <section class="section">
-
-        <div class="episode-header">
-
-            <div>
-
-                <h2 class="section-title">
-                    Episodes
-                </h2>
-
-                <p class="section-subtitle">
-                    SEASON COLLECTION
-                </p>
-
-            </div>
-
-            <select class="season-select">
-                <option>Season 1</option>
-                <option>Season 2</option>
-            </select>
-
-        </div>
-
-        <div class="episode-grid">
-
-            <div class="episode-card">
-                <h3>Episode 1</h3>
-                <p>
-                    The Avengers discover the beginning of the multiverse collapse.
-                </p>
-            </div>
-
-            <div class="episode-card">
-                <h3>Episode 2</h3>
-                <p>
-                    Strange realities collide as heroes search for answers.
-                </p>
-            </div>
-
-            <div class="episode-card">
-                <h3>Episode 3</h3>
-                <p>
-                    An unexpected villain rises from another universe.
-                </p>
-            </div>
-
-            <div class="episode-card">
-                <h3>Episode 4</h3>
-                <p>
-                    The final portal opens and chaos begins.
-                </p>
-            </div>
-
-        </div>
-
+        <%
+            }
+        } catch (Exception e) {
+            out.println("<p class='review-text'>Gagal memuat review: " + e.getMessage() + "</p>");
+        } finally {
+            if (rsReview != null) try { rsReview.close(); } catch (Exception e) {}
+            if (psReview != null) try { psReview.close(); } catch (Exception e) {}
+            if (connReview != null) try { connReview.close(); } catch (Exception e) {}
+        }
+        %>
     </section>
 
-    <!-- RECOMMENDATIONS -->
-
-    <section class="section">
-
-        <h2 class="section-title">
-            Recommended For You
-        </h2>
-
-        <p class="section-subtitle">
-            BASED ON YOUR WATCH HISTORY
-        </p>
-
-        <div class="movie-row">
-
-            <a href="Konten.jsp">
-
-                <div class="movie-card">
-
-                    <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Interstellar_film_poster.jpg">
-
-                    <div class="movie-info">
-
-                        <h3>Interstellar</h3>
-
-                        <p>
-                            Sci-Fi • 2h 49m
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-            <div class="movie-card">
-
-                <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Dune_Part_Two_poster.jpeg">
-
-                <div class="movie-info">
-
-                    <h3>Dune Part Two</h3>
-
-                    <p>
-                        Adventure • 2h 46m
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="movie-card">
-
-                <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Guardians_of_the_Galaxy_Vol._3_poster.jpg">
-
-                <div class="movie-info">
-
-                    <h3>Guardians Vol.3</h3>
-
-                    <p>
-                        Action • 2h 30m
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- COMMENTS -->
-
-    <section class="section">
-
-        <div class="rating-header">
-
-            <div class="rating-number">
-                4.8
-            </div>
-
-            <div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <p>
-                    Based on 2.4k reviews
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="comment-grid">
-
-            <div class="comment-card">
-
-                <div class="comment-user">
-                    Viozkyyy
-                </div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐⭐
-                </div>
-
-                <div class="comment-text">
-                    One of the best Marvel stories ever created.
-                    The visuals and action sequences are incredible.
-                </div>
-
-            </div>
-
-            <div class="comment-card">
-
-                <div class="comment-user">
-                    CineLover
-                </div>
-
-                <div class="stars">
-                    ⭐⭐⭐⭐☆
-                </div>
-
-                <div class="comment-text">
-                    Amazing multiverse concept and emotional ending.
-                    Definitely worth watching.
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-        © 2026 CineStream • Kelompok 8
-    </footer>
 </body>
 </html>

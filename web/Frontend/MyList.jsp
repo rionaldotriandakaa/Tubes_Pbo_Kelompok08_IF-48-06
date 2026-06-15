@@ -1,368 +1,172 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="config.DatabaseConnection" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String dashboardUser = (String) session.getAttribute("activeProfileName");
+    String dashboardAvatar = (String) session.getAttribute("activeProfileAvatar");
+    Integer profileId = (Integer) session.getAttribute("activeProfileId");
 
+    if (profileId == null) {
+        response.sendRedirect(request.getContextPath() + "/Frontend/Profile.jsp");
+        return;
+    }
+
+    if (dashboardUser == null) {
+        dashboardUser = "No Profile";
+    }
+
+    String dashboardImgSrc;
+    if (dashboardAvatar != null && !dashboardAvatar.trim().isEmpty()) {
+        dashboardImgSrc = request.getContextPath() + "/Assets/avatars/" + dashboardAvatar;
+    } else {
+        dashboardImgSrc = request.getContextPath() + "/Assets/avatars/avatar1.png";
+    }
+
+    List<Map<String, String>> myListItems = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
+    try {
+        conn = DatabaseConnection.getConnection();
+        
+        // SINKRONISASI QUERY: Menggunakan nama tabel watchlist dan kolom user_id
+        String sql = "SELECT f.id, f.judul, f.poster, f.deskripsi, 'film' AS tipe FROM watchlist w " +
+                     "JOIN film f ON w.film_id = f.id WHERE w.user_id = ? " +
+                     "UNION " +
+                     "SELECT s.id, s.judul, s.poster, s.deskripsi, 'series' AS tipe FROM watchlist w " +
+                     "JOIN series s ON w.series_id = s.id WHERE w.user_id = ?";
+        
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, profileId);
+        ps.setInt(2, profileId);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> item = new HashMap<>();
+            item.put("id", rs.getString("id"));
+            item.put("judul", rs.getString("judul"));
+            item.put("poster", rs.getString("poster"));
+            item.put("deskripsi", rs.getString("deskripsi"));
+            item.put("tipe", rs.getString("tipe"));
+            myListItems.add(item);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) try { rs.close(); } catch (SQLException e) {}
+        if (ps != null) try { ps.close(); } catch (SQLException e) {}
+        if (conn != null) try { conn.close(); } catch (SQLException e) {}
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
-
     <title>CineStream - My List</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins',sans-serif;
-        }
-
-        body{
-            background:#040816;
-            color:white;
-        }
-
-        a{
-            text-decoration:none;
-        }
-
-        /* NAVBAR */
-
-        .navbar{
-            width:100%;
-            height:85px;
-            padding:0 60px;
-
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-
-            position:fixed;
-            top:0;
-            z-index:1000;
-
-            background:rgba(0,0,0,0.35);
-            backdrop-filter:blur(14px);
-        }
-
-        .logo{
-            font-size:32px;
-            font-weight:700;
-            color:#ff9b9b;
-        }
-
-        .nav-links{
-            display:flex;
-            gap:35px;
-        }
-
-        .nav-links a{
-            color:#ddd;
-            font-size:14px;
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-            color:#ff9b9b;
-        }
-
-        .right-nav{
-            display:flex;
-            align-items:center;
-            gap:20px;
-        }
-
-        .icon{
-            font-size:20px;
-            cursor:pointer;
-        }
-
-        .profile{
-            width:42px;
-            height:42px;
-
-            border-radius:50%;
-
-            background-image:url('https://i.pravatar.cc/150?img=12');
-
-            background-size:cover;
-            background-position:center;
-
-            border:2px solid #ff9b9b;
-        }
-
-        /* HEADER */
-
-        .header{
-            padding-top:140px;
-            padding-left:80px;
-            padding-right:80px;
-            margin-bottom:40px;
-        }
-
-        .header h1{
-            font-size:50px;
-            margin-bottom:10px;
-        }
-
-        .header p{
-            color:#9ca3af;
-        }
-
-        /* MOVIE GRID */
-
-        .movie-grid{
-            padding:0 80px 60px;
-
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-            gap:30px;
-        }
-
-        .movie-card{
-            background:#0b1024;
-            border-radius:24px;
-            overflow:hidden;
-            transition:0.3s;
-        }
-
-        .movie-card:hover{
-            transform:translateY(-8px);
-        }
-
-        .movie-card img{
-            width:100%;
-            height:340px;
-            object-fit:cover;
-        }
-
-        .movie-info{
-            padding:20px;
-        }
-
-        .movie-info h3{
-            margin-bottom:10px;
-            font-size:22px;
-        }
-
-        .movie-info p{
-            color:#8d8d8d;
-            font-size:14px;
-            margin-bottom:20px;
-            line-height:24px;
-        }
-
-        .btn-group{
-            display:flex;
-            gap:12px;
-        }
-
-        .watch-btn{
-            flex:1;
-
-            padding:14px;
-
-            border:none;
-            border-radius:14px;
-
-            background:linear-gradient(90deg,#ff9b9b,#ff6b81);
-
-            color:black;
-            font-weight:700;
-
-            cursor:pointer;
-        }
-
-        .remove-btn{
-            flex:1;
-
-            padding:14px;
-
-            border:none;
-            border-radius:14px;
-
-            background:#1f2937;
-
-            color:white;
-
-            cursor:pointer;
-        }
-
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+        body{ background:#040816; color:white; overflow-x: hidden; }
+        a{ text-decoration:none; }
+        .navbar{ width:100%; height:85px; padding:0 60px; display:flex; justify-content:space-between; align-items:center; position:fixed; top:0; z-index:1000; background:rgba(0,0,0,0.35); backdrop-filter:blur(14px); }
+        .logo{ font-size:32px; font-weight:700; color:#ff9b9b; }
+        .nav-links{ display:flex; gap:35px; }
+        .nav-links a{ color:#ddd; font-size:14px; transition:0.3s; }
+        .nav-links a:hover, .nav-links a.active{ color:#ff9b9b; }
+        .right-nav{ display:flex; align-items:center; gap:20px; }
+        .icon{ font-size:20px; cursor:pointer; }
+        .profile{ width:42px; height:42px; border-radius:50%; background-size:cover; background-position:center; border:2px solid #ff9b9b; }
+        .profile-wrapper-nav{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .profile-name-nav{ color:white; font-size:14px; font-weight:500; }
+        .profile-wrapper-nav:hover .profile-name-nav { color: #ff9b9b; }
+        .header{ padding-top:140px; padding-left:80px; padding-right:80px; margin-bottom:40px; }
+        .header h1{ font-size:50px; margin-bottom:10px; }
+        .header p{ color:#9ca3af; }
+        .movie-grid{ padding:0 80px 60px; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:30px; }
+        .movie-card{ background:#0b1024; border-radius:24px; overflow:hidden; transition:0.3s; display: flex; flex-direction: column; height: 100%; }
+        .movie-card:hover{ transform:translateY(-8px); }
+        .movie-card img{ width:100%; height:340px; object-fit:cover; display: block; }
+        .movie-info{ padding:20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .movie-info h3{ margin-bottom:10px; font-size:22px; color: white; }
+        .movie-info p{ color:#8d8d8d; font-size:14px; margin-bottom:20px; line-height:24px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .btn-group{ display:flex; gap:12px; margin-top: auto; }
+        .watch-btn{ flex:1; padding:14px; border:none; border-radius:14px; background:linear-gradient(90deg,#ff9b9b,#ff6b81); color:black; font-weight:700; cursor:pointer; text-align: center; }
+        .remove-btn{ flex:1; padding:14px; border:none; border-radius:14px; background:#1f2937; color:white; font-weight: 600; cursor:pointer; }
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; background: rgba(255, 255, 255, 0.02); border-radius: 24px; border: 2px dashed rgba(255, 255, 255, 0.08); }
+        .empty-state h3 { font-size: 24px; color: #ff9b9b; margin-bottom: 10px; }
+        .empty-state p { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+        .explore-btn { display: inline-block; padding: 14px 30px; background: #ff9b9b; color: #040816; font-weight: 700; border-radius: 14px; }
     </style>
-
 </head>
-
 <body>
-
-    <!-- NAVBAR -->
-
     <div class="navbar">
-
-        <div class="logo">
-            CineStream
-        </div>
-
+        <div class="logo">CineStream</div>
         <div class="nav-links">
-
-            <a href="/CineStream/Frontend/Dashboard.jsp">
-                HOME
-            </a>
-
-            <a href="/CineStream/Frontend/Search.jsp">
-                MOVIES
-            </a>
-
-            <a href="/CineStream/Frontend/Player.jsp">
-                SERIES
-            </a>
-
-            <a href="/CineStream/Frontend/Favorites.jsp">
-                FAVORITES</a>
-            </a>
-
-            <a href="/CineStream/Frontend/MyList.jsp">
-                MY LIST
-            </a>
-
+            <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
+            <a href="/CineStream/movies">MOVIES</a>
+            <a href="/CineStream/series">SERIES</a>
+            <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
+            <a href="/CineStream/Frontend/MyList.jsp" class="active">MY LIST</a>
         </div>
-
         <div class="right-nav">
-
-            <div class="icon">
-                🔍
-            </div>
-
-            <div class="icon">
-                🔔
-            </div>
-
-            <a href="/CineStream/Frontend/Profile.jsp">
-
-                <div class="profile"></div>
-
+            <div class="icon">🔍</div>
+            <div class="icon">🔔</div>
+            <a href="/CineStream/Frontend/Profile.jsp" class="profile-wrapper-nav">
+                <span class="profile-name-nav"><%= dashboardUser %></span>
+                <div class="profile" style="background-image:url('<%= dashboardImgSrc %>');"></div>
             </a>
-
         </div>
-
     </div>
-
-    <!-- HEADER -->
 
     <div class="header">
-
-        <h1>
-            My List
-        </h1>
-
-        <p>
-            Your saved movies and series collection.
-        </p>
-
+        <h1>My List</h1>
+        <p>Your saved movies and series collection.</p>
     </div>
-
-    <!-- MOVIES -->
 
     <div class="movie-grid">
-
-        <!-- MOVIE 1 -->
-
-        <div class="movie-card">
-
-            <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg">
-
-            <div class="movie-info">
-
-                <h3>
-                    Avengers Endgame
-                </h3>
-
-                <p>
-                    The Avengers assemble once more to restore balance to the universe.
-                </p>
-
-                <div class="btn-group">
-
-                    <button class="watch-btn">
-                        ▶ WATCH
-                    </button>
-
-                    <button class="remove-btn">
-                        REMOVE
-                    </button>
-
-                </div>
-
+        <% if (myListItems.isEmpty()) { %>
+            <div class="empty-state">
+                <h3>Daftar tontonanmu masih kosong</h3>
+                <p>Simpan film dan series favoritmu agar muncul di sini.</p>
+                <a href="/CineStream/Frontend/Dashboard.jsp" class="explore-btn">Jelajahi Beranda</a>
             </div>
-
-        </div>
-
-        <!-- MOVIE 2 -->
-
-        <div class="movie-card">
-
-            <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/TheBatmanPoster2022.jpg">
-
-            <div class="movie-info">
-
-                <h3>
-                    The Batman
-                </h3>
-
-                <p>
-                    Batman uncovers corruption in Gotham while chasing the Riddler.
-                </p>
-
-                <div class="btn-group">
-
-                    <button class="watch-btn">
-                        ▶ WATCH
-                    </button>
-
-                    <button class="remove-btn">
-                        REMOVE
-                    </button>
-
+        <% } else { 
+            for (Map<String, String> item : myListItems) { 
+                String posterImg = item.get("poster");
+                String desc = item.get("deskripsi");
+                if (desc == null) desc = "No description available.";
+                
+                if (posterImg == null || posterImg.trim().isEmpty()) {
+                    posterImg = request.getContextPath() + "/Assets/posters/default.jpg"; 
+                } else if (!posterImg.toLowerCase().startsWith("http://") && !posterImg.toLowerCase().startsWith("https://")) {
+                    posterImg = request.getContextPath() + "/Assets/posters/" + posterImg;
+                }
+                String detailUrl = "series".equals(item.get("tipe")) ? "kontenSeries.jsp" : "Konten.jsp";
+        %>
+                <div class="movie-card">
+                    <img src="<%= posterImg %>" alt="<%= item.get("judul") %>">
+                    <div class="movie-info">
+                        <div>
+                            <h3><%= item.get("judul") %></h3>
+                            <p><%= desc %></p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="<%= detailUrl %>?id=<%= item.get("id") %>" class="watch-btn">▶ WATCH</a>
+                            <form action="/CineStream/WatchlistServlet" method="post" style="flex: 1; display: flex;">
+                                <input type="hidden" name="action" value="remove">
+                                <input type="hidden" name="itemId" value="<%= item.get("id") %>">
+                                <input type="hidden" name="tipe" value="<%= item.get("tipe") %>">
+                                <button type="submit" class="remove-btn">REMOVE</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-
-        </div>
-
-        <!-- MOVIE 3 -->
-
-        <div class="movie-card">
-
-            <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Stranger_Things_season_3.jpg">
-
-            <div class="movie-info">
-
-                <h3>
-                    Stranger Things
-                </h3>
-
-                <p>
-                    A group of kids face supernatural dangers in Hawkins.
-                </p>
-
-                <div class="btn-group">
-
-                    <button class="watch-btn">
-                        ▶ WATCH
-                    </button>
-
-                    <button class="remove-btn">
-                        REMOVE
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
+        <% 
+            } 
+        } 
+        %>
     </div>
-
 </body>
 </html>
