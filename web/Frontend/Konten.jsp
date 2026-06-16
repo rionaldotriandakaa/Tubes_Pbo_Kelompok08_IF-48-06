@@ -13,6 +13,7 @@ String title = "Film Tidak Ditemukan";
 String poster = "";
 String description = "Detail film tidak tersedia atau ID salah.";
 String genre = "-";
+String genreFilm = "";
 String duration = "-";
 
 String idParam = request.getParameter("id");
@@ -35,6 +36,7 @@ if (idParam != null) {
             poster = rs.getString("poster");
             description = rs.getString("deskripsi");
             genre = rs.getString("genre");
+            genreFilm = rs.getString("genre");
             duration = rs.getString("durasi") + " menit";
         }
     } catch (Exception e) {

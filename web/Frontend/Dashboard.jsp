@@ -15,6 +15,8 @@
     String dashboardAvatar = (String) session.getAttribute("activeProfileAvatar");
     Integer profileId = (Integer) session.getAttribute("activeProfileId");
     String userGenre = (String) session.getAttribute("genre");
+    
+    System.out.println("GENRE SESSION = " + userGenre);
 
     if (profileId == null) {
         response.sendRedirect(request.getContextPath() + "/Frontend/Profile.jsp");
@@ -71,13 +73,19 @@
         }
 
         // Query Recommended For You: Ambil konten berdasarkan kesamaan genre favorit user di session
-        String sqlRec = "SELECT id, judul, poster, genre, 'film' AS tipe FROM film WHERE genre LIKE ? " +
-                        "UNION " +
-                        "SELECT id, judul, poster, genre, 'series' AS tipe FROM series WHERE genre LIKE ? " +
-                        "LIMIT 4";
+        String sqlRec =
+            "SELECT DISTINCT f2.id, f2.judul, f2.poster, f2.genre, 'film' AS tipe " +
+            "FROM rating r " +
+            "JOIN film f1 ON r.film_id = f1.id " +
+            "JOIN film f2 ON f1.genre = f2.genre " +
+            "WHERE r.profile_id = ? " +
+            "AND r.nilai >= 4 " +
+            "AND f2.id != f1.id " +
+            "LIMIT 4";
+
         psRec = conn.prepareStatement(sqlRec);
-        psRec.setString(1, "%" + userGenre + "%");
-        psRec.setString(2, "%" + userGenre + "%");
+        psRec.setInt(1, profileId);
+
         rsRec = psRec.executeQuery();
         while(rsRec.next()) {
             Map<String, String> item = new HashMap<>();
@@ -268,7 +276,7 @@
 
         <div class="section">
             <h2 class="section-title">Recommended For You</h2>
-            <p class="section-subtitle">BASED ON YOUR FAVORITE GENRE (<%= userGenre.toUpperCase() %>)</p>
+            <p class="section-subtitle">BASED ON YOUR HIGHEST RATED MOVIES (<%= userGenre.toUpperCase() %>)</p>
             <div class="movie-row">
             <%
             if(recList.isEmpty()) {
