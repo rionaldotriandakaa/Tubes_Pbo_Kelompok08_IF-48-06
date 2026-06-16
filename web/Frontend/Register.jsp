@@ -193,39 +193,36 @@
             </p>
         </div>
 
-        <form action="Verifikasi.jsp" method="get">
+        <form action="../RegisterServlet" method="post">
 
             <div class="input-group">
                 <label>USERNAME</label>
-
-                <input 
+                <input
                     type="text"
+                    name="username"
                     class="input-box"
                     placeholder="Enter your username"
-                    required
-                >
+                    required>
             </div>
 
             <div class="input-group">
                 <label>EMAIL ADDRESS</label>
-
-                <input 
+                <input
                     type="email"
+                    name="email"
                     class="input-box"
                     placeholder="Enter your email"
-                    required
-                >
+                    required>
             </div>
 
             <div class="input-group">
                 <label>PASSWORD</label>
-
-                <input 
+                <input
                     type="password"
+                    name="password"
                     class="input-box"
                     placeholder="Enter your password"
-                    required
-                >
+                    required>
             </div>
 
             <button type="submit" class="register-btn">
@@ -233,7 +230,6 @@
             </button>
 
         </form>
-
         <div class="login-link">
             Already have an account?
             <a href="Login.jsp">Login</a>

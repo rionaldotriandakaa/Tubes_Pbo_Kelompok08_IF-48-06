@@ -1,59 +1,71 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package rating;
 
-/**
- *
- * @author ACER
- */
 public class Rating {
 
-    private int idRating;
-    private int idUser;
-    private int idKonten;
-    private double nilai;
+    private int id;
+    private int userId;
+    private Integer filmId;
+    private Integer seriesId;
+    private int nilai;
+    private String komentar;
 
     public Rating() {
     }
 
-    public Rating(int idRating, int idUser, int idKonten, double nilai) {
-        this.idRating = idRating;
-        this.idUser = idUser;
-        this.idKonten = idKonten;
-        this.nilai = nilai;
+    public int getId() {
+        return id;
     }
 
-    public int getIdRating() {
-        return idRating;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setIdRating(int idRating) {
-        this.idRating = idRating;
+    public int getUserId() {
+        return userId;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public Integer getFilmId() {
+        return filmId;
     }
 
-    public int getIdKonten() {
-        return idKonten;
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
     }
 
-    public void setIdKonten(int idKonten) {
-        this.idKonten = idKonten;
+    public Integer getSeriesId() {
+        return seriesId;
     }
 
-    public double getNilai() {
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
+    }
+
+    public int getNilai() {
         return nilai;
     }
 
-    public void setNilai(double nilai) {
+    public void setNilai(int nilai) {
         this.nilai = nilai;
+    }
+
+    public String getKomentar() {
+        return komentar;
+    }
+
+    public void setKomentar(String komentar) {
+        this.komentar = komentar;
+    }
+    private int profileId;
+
+    public int getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 }

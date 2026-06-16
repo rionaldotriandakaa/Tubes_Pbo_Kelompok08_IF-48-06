@@ -1,257 +1,348 @@
+<%-- 
+    Document   : Movies
+    Created on : 22 May 2026, 14.22.07
+    Author     : ACER
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="kategori.Movies"%>
 
 <%
-List<Movies> films =
-(List<Movies>) request.getAttribute("films");
+    // 1. Ambil data list film dari Servlet request
+    List<Movies> films = (List<Movies>) request.getAttribute("films");
+
+    // ================= SINKRONISASI SESSION PROFILE =================
+    String dashboardUser = (String) session.getAttribute("activeProfileName");
+    String dashboardAvatar = (String) session.getAttribute("activeProfileAvatar");
+
+    if (dashboardUser == null) {
+        dashboardUser = "No Profile";
+    }
+
+    String dashboardImgSrc;
+    if (dashboardAvatar != null && !dashboardAvatar.trim().isEmpty()) {
+        dashboardImgSrc = request.getContextPath() + "/Assets/avatars/" + dashboardAvatar;
+    } else {
+        dashboardImgSrc = request.getContextPath() + "/Assets/avatars/avatar1.png";
+    }
 %>
-
 <!DOCTYPE html>
-
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Movies - CineStream</title>
+    <meta charset="UTF-8">
+    <title>Movies - CineStream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<style>
+        body {
+            background: #040816;
+            color: white;
+            overflow-x: hidden;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+        /* NAVBAR STYLING */
+        .navbar {
+            width: 100%;
+            height: 85px;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(14px);
+        }
 
-body{
-    background:#040816;
-    color:white;
-}
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff9b9b;
+            text-decoration: none;
+        }
 
-.navbar{
-    width:100%;
-    height:85px;
-    padding:0 60px;
-    display:flex;
-    align-items:center;
-    position:fixed;
-    top:0;
-    z-index:1000;
-    background:rgba(0,0,0,0.35);
-    backdrop-filter:blur(14px);
-}
+        .nav-container-center {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-.logo{
-    font-size:32px;
-    font-weight:700;
-    color:#ff9b9b;
-}
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
 
-.nav-links{
-    display:flex;
-    gap:35px;
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-}
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-.nav-links a{
-    color:#ddd;
-    text-decoration:none;
-    font-size:14px;
-}
+        .nav-links a:hover, .nav-links a.active {
+            color: #ff9b9b;
+        }
 
-.nav-links a:hover{
-    color:#ff9b9b;
-}
+        /* NAVBAR SEARCH */
+        .navbar-search {
+            display: flex;
+            align-items: center;
+        }
 
-.right-nav{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-left:auto;
-}
+        .navbar-search-input {
+            height: 38px;
+            width: 180px;
+            border-radius: 20px 0 0 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: none;
+            padding: 0 16px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+        }
 
-.icon{
-    font-size:20px;
-    cursor:pointer;
-}
+        .navbar-search-input:focus {
+            width: 230px;
+            border-color: #ff9b9b;
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-.profile{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background-image:url('https://i.pravatar.cc/150?img=12');
-    background-size:cover;
-    background-position:center;
-    border:2px solid #ff9b9b;
-}
+        .navbar-search-input::placeholder {
+            color: #6b7280;
+        }
 
-.container{
-    width:90%;
-    margin:auto;
-    padding-top:120px;
-}
+        .navbar-search-btn {
+            height: 38px;
+            padding: 0 16px;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            background: linear-gradient(90deg, #ff9b9b, #ff6b81);
+            color: #040816;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 13px;
+        }
 
-h1{
-    margin-top:20px;
-    font-size:58px;
-}
+        .navbar-search-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 107, 129, 0.5);
+        }
 
-.subtitle{
-    margin-top:10px;
-    color:#cfcfcf;
-    margin-bottom:35px;
-}
+        .right-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-left: auto;
+        }
 
-.movie-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-    gap:20px;
-}
+        .bell-icon {
+            width: 22px;
+            height: 22px;
+            fill: #ddd;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.movie-link{
-    text-decoration:none;
-    color:white;
-}
+        .bell-icon:hover {
+            fill: #ff9b9b;
+        }
 
-.movie{
-    position:relative;
-    overflow:hidden;
-    border-radius:15px;
-    transition:0.3s;
-}
+        .profile-wrapper-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
 
-.movie:hover{
-    transform:scale(1.03);
-}
+        .profile-name-nav {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-.movie img{
-    width:100%;
-    height:350px;
-    object-fit:cover;
-}
+        .profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #ff9b9b;
+        }
 
-.movie-info{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    padding:15px;
-    background:linear-gradient(
-        transparent,
-        rgba(0,0,0,0.9)
-    );
-}
+        /* GRID CONTENT LAYOUT */
+        .container {
+            width: 90%;
+            margin: auto;
+            padding-top: 140px;
+            padding-bottom: 50px;
+        }
 
-.movie-rating{
-    font-size:13px;
-    color:#ff8fa3;
-    margin-bottom:5px;
-}
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
 
-.movie-title{
-    font-size:18px;
-    font-weight:700;
-}
+        .subtitle {
+            color: #cfcfcf;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
 
-.empty{
-    color:#ccc;
-    font-size:18px;
-}
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
 
-</style>
+        .movie-link {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
 
+        .movie {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #0b1024;
+            transition: 0.3s;
+        }
+
+        .movie:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(4, 8, 22, 0.95) 80%);
+        }
+
+        .movie-rating {
+            font-size: 12px;
+            color: #ff9b9b;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .movie-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-duration {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .empty {
+            color: #6b7280;
+            font-size: 16px;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 0;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="navbar">
+    <div class="navbar">
+        <a href="/CineStream/Frontend/Dashboard.jsp" class="logo">CineStream</a>
 
-    <div class="logo">
-        CineStream
-    </div>
-
-    <div class="nav-links">
-        <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
-        <a href="/CineStream/movies">MOVIES</a>
-        <a href="/CineStream/series">SERIES</a>
-        <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
-        <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
-    </div>
-
-    <div class="right-nav">
-
-        <div class="icon">
-            🔍
-        </div>
-
-        <div class="icon">
-            🔔
-        </div>
-
-        <a href="/CineStream/Frontend/Profile.jsp">
-            <div class="profile"></div>
-        </a>
-
-    </div>
-
-</div>
-
-<div class="container">
-
-<h1>Movies</h1>
-
-<p class="subtitle">
-    Temukan film terbaik yang tersedia di CineStream.
-</p>
-
-<div class="movie-grid">
-
-<%
-if(films != null && !films.isEmpty()){
-
-    for(Movies film : films){
-%>
-
-    <a href="Konten.jsp?id=<%= film.getIdFilm() %>"
-       class="movie-link">
-
-        <div class="movie">
-
-            <img src="<%= film.getThumbnail() %>"
-                alt="<%= film.getJudul() %>">
-
-            <div class="movie-info">
-
-                <div class="movie-rating">
-                    <%= film.getGenre() %>
-                </div>
-
-                <div class="movie-title">
-                    <%= film.getJudul() %>
-                </div>
-
-                <div>
-                    <%= film.getDurasi() %> menit
-                </div>
-
+        <div class="nav-container-center">
+            <div class="nav-links">
+                <a href="/CineStream/Frontend/Dashboard.jsp">HOME</a>
+                <a href="/CineStream/movies" class="active">MOVIES</a>
+                <a href="/CineStream/series">SERIES</a>
+                <a href="/CineStream/Frontend/Favorites.jsp">FAVORITES</a>
+                <a href="/CineStream/Frontend/MyList.jsp">MY LIST</a>
             </div>
 
+            <form action="/CineStream/search" method="get" class="navbar-search">
+                <input type="text" name="keyword" class="navbar-search-input" placeholder="Search movies...">
+                <button type="submit" class="navbar-search-btn">Search</button>
+            </form>
         </div>
 
-        <%
+        <div class="right-nav">
+            <svg class="bell-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+
+            <a href="/CineStream/Frontend/Profile.jsp" class="profile-wrapper-nav">
+                <span class="profile-name-nav"><%= dashboardUser %></span>
+                <div class="profile" style="background-image:url('<%= dashboardImgSrc %>');"></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Movies</h1>
+        <p class="subtitle">Temukan film terbaik yang tersedia di CineStream.</p>
+
+        <div class="movie-grid">
+            <%
+            if (films != null && !films.isEmpty()) {
+                for (Movies film : films) {
+                    // Penyesuaian poster adaptif lokal maupun internet
+                    String currentPoster = film.getThumbnail();
+                    if (currentPoster == null || currentPoster.trim().isEmpty()) {
+                        currentPoster = request.getContextPath() + "/Assets/posters/default.jpg";
+                    } else if (!currentPoster.toLowerCase().startsWith("http://") && !currentPoster.toLowerCase().startsWith("https://")) {
+                        currentPoster = request.getContextPath() + "/Assets/posters/" + currentPoster;
+                    }
+            %>
+                <a href="<%= request.getContextPath() %>/Frontend/Konten.jsp?id=<%= film.getIdFilm() %>" class="movie-link">
+                    <div class="movie">
+                        <img src="<%= currentPoster %>" alt="<%= film.getJudul() %>" loading="lazy">
+                        <div class="movie-info">
+                            <div class="movie-rating"><%= film.getGenre() %></div>
+                            <div class="movie-title"><%= film.getJudul() %></div>
+                            <div class="movie-duration"><%= film.getDurasi() %> menit</div>
+                        </div>
+                    </div>
+                </a>
+            <%
+                }
+            } else {
+            %>
+                <p class="empty">Belum ada film di database.</p>
+            <%
             }
-        } else {
-        %>
-
-        <p class="empty">
-            Belum ada film di database.
-        </p>
-
-        <%
-        }
-        %>
+            %>
+        </div>
+    </div> 
 
 </body>
 </html>
