@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class RiwayatTontonanService {
 
-    private RiwayatTontonanRepository repository;
+    private final RiwayatTontonanRepository repository;
 
     public RiwayatTontonanService() {
         repository = new RiwayatTontonanRepository();
@@ -20,8 +20,16 @@ public class RiwayatTontonanService {
     public List<RiwayatTontonan> getAllRiwayat() {
         return repository.getAllRiwayat();
     }
+    
+    public List<RiwayatTontonan> getRiwayatByUser(int userId) {
+        return repository.getRiwayatByUser(userId);
+    }
 
     public boolean tambahRiwayat(RiwayatTontonan riwayat) {
         return repository.tambahRiwayat(riwayat);
+    }
+    
+    public boolean hapusRiwayat(int userId) {
+        return repository.hapusRiwayatByUser(userId);
     }
 }

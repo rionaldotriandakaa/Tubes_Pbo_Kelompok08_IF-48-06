@@ -5,6 +5,8 @@
 package search;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -29,14 +31,24 @@ public class SearchServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String keyword =
-            request.getParameter("keyword");
+        String keyword = request.getParameter("keyword");
+        String genre   = request.getParameter("genre");
+        String sort    = request.getParameter("sort");
 
-        request.setAttribute(
-            "hasil",
-            service.searchMovies(keyword)
-        );
+        if (keyword == null) keyword = "";
+        if (genre == null)   genre = "";
+        if (sort == null)    sort = "terbaru";
 
+        List<Map<String, String>> hasil = service.search(keyword, genre, sort);
+        List<String> daftarGenre = service.getAllGenres();
+
+        request.setAttribute("hasil",       hasil);
+        request.setAttribute("daftarGenre", daftarGenre);
+        request.setAttribute("keyword",     keyword);
+        request.setAttribute("genre",       genre);
+        request.setAttribute("sort",        sort);
+
+        
         request.getRequestDispatcher(
             "/Frontend/Search.jsp"
         ).forward(request,response);

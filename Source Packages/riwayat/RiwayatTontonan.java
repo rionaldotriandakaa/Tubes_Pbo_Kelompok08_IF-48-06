@@ -15,7 +15,12 @@ public class RiwayatTontonan {
     private int idUser;
     private int idKonten;
     private Timestamp tanggalTonton;
-
+    
+    private String judulKonten;
+    private String posterKonten;
+    private String genre;
+    private int durasi;
+    
     public RiwayatTontonan() {
     }
 
@@ -49,5 +54,37 @@ public class RiwayatTontonan {
 
     public void setTanggalTonton(Timestamp tanggalTonton) {
         this.tanggalTonton = tanggalTonton;
+    }
+    
+    public String getJudulKonten() {
+    return judulKonten;
+    }
+
+    public void setJudulKonten(String judulKonten) {
+        this.judulKonten = judulKonten;
+    }
+
+    public String getPosterKonten() {
+        return posterKonten;
+    }
+
+    public void setPosterKonten(String posterKonten) {
+        this.posterKonten = posterKonten;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getDurasi() {
+        return durasi;
+    }
+
+    public void setDurasi(int durasi) {
+        this.durasi = durasi;
     }
 }

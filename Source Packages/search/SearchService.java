@@ -4,8 +4,8 @@
  */
 package search;
 
-import kategori.Movies;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,7 +20,11 @@ public class SearchService {
         repository = new SearchRepository();
     }
 
-    public List<Movies> searchMovies(String keyword){
-        return repository.searchMovies(keyword);
+    public List<Map<String, String>> search(String keyword, String genre, String sort) {
+        return repository.search(keyword, genre, sort);
+    }
+    
+    public List<String> getAllGenres() {
+        return repository.getAllGenres();
     }
 }
