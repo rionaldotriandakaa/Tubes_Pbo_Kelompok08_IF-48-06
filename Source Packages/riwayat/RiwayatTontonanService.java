@@ -32,4 +32,8 @@ public class RiwayatTontonanService {
     public boolean hapusRiwayat(int userId) {
         return repository.hapusRiwayatByUser(userId);
     }
+    
+    public boolean sudahAdaRiwayat(int userId, int filmId, Integer episodeId) {
+    return repository.cekRiwayat(userId, filmId, episodeId);
+}
 }
