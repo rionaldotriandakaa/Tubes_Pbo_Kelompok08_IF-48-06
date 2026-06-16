@@ -13,7 +13,7 @@ public class Episode {
     private int idSeries;
     private int nomorEpisode;
     private String judulEpisode;
-    private String videoUrl;
+    private int durasi;
 
     public Episode() {
     }
@@ -25,7 +25,7 @@ public class Episode {
         this.idSeries = idSeries;
         this.nomorEpisode = nomorEpisode;
         this.judulEpisode = judulEpisode;
-        this.videoUrl = videoUrl;
+        this.durasi = durasi;
     }
 
     public int getIdEpisode() {
@@ -60,11 +60,10 @@ public class Episode {
         this.judulEpisode = judulEpisode;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public int getDurasi() { 
+        return durasi; 
     }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setDurasi(int durasi) { 
+        this.durasi = durasi; 
     }
 }

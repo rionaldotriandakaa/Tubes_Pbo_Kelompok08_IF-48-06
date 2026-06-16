@@ -7,6 +7,10 @@
 <%@page import="java.sql.*"%>
 <%@page import="config.DatabaseConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="konten.Episode"%>
+<%@page import="konten.EpisodeService"%>
+<%@page import="java.util.List"%>
+
 <%
 String title = "Series Tidak Ditemukan";
 String poster = "";
@@ -46,6 +50,17 @@ if (idParam != null) {
         if (conn != null) try { conn.close(); } catch (Exception e) {}
     }
 }
+
+List<Episode> episodes = null;
+if (idParam != null) {
+    try {
+        EpisodeService epService = new EpisodeService();
+        episodes = epService.getEpisodesBySeries(Integer.parseInt(idParam));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -76,6 +91,36 @@ if (idParam != null) {
         .review-btn { padding: 14px 28px; border: none; border-radius: 30px; background: #ff9b9b; color: black; font-weight: 700; cursor: pointer; transition: .3s; }
         .favorite-btn { margin-top: 15px; padding: 14px 28px; border: none; border-radius: 30px; background: transparent; color: #ff9b9b; font-weight: 700; letter-spacing: 1px; border: 2px solid #ff9b9b; cursor: pointer; transition: .3s; display: inline-block; }
         .favorite-btn:hover { background: #ff9b9b; color: black; transform: translateY(-2px); }
+
+        /* ===== SECTION EPISODE (BARU) ===== */
+        .episode-section { padding: 60px 80px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .episode-section h2 { font-size: 32px; margin-bottom: 30px; }
+        .episode-list { display: flex; flex-direction: column; gap: 14px; }
+        .episode-item {
+            display: flex; align-items: center; gap: 20px;
+            background: #111827; border-radius: 16px; padding: 18px 24px;
+            transition: background 0.2s;
+        }
+        .episode-item:hover { background: #1a2340; }
+        .ep-number {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(90deg, #ff9b9b, #ff6b81);
+            color: black; font-weight: 800; font-size: 14px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .ep-info { flex: 1; }
+        .ep-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .ep-durasi { font-size: 13px; color: #888; }
+        .ep-watch-btn {
+            padding: 10px 22px; border-radius: 20px;
+            background: linear-gradient(90deg, #ff9b9b, #ff6b81);
+            color: black; text-decoration: none; font-weight: 700;
+            font-size: 13px; transition: 0.3s; flex-shrink: 0;
+        }
+        .ep-watch-btn:hover { transform: scale(1.05); }
+        .no-episode { color: #888; font-size: 15px; padding: 20px 0; }
+
         .review-section { padding: 60px 80px; }
         .review-title { font-size: 32px; margin-bottom: 25px; }
         .review-card { background: #111827; padding: 20px; border-radius: 15px; margin-bottom: 15px; }
@@ -86,7 +131,7 @@ if (idParam != null) {
 </head>
 <body>
 
-    <section class="hero">
+   <section class="hero">
         <div class="poster">
             <% 
             if (poster != null && !poster.isEmpty()) { 
@@ -141,8 +186,38 @@ if (idParam != null) {
             </form>
 
             <p class="description" style="margin-top: 25px;"><%= description %></p>
-            
-            <a href="<%= request.getContextPath() %>/Frontend/Streaming.jsp?id=<%= idParam %>&tipe=series" class="btn">▶ WATCH NOW</a>
+        </div>
+    </section>
+
+    <%-- ===== SECTION DAFTAR EPISODE (FITUR BARU) ===== --%>
+    <section class="episode-section">
+        <h2>Daftar Episode</h2>
+        <div class="episode-list">
+        <% if (episodes == null || episodes.isEmpty()) { %>
+            <p class="no-episode">Belum ada episode tersedia untuk series ini.</p>
+        <% } else {
+               for (Episode ep : episodes) {
+        %>
+            <div class="episode-item">
+                <div class="ep-number">Ep<%= ep.getNomorEpisode() %></div>
+                <div class="ep-info">
+                    <div class="ep-title"><%= ep.getJudulEpisode() %></div>
+                    <div class="ep-durasi">
+                        <% if (ep.getDurasi() > 0) { %>
+                            <%= ep.getDurasi() %> menit
+                        <% } else { %>
+                            Durasi tidak tersedia
+                        <% } %>
+                    </div>
+                </div>
+                <%-- Link ke Streaming.jsp dengan parameter idEpisode DAN idSeries --%>
+                <a href="<%= request.getContextPath() %>/Frontend/Streaming.jsp?idEpisode=<%= ep.getIdEpisode() %>&idSeries=<%= idParam %>&tipe=series"
+                   class="ep-watch-btn">▶ Tonton</a>
+            </div>
+        <%
+               }
+           }
+        %>
         </div>
     </section>
 
@@ -185,7 +260,7 @@ if (idParam != null) {
         <%
             }
         } catch(Exception e){
-            out.println(e.getMessage());
+            // Tabel rating/profiles mungkin belum ada — skip saja
         } finally {
             if(rsReview != null) try { rsReview.close(); } catch (Exception e) {}
             if(psReview != null) try { psReview.close(); } catch (Exception e) {}

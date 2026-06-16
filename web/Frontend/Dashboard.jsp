@@ -190,7 +190,9 @@
                 <h1>AVENGERS<br>DOOMSDAY</h1>
                 <p>When the greatest threat rises from the shadows, the Avengers must reunite to face the ultimate destruction.</p>
                 <div class="hero-buttons">
-                    <a href="Konten.jsp?id=1"><button class="watch-btn">▶ WATCH NOW</button></a>
+                    <a href="<%= request.getContextPath() %>/Frontend/Konten.jsp?id=1">
+                        <button class="watch-btn">▶ WATCH NOW</button>
+                    </a>
                     <a href="Favorites.jsp"><button class="fav-btn">+ ADD TO FAVORITES</button></a>
                 </div>
             </div>
@@ -211,7 +213,7 @@
                     }
             %>
                     <div class="movie-card">
-                        <a href="Konten.jsp?id=<%= film.getIdFilm() %>" class="movie-card-link">
+                       <a href="<%= request.getContextPath() %>/Frontend/Konten.jsp?id=<%= film.getIdFilm() %>" class="movie-card-link">
                             <img src="<%= currentPoster %>" alt="<%= film.getJudul() %>" loading="lazy">
                             <div class="movie-info">
                                 <h3><%= film.getJudul() %></h3>
@@ -243,7 +245,10 @@
                     } else if (!pImg.toLowerCase().startsWith("http://") && !pImg.toLowerCase().startsWith("https://")) {
                         pImg = request.getContextPath() + "/Assets/posters/" + pImg;
                     }
-                    String targetUrl = "series".equals(item.get("tipe")) ? "kontenSeries.jsp" : "Konten.jsp";
+                    String targetUrl =
+                        "series".equals(item.get("tipe"))
+                        ? request.getContextPath() + "/Frontend/kontenSeries.jsp"
+                        : request.getContextPath() + "/Frontend/Konten.jsp";
             %>
                 <a href="<%= targetUrl %>?id=<%= item.get("id") %>" class="continue-card-link">
                     <div class="continue-card">
@@ -278,7 +283,10 @@
                     } else if (!pImg.toLowerCase().startsWith("http://") && !pImg.toLowerCase().startsWith("https://")) {
                         pImg = request.getContextPath() + "/Assets/posters/" + pImg;
                     }
-                    String targetUrl = "series".equals(item.get("tipe")) ? "kontenSeries.jsp" : "Konten.jsp";
+                    String targetUrl =
+                        "series".equals(item.get("tipe"))
+                        ? request.getContextPath() + "/Frontend/kontenSeries.jsp"
+                        : request.getContextPath() + "/Frontend/Konten.jsp";
             %>
                 <div class="movie-card">
                     <a href="<%= targetUrl %>?id=<%= item.get("id") %>" class="movie-card-link">
