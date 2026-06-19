@@ -175,24 +175,24 @@
 
                 <div class="avatar-picker">
 
-                    <label class="avatar-option">
+                <label class="avatar-option">
                     <input type="radio" name="chosenAvatar" value="avatar1.png" checked>
-                    <img src="https://i.pravatar.cc/150?img=1">
+                    <img src="../Assets/avatars/avatar1.png" alt="Avatar 1">
                 </label>
 
                 <label class="avatar-option">
                     <input type="radio" name="chosenAvatar" value="avatar2.png">
-                    <img src="https://i.pravatar.cc/150?img=2">
+                    <img src="../Assets/avatars/avatar2.png" alt="Avatar 2">
                 </label>
 
                 <label class="avatar-option">
                     <input type="radio" name="chosenAvatar" value="avatar3.png">
-                    <img src="https://i.pravatar.cc/150?img=3">
+                    <img src="../Assets/avatars/avatar3.png" alt="Avatar 3">
                 </label>
 
                 <label class="avatar-option">
                     <input type="radio" name="chosenAvatar" value="avatar4.png">
-                    <img src="https://i.pravatar.cc/150?img=4">
+                    <img src="../Assets/avatars/avatar4.png" alt="Avatar 4">
                 </label>
 
                 </div>
