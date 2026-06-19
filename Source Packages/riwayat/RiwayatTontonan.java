@@ -20,6 +20,7 @@ public class RiwayatTontonan {
     private String posterKonten;
     private String genre;
     private int durasi;
+    private Integer episodeId;
     
     public RiwayatTontonan() {
     }
@@ -87,4 +88,12 @@ public class RiwayatTontonan {
     public void setDurasi(int durasi) {
         this.durasi = durasi;
     }
+    
+    public Integer getEpisodeId() {
+    return episodeId;
+}
+
+public void setEpisodeId(Integer episodeId) {
+    this.episodeId = episodeId;
+}
 }

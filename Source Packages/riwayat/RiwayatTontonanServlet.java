@@ -8,10 +8,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-/**
- *
- * @author ACER
- */
+
 @WebServlet("/riwayat")
 public class RiwayatTontonanServlet extends HttpServlet {
 
@@ -30,34 +27,56 @@ public class RiwayatTontonanServlet extends HttpServlet {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
 
         if (userId == null) {
-            // Belum login, redirect ke halaman login
             response.sendRedirect(request.getContextPath() + "/Frontend/Login.jsp");
             return;
         }
+
         request.setAttribute("riwayatList", service.getRiwayatByUser(userId));
 
-        request.getRequestDispatcher(
-                "/Frontend/MyList.jsp")
+        request.getRequestDispatcher("/Frontend/MyList.jsp")
                 .forward(request, response);
     }
-    
-        @Override
-         protected void doPost(HttpServletRequest request,
+
+    @Override
+    protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
 
         Integer userId = (Integer) request.getSession().getAttribute("userId");
+
         String filmIdStr = request.getParameter("filmId");
+        String episodeIdStr = request.getParameter("episodeId");
 
         if (userId != null && filmIdStr != null) {
+
+            int filmId = Integer.parseInt(filmIdStr);
+
+            Integer episodeId = (episodeIdStr != null && !episodeIdStr.isEmpty())
+                    ? Integer.parseInt(episodeIdStr)
+                    : null;
+
             RiwayatTontonan r = new RiwayatTontonan();
             r.setIdUser(userId);
-            r.setIdKonten(Integer.parseInt(filmIdStr));
-            service.tambahRiwayat(r);
+            r.setIdKonten(filmId);
+            r.setEpisodeId(episodeId);
+
+            // 🔥 SESSION ANTI DOUBLE REQUEST
+            HttpSession session = request.getSession();
+
+            String key = "riwayat_" + userId + "_" + filmId + "_" + (episodeId != null ? episodeId : "0");
+
+            if (session.getAttribute(key) == null) {
+
+                if (!service.sudahAdaRiwayat(userId, filmId, episodeId)) {
+                    service.tambahRiwayat(r);
+                }
+
+                session.setAttribute(key, true);
+            }
         }
 
-        // Redirect kembali ke halaman yang memanggil
         String referer = request.getHeader("Referer");
-        response.sendRedirect(referer != null ? referer : request.getContextPath() + "/Frontend/Dashboard.jsp");
+        response.sendRedirect(referer != null ? referer
+                : request.getContextPath() + "/Frontend/Dashboard.jsp");
     }
 }

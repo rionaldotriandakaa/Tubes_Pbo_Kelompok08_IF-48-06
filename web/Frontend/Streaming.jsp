@@ -16,9 +16,11 @@
 
     String idParam      = request.getParameter("id");
     String idEpisodeStr = request.getParameter("idEpisode");
+    Integer userId = (Integer) session.getAttribute("user_id");
     String idSeriesStr  = request.getParameter("idSeries");
     String tipeParam    = request.getParameter("tipe");
-
+    
+    
     String title    = "Konten Tidak Ditemukan";
     String videoUrl = "";
     String backUrl  = "Dashboard.jsp";

@@ -5,6 +5,7 @@
 package riwayat;
 
 import config.DatabaseConnection;
+import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,26 +106,43 @@ public class RiwayatTontonanRepository {
      * Gunakan INSERT IGNORE agar tidak duplikat jika nonton ulang dalam hari yang sama.
      */
     public boolean tambahRiwayat(RiwayatTontonan riwayat) {
-        String sql = "INSERT INTO riwayat_tontonan (user_id, film_id, tanggal_tonton) " +
-                     "VALUES (?, ?, NOW())";
+
+        String sql =
+            "INSERT INTO riwayat_tontonan " +
+            "(user_id, film_id, episode_id, tanggal_tonton) " +
+            "VALUES (?, ?, ?, NOW())";
 
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
+
             conn = DatabaseConnection.getConnection();
             ps = conn.prepareStatement(sql);
+
             ps.setInt(1, riwayat.getIdUser());
             ps.setInt(2, riwayat.getIdKonten());
+
+            if (riwayat.getEpisodeId() != null) {
+                ps.setInt(3, riwayat.getEpisodeId());
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+
             int rows = ps.executeUpdate();
             return rows > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+
         } finally {
-            if (ps != null) try { ps.close(); } catch (Exception e) {}
-            if (conn != null) try { conn.close(); } catch (Exception e) {}
+
+            if (ps != null)
+                try { ps.close(); } catch (Exception e) {}
+
+            if (conn != null)
+                try { conn.close(); } catch (Exception e) {}
         }
     }
 
@@ -148,5 +166,42 @@ public class RiwayatTontonanRepository {
             if (ps != null) try { ps.close(); } catch (Exception e) {}
             if (conn != null) try { conn.close(); } catch (Exception e) {}
         }
+    }
+    
+    public boolean cekRiwayat(int userId, int filmId, Integer episodeId) {
+
+    String sql = "SELECT id FROM riwayat_tontonan WHERE user_id=? AND film_id=?";
+
+    if (episodeId != null) {
+        sql += " AND episode_id=?";
+    }
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        conn = DatabaseConnection.getConnection();
+        ps = conn.prepareStatement(sql);
+
+        ps.setInt(1, userId);
+        ps.setInt(2, filmId);
+
+        if (episodeId != null) {
+            ps.setInt(3, episodeId);
+        }
+
+        rs = ps.executeQuery();
+        return rs.next();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) try { rs.close(); } catch (Exception e) {}
+        if (ps != null) try { ps.close(); } catch (Exception e) {}
+        if (conn != null) try { conn.close(); } catch (Exception e) {}
+    }
+
+    return false;
     }
 }
