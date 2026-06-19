@@ -107,53 +107,289 @@
         <title>CineStream Dashboard</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <style>
-            *{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-            body{ background:#040816; color:white; overflow-x:hidden; }
-            a{ text-decoration:none; }
-            .navbar{ width:100%; height:85px; padding:0 60px; display:flex; justify-content:space-between; align-items:center; position:fixed; top:0; z-index:1000; background:rgba(0,0,0,0.35); backdrop-filter:blur(14px); }
-            .logo{ font-size:32px; font-weight:700; color:#ff9b9b; }
-            .nav-container-center { display: flex; align-items: center; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
-            .nav-links{ display:flex; gap:25px; }
-            .nav-links a{ color:#ddd; font-size:14px; transition:0.3s; font-weight: 500; }
-            .nav-links a:hover, .nav-links a.active{ color:#ff9b9b; }
-            .navbar-search { display: flex; align-items: center; }
-            .navbar-search-input { height: 38px; width: 180px; border-radius: 20px 0 0 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-right: none; padding: 0 16px; color: white; font-size: 13px; outline: none; transition: 0.3s; }
-            .navbar-search-input:focus { background: rgba(255,255,255,0.1); border-color: #ff9b9b; width: 230px; }
-            .navbar-search-btn { height: 38px; padding: 0 16px; border-radius: 0 20px 20px 0; background: linear-gradient(90deg, #ff9b9b, #ff6b81); border: none; color: #040816; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-            .right-nav{ display:flex; align-items:center; gap:25px; }
-            .bell-icon { width: 22px; height: 22px; fill: #ddd; cursor: pointer; transition: 0.3s; }
-            .bell-icon:hover { fill: #ff9b9b; }
-            .profile-wrapper-nav { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-            .profile-name-nav { font-size: 14px; font-weight: 500; color: white; }
-            .profile{ width:42px; height:42px; border-radius:50%; background-size:cover; background-position:center; border:2px solid #ff9b9b; }
-            .hero{ height:100vh; background: linear-gradient(to right, rgba(4,8,22,0.96) 25%, rgba(4,8,22,0.4)), url('../Assets/Dasboard.jpg'); background-size:cover; background-position:center; display:flex; align-items:center; padding:0 80px; }
-            .hero-content{ max-width:650px; }
-            .tag{ display:inline-block; padding:8px 18px; background:#ff9b9b; color:black; font-size:12px; font-weight:700; border-radius:20px; margin-bottom:25px; }
-            .hero h1{ font-size:90px; line-height:92px; margin-bottom:25px; font-weight:800; }
-            .hero p{ color:#d2d2d2; line-height:32px; margin-bottom:35px; }
-            .hero-buttons{ display:flex; gap:20px; }
-            .watch-btn{ padding:18px 38px; border:none; border-radius:40px; background:linear-gradient(90deg,#ff9b9b,#ff6b81); color:black; font-weight:700; cursor:pointer; }
-            .fav-btn{ padding:18px 38px; border:none; border-radius:40px; background:rgba(255,255,255,0.08); color:white; font-weight: 600; }
-            .section{ padding:40px 80px; }
-            .section-title{ font-size:32px; margin-bottom:4px; font-weight: 700; }
-            .section-subtitle{ color:#6b7280; margin-bottom:30px; letter-spacing:2px; font-size:12px; font-weight: 600; }
-            .movie-row{ display:flex; gap:25px; overflow-x:auto; padding: 10px 0; }
-            .movie-row::-webkit-scrollbar{ display:none; }
-            .movie-card-link { display: block; color: white; }
-            .movie-card{ min-width:240px; background:#0b1024; border-radius:24px; overflow:hidden; transition:0.3s; }
-            .movie-card:hover{ transform:translateY(-10px); }
-            .movie-card img{ width:100%; height:340px; object-fit:cover; display: block; }
-            .movie-info{ padding:20px; }
-            .movie-info h3{ font-size: 18px; font-weight: 700; margin-bottom:6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-            .movie-info p{ color:#8c8c8c; font-size:13px; }
-            .continue-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
-            .continue-card-link { display: block; color: white; }
-            .continue-card{ background:#0b1024; border-radius:22px; padding:20px; display:flex; align-items:center; gap:18px; transition:0.3s; }
-            .continue-card img{ width:110px; height:75px; border-radius:12px; object-fit:cover; }
-            .continue-info h4{ font-size: 16px; font-weight: 600; margin-bottom:6px; }
-            .continue-info p{ color:#8d8d8d; font-size:13px; }
-            .continue-card:hover{ transform:translateY(-5px); background: #111736; }
-            .badge-type { display:inline-block; font-size:10px; padding:2px 8px; background:rgba(255,155,155,0.2); color:#ff9b9b; border-radius:5px; margin-top:5px; text-transform:uppercase; font-weight:700; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif; 
+            }
+            body { 
+                background: #040816; 
+                color: white; 
+                overflow-x: hidden; 
+            }
+            a {
+                text-decoration: none; 
+            }
+            .navbar {
+                width: 100%; 
+                height: 85px; 
+                padding: 0 60px; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                position: fixed; 
+                top: 0; 
+                z-index: 1000; 
+                background: rgba(0, 0, 0, 0.35); 
+                backdrop-filter: blur(14px); 
+            }
+            .logo { 
+                font-size: 32px; 
+                font-weight: 700; 
+                color: #ff9b9b; 
+            }
+            .nav-container-center { 
+                display: flex; 
+                align-items: center; 
+                gap: 40px; 
+                position: absolute; 
+                left: 50%; 
+                transform: translateX(-50%); 
+            }
+            .nav-links { 
+                display: flex; 
+                gap: 25px; 
+            }
+            .nav-links a { 
+                color: #ddd; 
+                font-size: 14px; 
+                transition: 0.3s; 
+                font-weight: 500; 
+            }
+            .nav-links a:hover, 
+            .nav-links a.active { 
+                color: #ff9b9b; 
+            }
+            .navbar-search {
+                display: flex; 
+                align-items: center; 
+            }
+            .navbar-search-input {
+                height: 38px; 
+                width: 180px;
+                border-radius: 20px 0 0 20px;
+                background: rgba(255, 255, 255, 0.06); 
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-right: none; 
+                padding: 0 16px; 
+                color: white; 
+                font-size: 13px;
+                outline: none; 
+                transition: 0.3s; 
+            }
+            .navbar-search-input:focus { 
+                background: rgba(255, 255, 255, 0.1); 
+                border-color: #ff9b9b; 
+                width: 230px; 
+            }
+            .navbar-search-btn { 
+                height: 38px; 
+                padding: 0 16px; 
+                border-radius: 0 20px 20px 0; 
+                background: linear-gradient(90deg, #ff9b9b, #ff6b81); 
+                border: none; 
+                color: #040816; 
+                font-size: 13px; 
+                font-weight: 700; 
+                cursor: pointer; 
+                transition: 0.3s; 
+            }
+            .right-nav { 
+                display: flex; 
+                align-items: center; 
+                gap: 25px; 
+            }
+            .bell-icon { 
+                width: 22px; 
+                height: 22px; 
+                fill: #ddd; 
+                cursor: pointer; 
+                transition: 0.3s; 
+            }
+            .bell-icon:hover { 
+                fill: #ff9b9b; 
+            }
+            .profile-wrapper-nav { 
+                display: flex; 
+                align-items: center; 
+                gap: 12px; 
+                text-decoration: none; 
+            }
+            .profile-name-nav { 
+                font-size: 14px; 
+                font-weight: 500; 
+                color: white; 
+            }
+            .profile {
+                width: 42px;
+                height: 42px; 
+                border-radius: 50%; 
+                background-size: cover; 
+                background-position: center; 
+                border: 2px solid #ff9b9b; 
+            }
+            .hero { 
+                height: 100vh; 
+                background: linear-gradient(to right, rgba(4, 8, 22, 0.96) 25%, rgba(4, 8, 22, 0.4)), url('../Assets/Dasboard.jpg'); 
+                background-size: cover; 
+                background-position: center; 
+                display: flex; 
+                align-items: center; 
+                padding: 0 80px; 
+            }
+            .hero-content { 
+                max-width: 650px; 
+            }
+            .tag { 
+                display: inline-block; 
+                padding: 8px 18px; 
+                background: #ff9b9b; 
+                color: black; 
+                font-size: 12px; 
+                font-weight: 700; 
+                border-radius: 20px; 
+                margin-bottom: 25px; 
+            }
+            .hero h1 { 
+                font-size: 90px; 
+                line-height: 92px; 
+                margin-bottom: 25px; 
+                font-weight: 800; 
+            }
+            .hero p { 
+                color: #d2d2d2; 
+                line-height: 32px; 
+                margin-bottom: 35px; 
+            }
+            .hero-buttons { 
+                display: flex; 
+                gap: 20px; 
+            }
+            .watch-btn { 
+                padding: 18px 38px; 
+                border: none; 
+                border-radius: 40px; 
+                background: linear-gradient(90deg, #ff9b9b, #ff6b81); 
+                color: black; 
+                font-weight: 700; 
+                cursor: pointer; 
+            }
+            .fav-btn { 
+                padding: 18px 38px; 
+                border: none; 
+                border-radius: 40px; 
+                background: rgba(255, 255, 255, 0.08); 
+                color: white; 
+                font-weight: 600; 
+            }
+            .section { 
+                padding: 40px 80px; 
+            }
+            .section-title { 
+                font-size: 32px; 
+                margin-bottom: 4px; 
+                font-weight: 700; 
+            }
+            .section-subtitle { 
+                color: #6b7280; 
+                margin-bottom: 30px; 
+                letter-spacing: 2px; 
+                font-size: 12px; 
+                font-weight: 600; 
+            }
+            .movie-row { 
+                display: flex; 
+                gap: 25px; 
+                overflow-x: auto; 
+                padding: 10px 0; 
+            }
+            .movie-row::-webkit-scrollbar { 
+                display: none; 
+            }
+            .movie-card-link { 
+                display: block; 
+                color: white; 
+            }
+            .movie-card { 
+                min-width: 240px; 
+                background: #0b1024; 
+                border-radius: 24px; 
+                overflow: hidden; 
+                transition: 0.3s; 
+            }
+            .movie-card:hover { 
+                transform: translateY(-10px); 
+            }
+            .movie-card img { 
+                width: 100%; 
+                height: 340px; 
+                object-fit: cover; 
+                display: block; 
+            }
+            .movie-info { 
+                padding: 20px; 
+            }
+            .movie-info h3 { 
+                font-size: 18px; 
+                font-weight: 700; 
+                margin-bottom: 6px; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+            }
+            .movie-info p { 
+                color: #8c8c8c; 
+                font-size: 13px; 
+            }
+            .continue-grid { 
+                display: grid; 
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 25px; 
+            }
+            .continue-card-link { 
+                display: block; 
+                color: white; 
+            }
+            .continue-card { 
+                background: #0b1024; 
+                border-radius: 22px; 
+                padding: 20px; 
+                display: flex; 
+                align-items: center; 
+                gap: 18px; 
+                transition: 0.3s; 
+            }
+            .continue-card img { 
+                width: 110px; 
+                height: 75px; 
+                border-radius: 12px; 
+                object-fit: cover; 
+            }
+            .continue-info h4 { 
+                font-size: 16px; 
+                font-weight: 600; 
+                margin-bottom: 6px; 
+            }
+            .continue-info p { 
+                color: #8d8d8d; 
+                font-size: 13px; 
+            }
+            .continue-card:hover { 
+                transform: translateY(-5px); 
+                background: #111736; 
+            }
+            .badge-type { 
+                display: inline-block; 
+                font-size: 10px; 
+                padding: 2px 8px; 
+                background: rgba(255, 155, 155, 0.2); 
+                color: #ff9b9b; 
+                border-radius: 5px; 
+                margin-top: 5px; 
+                text-transform: uppercase; 
+                font-weight: 700; 
+            }
         </style>
     </head>
     <body>
@@ -203,8 +439,8 @@
             <p class="section-subtitle">GLOBAL FAVORITES THIS WEEK</p>
             <div class="movie-row">
             <%
-            if(films != null){
-                for(Movies film : films){
+            if (films != null) {
+                for (Movies film : films) {
                     String currentPoster = film.getThumbnail();
                     if (currentPoster == null || currentPoster.trim().isEmpty()) {
                         currentPoster = request.getContextPath() + "/Assets/posters/default.jpg";
@@ -233,20 +469,19 @@
             <p class="section-subtitle">PICK UP WHERE YOU LEFT OFF</p>
             <div class="continue-grid">
             <%
-            if(continueList.isEmpty()) {
+            if (continueList.isEmpty()) {
             %>
                 <p style="color: #6b7280; grid-column: 1/-1;">Belum ada riwayat tontonan baru-baru ini.</p>
             <%
             } else {
-                for(Map<String, String> item : continueList) {
+                for (Map<String, String> item : continueList) {
                     String pImg = item.get("poster");
                     if (pImg == null || pImg.trim().isEmpty()) {
                         pImg = request.getContextPath() + "/Assets/posters/default.jpg";
                     } else if (!pImg.toLowerCase().startsWith("http://") && !pImg.toLowerCase().startsWith("https://")) {
                         pImg = request.getContextPath() + "/Assets/posters/" + pImg;
                     }
-                    String targetUrl =
-                        "series".equals(item.get("tipe"))
+                    String targetUrl = "series".equals(item.get("tipe"))
                         ? request.getContextPath() + "/Frontend/kontenSeries.jsp"
                         : request.getContextPath() + "/Frontend/Konten.jsp";
             %>
@@ -271,20 +506,19 @@
             <p class="section-subtitle">BASED ON YOUR FAVORITE GENRE (<%= userGenre.toUpperCase() %>)</p>
             <div class="movie-row">
             <%
-            if(recList.isEmpty()) {
+            if (recList.isEmpty()) {
             %>
                 <p style="color: #6b7280;">Belum ada rekomendasi yang cocok.</p>
             <%
             } else {
-                for(Map<String, String> item : recList) {
+                for (Map<String, String> item : recList) {
                     String pImg = item.get("poster");
                     if (pImg == null || pImg.trim().isEmpty()) {
                         pImg = request.getContextPath() + "/Assets/posters/default.jpg";
                     } else if (!pImg.toLowerCase().startsWith("http://") && !pImg.toLowerCase().startsWith("https://")) {
                         pImg = request.getContextPath() + "/Assets/posters/" + pImg;
                     }
-                    String targetUrl =
-                        "series".equals(item.get("tipe"))
+                    String targetUrl = "series".equals(item.get("tipe"))
                         ? request.getContextPath() + "/Frontend/kontenSeries.jsp"
                         : request.getContextPath() + "/Frontend/Konten.jsp";
             %>
